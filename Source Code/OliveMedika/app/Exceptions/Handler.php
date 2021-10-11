@@ -2,6 +2,8 @@
 
 namespace App\Exceptions;
 
+use App\Http\Mechanism\UnitOfWork;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -27,8 +29,24 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
-    /**
-     * Register the exception handling callbacks for the application.
+
+	/**
+	 * Create a new exception handler instance.
+	 *
+	 * @param Container $container
+	 * @param UnitOfWork $unitOfWork
+	 */
+	public function __construct(Container $container, UnitOfWork $unitOfWork)
+	{
+		$this->container = $container;
+
+		$this->register();
+
+		$unitOfWork->rollbackAllTransaction();
+	}
+
+	/**
+	 * Register the exception handling callbacks for the application.
      *
      * @return void
      */
