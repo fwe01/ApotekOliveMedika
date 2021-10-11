@@ -8,48 +8,50 @@ use Illuminate\Database\ConnectionInterface;
 
 class UnitOfWork
 {
-    private ConnectionInterface $db;
+	private ConnectionInterface $db;
 
-    public static function newInstance(ConnectionInterface $db): UnitOfWork
-    {
-        return new UnitOfWork($db);
-    }
+	/**
+	 * @param ConnectionInterface $db
+	 */
+	public function __construct(ConnectionInterface $db)
+	{
+		$this->db = $db;
+	}
 
-    /**
-     * @param ConnectionInterface $db
-     */
-    public function __construct(ConnectionInterface $db)
-    {
-        $this->db = $db;
-    }
+	public static function newInstance(ConnectionInterface $db): UnitOfWork
+	{
+		return new UnitOfWork($db);
+	}
 
-    public function begin(): void
-    {
-        $this->db->beginTransaction();
-    }
+	public function begin(): void
+	{
+		$this->db->beginTransaction();
+	}
 
-    public function commit(): void
-    {
-        $this->db->commit();
-    }
+	public function commit(): void
+	{
+		$this->db->commit();
+	}
 
-    public function rollback(): void
-    {
-        $this->db->rollBack();
-    }
+	public function rollbackAllTransaction(): void
+	{
+		while ($this->transactionExists()) {
+			$this->rollback();
+		}
+	}
 
-    public function transactionLevel(): int
-    {
-        return $this->db->transactionLevel();
-    }
+	public function transactionExists(): bool
+	{
+		return (bool)$this->transactionLevel();
+	}
 
-    public function transactionExists(): bool
-    {
-        return (bool) $this->transactionLevel();
-    }
+	public function transactionLevel(): int
+	{
+		return $this->db->transactionLevel();
+	}
 
-    public function rollbackAllTransaction(): void
-    {
-        while ($this->transactionExists()) { $this->rollback(); }
-    }
+	public function rollback(): void
+	{
+		$this->db->rollBack();
+	}
 }
