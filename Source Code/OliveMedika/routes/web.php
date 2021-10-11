@@ -19,13 +19,13 @@ Route::get('/', function () {
     return view('auth.user.login');
 });
 
-Route::name('auth.')->group(function (){
+Route::name('auth.')->group(function () {
 	Route::get('admin/login', [AuthController::class, 'showAdminLogin'])->name('admin.login');
 	Route::post('admin/login', [AuthController::class, 'authenticateAdmin'])->name('admin.login');
 });
 
-Route::prefix('admin')->name('admin.')->group(function (){
-	Route::get('/dashboard', function (){
+Route::prefix('admin')->name('admin.')->group(function () {
+	Route::get('/dashboard', function () {
 		echo 'ini dashboard';
 	})->name('dashboard');
 });

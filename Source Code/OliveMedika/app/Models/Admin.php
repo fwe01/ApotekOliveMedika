@@ -2,23 +2,14 @@
 
 namespace App\Models;
 
-use Faker\Core\File;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Admin extends Authenticatable
 {
-    use HasFactory;
-
-	private ?int $id;
-	private string $username;
-	private string $nama;
-	private string $password;
-	private string $alamat;
-	private string $no_telp;
+	use HasFactory;
 
 	protected $table = 'admins';
-
 	protected $fillable = [
 		'username',
 		'password',
@@ -26,7 +17,6 @@ class Admin extends Authenticatable
 		'no-telp',
 		'nama'
 	];
-
 	/**
 	 * The attributes that should be hidden for serialization.
 	 *
@@ -35,6 +25,12 @@ class Admin extends Authenticatable
 	protected $hidden = [
 		'password',
 	];
+	private ?int $id;
+	private string $username;
+	private string $nama;
+	private string $password;
+	private string $alamat;
+	private string $no_telp;
 
 	/**
 	 * @return int|null
