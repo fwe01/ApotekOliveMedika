@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,10 +23,9 @@ Route::get('/', function () {
 Route::name('auth.')->group(function () {
 	Route::get('admin/login', [AuthController::class, 'showAdminLogin'])->name('admin.login');
 	Route::post('admin/login', [AuthController::class, 'authenticateAdmin'])->name('admin.login');
+	Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-Route::prefix('admin')->name('admin.')->group(function () {
-	Route::get('/dashboard', function () {
-		echo 'ini dashboard';
-	})->name('dashboard');
+Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
+	Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
 });

@@ -24,7 +24,9 @@ class Admin extends Authenticatable
 	 */
 	protected $hidden = [
 		'password',
+		'remember_token',
 	];
+
 	private ?int $id;
 	private string $username;
 	private string $nama;
@@ -78,5 +80,16 @@ class Admin extends Authenticatable
 	public function getNoTelp(): string
 	{
 		return $this->no_telp;
+	}
+
+	/**
+	 * Overrides the method to ignore the remember token.
+	 */
+	public function setAttribute($key, $value)
+	{
+		$isRememberTokenAttribute = $key == $this->getRememberTokenName();
+		if (!$isRememberTokenAttribute) {
+			parent::setAttribute($key, $value);
+		}
 	}
 }

@@ -20,6 +20,7 @@ class CreateAdminsTable extends Migration
 			$table->string('password');
 			$table->string('no_telp');
 			$table->string('alamat');
+			$table->rememberToken();
 			$table->timestamps();
 		});
     }

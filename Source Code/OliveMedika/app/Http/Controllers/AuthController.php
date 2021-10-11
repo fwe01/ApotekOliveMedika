@@ -7,6 +7,7 @@ use App\Http\Services\Admin\AdminLogin\AdminLoginService;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController
 {
@@ -33,5 +34,17 @@ class AuthController
 			return redirect()->back()->with('alert', 'User tidak ditemukan');
 		}
 		return redirect()->route('admin.dashboard');
+	}
+
+	public function logout(Request $request)
+	{
+		if (Auth::guard('admin')->user()) {
+			Auth::guard('admin')->logout();
+			return redirect()->route('auth.admin.login');
+		}
+		if (Auth::guard('user')->user()) {
+			Auth::guard('user')->logout();
+		}
+		return redirect('/');
 	}
 }
