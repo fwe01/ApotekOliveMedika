@@ -3,7 +3,7 @@
 @endsection
 
 <div id="confirm-delete" class="delete-confirmation">
-    <form class="content" action="" method="post">
+    <form class="content" action="{{route('admin.accounts.delete')}}" method="post">
         @csrf
         <div class="container">
             <h2>Hapus Admin</h2>

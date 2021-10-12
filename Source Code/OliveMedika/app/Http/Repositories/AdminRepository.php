@@ -99,4 +99,9 @@ class AdminRepository
 			);
 		}
 	}
+
+	public function delete(int $id)
+	{
+		DB::table('admins')->where('id', $id)->delete();
+	}
 }
