@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Barang extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
 	protected $table = 'barangs';
 
+	private ?int $id;
 	private string $nama;
 	private float $harga;
 	private int $stock;
@@ -19,6 +20,7 @@ class Barang extends Model
 	private bool $is_generic;
 
 	/**
+	 * @param int|null $id
 	 * @param string $nama
 	 * @param float $harga
 	 * @param int $stock
@@ -27,6 +29,7 @@ class Barang extends Model
 	 * @param bool $is_generic
 	 */
 	public function __construct(
+		?int $id,
 		string $nama,
 		float $harga,
 		int $stock,
@@ -34,12 +37,51 @@ class Barang extends Model
 		TypeBarang $type,
 		bool $is_generic
 	) {
+		parent::__construct();
+		$this->id = $id;
 		$this->nama = $nama;
 		$this->harga = $harga;
 		$this->stock = $stock;
 		$this->gambar = $gambar;
 		$this->type = $type;
 		$this->is_generic = $is_generic;
+	}
+
+	/**
+	 * @param string $nama
+	 * @param float $harga
+	 * @param int $stock
+	 * @param string $gambar
+	 * @param TypeBarang $type
+	 * @param bool $is_generic
+	 * @return Barang
+	 */
+	static public function create(
+		string $nama,
+		float $harga,
+		int $stock,
+		string $gambar,
+		TypeBarang $type,
+		bool $is_generic
+	): Barang {
+		return new self(
+			null,
+			$nama,
+			$harga,
+			$stock,
+			$gambar,
+			$type,
+			$is_generic
+		);
+	}
+
+
+	/**
+	 * @return int|null
+	 */
+	public function getId(): ?int
+	{
+		return $this->id;
 	}
 
 	/**
@@ -85,7 +127,7 @@ class Barang extends Model
 	/**
 	 * @return bool
 	 */
-	public function isIsGeneric(): bool
+	public function isGeneric(): bool
 	{
 		return $this->is_generic;
 	}

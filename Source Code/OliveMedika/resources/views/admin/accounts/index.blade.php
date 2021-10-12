@@ -66,7 +66,7 @@
         }
 
         function updateToBeDeletedId(value) {
-            document.getElementById('delete-admin-username').value = value
+            document.getElementById('delete-admin-id').value = value
         }
     </script>
 @endsection

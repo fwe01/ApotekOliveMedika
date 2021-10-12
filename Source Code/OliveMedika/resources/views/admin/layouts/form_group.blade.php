@@ -10,8 +10,9 @@
     }
 @endphp
 <div class="form-group row">
-    <label class="col-md-4 col-form-label text-md-right" style="font-weight:bold;">{{$label}}</label>
-    @if($required)<p style="color:red;">*</p> @endif
+    <label class="offset-md-1 col-md-4 col-form-label text-md-left" style="font-weight:bold;">{{$label}}
+        @if($required)<p style="color:red; display: inline">*</p>@endif
+    </label>
     <div class="col-md-6">
         @if($type == 'select')
             <select class="select2 select2-hidden-accessible" name="{{$name}}" id="{{$id_input}}" style="width: 100%">
@@ -27,6 +28,16 @@
                            data-target="#{{$id_input}}" value="{{$value ?? ""}}">
                     <div class="input-group-append" data-target="#{{$id_input}}" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                </div>
+            </div>
+        @elseif($type == 'image')
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="{{$id_input}}" name="{{$name}}"
+                               value="{{$value ?? ""}}" @if($required) required @endif accept="image/*">
+                        <label class="custom-file-label" for="exampleInputFile">Pilih file</label>
                     </div>
                 </div>
             </div>

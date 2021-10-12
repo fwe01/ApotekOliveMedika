@@ -13,6 +13,13 @@
     </a>
 </li>
 <li class="nav-item">
+    <a href="{{route('admin.barangs.index')}}"
+       class="nav-link {{ route('admin.barangs.index') == request()->url() ? 'active' : '' }}">
+        <i class="nav-icon fas fa-th"></i>
+        <p class="text">Barang</p>
+    </a>
+</li>
+<li class="nav-item">
     <a href="javascript: logout()" class="nav-link ">
         <i class="nav-icon fas fa-sign-out-alt"></i>
         <p class="text">Logout</p>

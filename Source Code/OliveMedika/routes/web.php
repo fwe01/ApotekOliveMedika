@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AccountsController;
+use App\Http\Controllers\Admin\BarangController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -35,5 +36,13 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 		Route::get('index', [AccountsController::class, 'index'])->name('index');
 		Route::post('add', [AccountsController::class, 'add'])->name('add');
 		Route::post('update', [AccountsController::class, 'update'])->name('update');
+	});
+
+	Route::prefix('barang')->name('barangs.')->group(function () {
+		Route::get('index', function () {
+			return view('admin.barangs.index');
+		})->name('index');
+		Route::post('add', [BarangController::class, 'add'])->name('add');
+//		Route::post('update', [AccountsController::class, 'update'])->name('update');
 	});
 });

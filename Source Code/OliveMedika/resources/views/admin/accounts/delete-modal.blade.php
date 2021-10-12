@@ -8,7 +8,7 @@
         <div class="container">
             <h2>Hapus Admin</h2>
             <p>Apakah anda yakin untuk menghapus admin ini?</p>
-            <input id="delete-admin-username" type="text" name="username" value="" hidden>
+            <input id="delete-admin-id" type="text" name="id" value="" hidden>
             <div class="clearfix">
                 <button type="button"
                         onclick="document.getElementById('confirm-delete').style.display='none';
