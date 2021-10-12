@@ -23,3 +23,4 @@
 3. Refactor : Linting, fungsionalitas hampir sama tapi ganti logic 
 4. Docs : Menambahkan dokumentasi
 5. Style : UI
+6. DB : melakukan perubahan pada migration/seeder
