@@ -10,7 +10,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>@yield('title') | Olive Medika</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="{{asset('assets/images/logo-olive-medika.png')}}">
+    <link rel="icon" href="{{asset('img/logo-olive-medika-icon.png')}}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('adminlte')}}/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
@@ -51,7 +51,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                <a class="nav-link d-lg-none" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
 				<?php
@@ -92,7 +92,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Brand Logo -->
         <a href="" class="brand-link" style="padding-left: 0">
             <div class="row text-center">
-                <img src="" alt="Logo Olive Medika" width="100" height="100" style="margin: auto"/>
+                <img src="{{asset('img/logo-olive-medika-500x500.jpg')}}" alt="Logo Olive Medika" width="100"
+                     height="100" style="margin: auto; border-radius: 50% ;"/>
             </div>
             <div class="row text-center">
                 <p style="margin: auto">
@@ -110,7 +111,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="{{asset('assets/img/default-user-image.png')}}" class="img-circle elevation-2"
+                    <img src="{{asset('img/default-user-image.png')}}" class="img-circle elevation-2"
                          alt="User Image">
                 </div>
                 <div class="info">
