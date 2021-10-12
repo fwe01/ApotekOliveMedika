@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AccountsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -27,5 +28,11 @@ Route::name('auth.')->group(function () {
 });
 
 Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
-	Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
+	Route::get('/', [DashboardController::class, 'showDashboard'])->name('dashboard');
+
+	Route::prefix('accounts')->name('accounts.')->group(function () {
+		Route::get('index', [AccountsController::class, 'index'])->name('index');
+		Route::post('add', [AccountsController::class, 'add'])->name('add');
+		Route::post('update', [AccountsController::class, 'update'])->name('update');
+	});
 });

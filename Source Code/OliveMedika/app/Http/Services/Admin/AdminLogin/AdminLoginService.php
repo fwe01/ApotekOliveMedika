@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminLoginService
 {
+	/**
+	 * @throws OliveMedikaException
+	 */
 	public function execute(AdminLoginRequest $request)
 	{
 		if (Auth::guard('admin')->attempt(['username' => $request->getUsername(), 'password' => $request->getPassword()]

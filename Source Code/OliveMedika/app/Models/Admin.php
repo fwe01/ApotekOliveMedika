@@ -35,6 +35,48 @@ class Admin extends Authenticatable
 	private string $no_telp;
 
 	/**
+	 * @param int|null $id
+	 * @param string $username
+	 * @param string $nama
+	 * @param string $password
+	 * @param string $alamat
+	 * @param string $no_telp
+	 */
+	public function __construct(
+		?int $id,
+		string $username,
+		string $nama,
+		string $password,
+		string $alamat,
+		string $no_telp
+	) {
+		parent::__construct();
+		$this->id = $id;
+		$this->username = $username;
+		$this->nama = $nama;
+		$this->password = $password;
+		$this->alamat = $alamat;
+		$this->no_telp = $no_telp;
+	}
+
+	static public function create(
+		string $username,
+		string $nama,
+		string $password,
+		string $alamat,
+		string $no_telp
+	): Admin {
+		return new self(
+			null,
+			$username,
+			$nama,
+			$password,
+			$alamat,
+			$no_telp
+		);
+	}
+
+	/**
 	 * @return int|null
 	 */
 	public function getId(): ?int

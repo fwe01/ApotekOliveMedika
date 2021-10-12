@@ -323,6 +323,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
         });
     }
 </script>
+<script>
+    var date_inputs = document.getElementsByClassName("date-input");
+    for (var i = 0; i < date_inputs.length; i++) {
+        console.log(date_inputs[i])
+        $('#' + date_inputs[i].id).datetimepicker({
+            format: 'L'
+        });
+    }
+</script>
+<script>
+    var select2 = document.getElementsByClassName("select2");
+    for (var i = 0; i < select2.length; i++) {
+        console.log(select2[i])
+        $('#' + select2[i].id).select2();
+    }
+</script>
 @yield('script')
 </body>
 </html>
