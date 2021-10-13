@@ -5,13 +5,15 @@
         <p class="text">Dashboard</p>
     </a>
 </li>
-<li class="nav-item">
-    <a href="{{route('admin.accounts.index')}}"
-       class="nav-link {{ route('admin.accounts.index') == request()->url() ? 'active' : '' }}">
-        <i class="nav-icon fas fa-user"></i>
-        <p class="text">Accounts</p>
-    </a>
-</li>
+@if(\Illuminate\Support\Facades\Auth::guard('admin')->user()->username === 'superadmin')
+    <li class="nav-item">
+        <a href="{{route('admin.accounts.index')}}"
+           class="nav-link {{ route('admin.accounts.index') == request()->url() ? 'active' : '' }}">
+            <i class="nav-icon fas fa-user"></i>
+            <p class="text">Accounts</p>
+        </a>
+    </li>
+@endif
 <li class="nav-item">
     <a href="{{route('admin.barangs.index')}}"
        class="nav-link {{ route('admin.barangs.index') == request()->url() ? 'active' : '' }}">
