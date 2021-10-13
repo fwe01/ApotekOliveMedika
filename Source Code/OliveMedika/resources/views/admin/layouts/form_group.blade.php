@@ -37,7 +37,8 @@
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="{{$id_input}}" name="{{$name}}"
                                value="{{$value ?? ""}}" @if($required) required @endif accept="image/*">
-                        <label class="custom-file-label" for="exampleInputFile">Pilih file</label>
+                        <label class="custom-file-label"
+                               for="exampleInputFile">{{$value !== '' ? str_replace('public/OliveMedika/img/', '', $value) : "Pilih file"}}</label>
                     </div>
                 </div>
             </div>

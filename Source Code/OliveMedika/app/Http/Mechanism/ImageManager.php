@@ -31,4 +31,29 @@ class ImageManager
 		}
 		return $path;
 	}
+
+	/**
+	 * Move image existing image in storage/app/public/OliveMedika/img
+	 * @param string $file_path Path to the file that wanted to be move
+	 * @param string $newFileName
+	 * @param string $path relative path from storage/app/public/OliveMedika/img
+	 * @return string
+	 * @throws OliveMedikaException
+	 */
+	static public function moveImage(string $file_path, string $newFileName, string $path = ''): string
+	{
+		if ($path !== '') {
+			$path = '/' . $path;
+		}
+
+		$format = substr($file_path, strpos($file_path, '.'));
+
+		$new_path = 'public/OliveMedika/img' . $path . '/' . $newFileName . $format;
+
+		if (!Storage::move($file_path, $new_path)) {
+			throw new OliveMedikaException('Failed to move image', 2003);
+		}
+
+		return $new_path;
+	}
 }

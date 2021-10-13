@@ -5,7 +5,7 @@
 @section('content')
     @include('admin.barangs.delete-modal')
     @include('admin.barangs.add-modal')
-    {{--    @include('admin.accounts.edit-modal')--}}
+    @include('admin.barangs.edit-modal')
     <div class="row" id="barang-tables">
         <div class="col-md-12">
             <div class="card">
@@ -50,7 +50,7 @@
                                     </td>
                                     <td class="text-center w-13p">
                                         <div class="btn btn-primary" data-toggle="modal"
-                                             data-target="#edit-admin-modal-{{$barang->getId()}}">
+                                             data-target="#edit-barang-modal-{{$barang->getId()}}">
                                             <i class="fas fa-tasks"></i>
                                             <h7 class="d-inline"> Edit</h7>
                                         </div>

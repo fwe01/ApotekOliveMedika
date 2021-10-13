@@ -72,13 +72,13 @@
                 'Obat'  => \App\Models\TypeBarang::OBAT_OBATAN,
                 'Peralatan Medis' => \App\Models\TypeBarang::PERALATAN
             ],
-            'value' => $barang ? $barang->getType()->getValue() : "",
+            'value' => $barang ? $barang->getType() : "",
         ])
         @include('admin.layouts.form_group', [
             'label' => 'Gambar',
             'name' => 'gambar',
             'id_input' => 'gambar_barang',
-            'required' => true,
+            'required' => !(bool) $barang,
             'type' => 'image',
             'value' => $barang ? $barang->getGambar() : "",
         ])
