@@ -17,7 +17,9 @@ class BarangRepository
 	 */
 	public function getAllBarang(): ?array
 	{
-		$rows = DB::table('barangs')->get();
+		$rows = DB::table('barangs')
+			->where('soft_deleted', false)
+			->get();
 
 		if (!$rows) {
 			return null;
@@ -55,7 +57,10 @@ class BarangRepository
 	 */
 	public function getBarangGeneric(): ?array
 	{
-		$rows = DB::table('barangs')->where('is_generic', true)->get();
+		$rows = DB::table('barangs')
+			->where('soft_deleted', false)
+			->where('is_generic', true)
+			->get();
 
 		if (!$rows) {
 			return null;
@@ -98,5 +103,41 @@ class BarangRepository
 				]
 			);
 		}
+	}
+
+	/**
+	 * @throws OliveMedikaException
+	 */
+	public function getBarangById(int $id): ?Barang
+	{
+		$row = DB::table('barangs')
+			->where('soft_deleted', false)
+			->where('id', $id)
+			->first();
+
+		if (!$row) {
+			return null;
+		}
+
+		return new Barang(
+			$row->id,
+			$row->nama,
+			$row->harga,
+			$row->stock,
+			$row->gambar,
+			new TypeBarang($row->type),
+			$row->is_generic,
+		);
+	}
+
+	public function delete(int $id)
+	{
+		DB::table('barangs')
+			->where('id', $id)
+			->update(
+				[
+					'soft_deleted' => true
+				]
+			);
 	}
 }

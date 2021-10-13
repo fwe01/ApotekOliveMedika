@@ -3,7 +3,7 @@
 @section('title', 'Barangs')
 
 @section('content')
-    {{--    @include('admin.accounts.delete-modal')--}}
+    @include('admin.barangs.delete-modal')
     @include('admin.barangs.add-modal')
     {{--    @include('admin.accounts.edit-modal')--}}
     <div class="row" id="barang-tables">
