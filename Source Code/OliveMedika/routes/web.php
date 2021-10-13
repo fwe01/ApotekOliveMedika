@@ -33,7 +33,7 @@ Route::name('auth.')->group(function () {
 Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 	Route::get('/', [DashboardController::class, 'showDashboard'])->name('dashboard');
 
-	Route::prefix('accounts')->name('accounts.')->group(function () {
+	Route::prefix('accounts')->name('accounts.')->middleware('superadmin')->group(function () {
 		Route::get('index', [AccountsController::class, 'index'])->name('index');
 		Route::post('add', [AccountsController::class, 'add'])->name('add');
 		Route::post('update', [AccountsController::class, 'update'])->name('update');

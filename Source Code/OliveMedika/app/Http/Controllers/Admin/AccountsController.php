@@ -13,30 +13,19 @@ use App\Http\Services\Admin\UpdateAdmin\UpdateAdminService;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class AccountsController
 {
 	public function index()
 	{
-		$this->ensureIsSuperadmin();
 		/** @var ListAdminService $service */
 		$service = resolve(ListAdminService::class);
 		$admins = $service->execute();
 		return view('admin.accounts.index', compact('admins'));
 	}
 
-	public function ensureIsSuperadmin()
-	{
-		if (Auth::guard('admin')->user()->username !== 'superadmin') {
-			return redirect()->back();
-		}
-		return 0;
-	}
-
 	public function add(Request $request)
 	{
-		$this->ensureIsSuperadmin();
 		$request->validate(
 			[
 				'nama' => 'required',
@@ -67,7 +56,6 @@ class AccountsController
 
 	public function update(Request $request)
 	{
-		$this->ensureIsSuperadmin();
 		$request->validate(
 			[
 				'id' => 'required',
