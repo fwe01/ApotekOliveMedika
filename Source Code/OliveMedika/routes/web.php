@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AccountsController;
 use App\Http\Controllers\Admin\BarangController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\RestockController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    //return view('welcome');
+	//return view('welcome');
 });
 
 Route::name('auth.')->group(function () {
@@ -44,5 +45,12 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 		Route::post('add', [BarangController::class, 'add'])->name('add');
 		Route::post('delete', [BarangController::class, 'delete'])->name('delete');
 		Route::post('update', [BarangController::class, 'update'])->name('update');
+	});
+
+	Route::prefix('restock')->name('restocks.')->group(function () {
+		Route::get('index', [RestockController::class, 'index'])->name('index');
+		Route::post('add', [RestockController::class, 'add'])->name('add');
+//		Route::post('delete', [RestockController::class, 'delete'])->name('delete');
+//		Route::post('update', [RestockController::class, 'update'])->name('update');
 	});
 });

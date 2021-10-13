@@ -20,6 +20,13 @@
     </a>
 </li>
 <li class="nav-item">
+    <a href="{{route('admin.restocks.index')}}"
+       class="nav-link {{ route('admin.restocks.index') == request()->url() ? 'active' : '' }}">
+        <i class="nav-icon fas fa-plus"></i>
+        <p class="text">Restock</p>
+    </a>
+</li>
+<li class="nav-item">
     <a href="javascript: logout()" class="nav-link ">
         <i class="nav-icon fas fa-sign-out-alt"></i>
         <p class="text">Logout</p>

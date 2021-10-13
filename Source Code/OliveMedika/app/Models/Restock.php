@@ -42,12 +42,12 @@ class Restock extends Model
 		$this->created_at = $created_at;
 	}
 
-	static public function create(int $id_barang, string $username, int $jumlah, float $harga_per_unit): Restock
+	static public function create(int $id_barang, string $username_admin, int $jumlah, float $harga_per_unit): Restock
 	{
 		return new self(
 			null,
 			$id_barang,
-			$username,
+			$username_admin,
 			$jumlah,
 			$harga_per_unit,
 			Carbon::now(),
