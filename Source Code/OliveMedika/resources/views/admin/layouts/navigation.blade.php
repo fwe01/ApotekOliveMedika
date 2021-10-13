@@ -8,14 +8,14 @@
 <li class="nav-item">
     <a href="{{route('admin.accounts.index')}}"
        class="nav-link {{ route('admin.accounts.index') == request()->url() ? 'active' : '' }}">
-        <i class="nav-icon fas fa-th"></i>
+        <i class="nav-icon fas fa-user"></i>
         <p class="text">Accounts</p>
     </a>
 </li>
 <li class="nav-item">
     <a href="{{route('admin.barangs.index')}}"
        class="nav-link {{ route('admin.barangs.index') == request()->url() ? 'active' : '' }}">
-        <i class="nav-icon fas fa-th"></i>
+        <i class="nav-icon fas fa-cubes"></i>
         <p class="text">Barang</p>
     </a>
 </li>

@@ -24,8 +24,8 @@ Route::get('/', function () {
 Route::name('auth.')->group(function () {
 	Route::get('admin/login', [AuthController::class, 'showAdminLogin'])->name('admin.login');
 	Route::post('admin/login', [AuthController::class, 'authenticateAdmin'])->name('admin.login');
-    Route::get('user/login', [AuthController::class, 'showUserLogin'])->name('user.login');
-    Route::post('user/login', [AuthController::class, 'authenticateUser'])->name('user.login');
+	Route::get('login', [AuthController::class, 'showUserLogin'])->name('user.login');
+	Route::post('login', [AuthController::class, 'authenticateUser'])->name('user.login');
 	Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
