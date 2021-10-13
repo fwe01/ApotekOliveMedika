@@ -26,7 +26,7 @@ class CreateBarangService
 	public function execute(CreateBarangRequest $request)
 	{
 		$filename = str_replace(' ', '-', strtolower($request->getNama()));
-		$path_gambar = ImageManager::saveImage($filename, $request->getGambar());
+		$path_gambar = ImageManager::saveImage($filename, $request->getGambar(), 'barang');
 		$barang = Barang::create(
 			$request->getNama(),
 			$request->getHarga(),

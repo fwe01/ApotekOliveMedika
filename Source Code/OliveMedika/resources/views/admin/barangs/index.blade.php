@@ -19,7 +19,8 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="tables table table-striped">
+                        <table id="myTable" class="myTable table table-striped table-valign-middle"
+                               style="font-size: large">
                             <thead class="text-primary">
                             <th class="text-center w-13p">Gambar</th>
                             <th class="text-center w-13p">Nama</th>
@@ -29,27 +30,38 @@
                             <th class="text-center w-13p">Action</th>
                             </thead>
                             <tbody>
-                            {{--                            @foreach($barangs as $barang)--}}
-                            {{--                                <tr>--}}
-                            {{--                                    <td class="text-center w-13p">{{ \Illuminate\Support\Facades\Storage::url($barang->getBarang()) }}</td>--}}
-                            {{--                                    <td class="text-center w-13p">{{ $barang->getNama() }}</td>--}}
-                            {{--                                    <td class="text-center w-13p">{{ $barang->getHarga() }}</td>--}}
-                            {{--                                    <td class="text-center w-13p">{{ $barang->getStock() }}</td>--}}
-                            {{--                                    <td class="text-center w-13p">{{ $barang->getType() }}</td>--}}
-                            {{--                                    <td class="text-center w-13p">--}}
-                            {{--                                        <div class="btn btn-primary" data-toggle="modal"--}}
-                            {{--                                             data-target="#edit-admin-modal-{{$barang->getId()}}">--}}
-                            {{--                                            <i class="fas fa-tasks"></i>--}}
-                            {{--                                            <h7 class="d-inline"> Edit</h7>--}}
-                            {{--                                        </div>--}}
-                            {{--                                        &nbsp--}}
-                            {{--                                        <div class="btn btn-danger" onclick="confirmDelete({{$barang->getId()}})">--}}
-                            {{--                                            <i class="fas fa-trash-alt"></i>--}}
-                            {{--                                            <h7 class="d-inline"> Hapus</h7>--}}
-                            {{--                                        </div>--}}
-                            {{--                                    </td>--}}
-                            {{--                                </tr>--}}
-                            {{--                            @endforeach--}}
+                            @foreach($barangs as $barang)
+                                <tr>
+                                    <td class="text-center w-13p" style="width: fit-content">
+                                        <img src="{{ url(\Illuminate\Support\Facades\Storage::url($barang->getGambar())) }}"
+                                             alt="" width="300px" height="300px">
+                                    </td>
+                                    <td class="text-center w-13p">
+                                        {{ $barang->getNama() }}
+                                    </td>
+                                    <td class="text-center w-13p">{{ $barang->getHarga() }}</td>
+                                    <td class="text-center w-13p">{{ $barang->getStock() }}</td>
+                                    <td class="text-center w-13p">
+                                        @if($barang->getType() === \App\Models\TypeBarang::OBAT_OBATAN)
+                                            <p class="badge badge-primary">Obat</p>
+                                        @elseif ($barang->getType() === \App\Models\TypeBarang::PERALATAN)
+                                            <p class="badge badge-secondary">Peralatan Medis</p>
+                                        @endif
+                                    </td>
+                                    <td class="text-center w-13p">
+                                        <div class="btn btn-primary" data-toggle="modal"
+                                             data-target="#edit-admin-modal-{{$barang->getId()}}">
+                                            <i class="fas fa-tasks"></i>
+                                            <h7 class="d-inline"> Edit</h7>
+                                        </div>
+                                        &nbsp
+                                        <div class="btn btn-danger" onclick="confirmDelete({{$barang->getId()}})">
+                                            <i class="fas fa-trash-alt"></i>
+                                            <h7 class="d-inline"> Hapus</h7>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>

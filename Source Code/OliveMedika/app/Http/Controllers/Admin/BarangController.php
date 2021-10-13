@@ -6,14 +6,25 @@ namespace App\Http\Controllers\Admin;
 use App\Exceptions\OliveMedikaException;
 use App\Http\Services\Barang\CreateBarang\CreateBarangRequest;
 use App\Http\Services\Barang\CreateBarang\CreateBarangService;
+use App\Http\Services\Barang\ListBarang\ListBarangOptions;
+use App\Http\Services\Barang\ListBarang\ListBarangRequest;
+use App\Http\Services\Barang\ListBarang\ListBarangService;
 use Exception;
 use Illuminate\Http\Request;
 
 class BarangController
 {
+	public function index()
+	{
+		$input = new ListBarangRequest(new ListBarangOptions(ListBarangOptions::ALL));
+		/** @var ListBarangService $service */
+		$service = resolve(ListBarangService::class);
+		$barangs = $service->execute($input);
+		return view('admin.barangs.index', compact('barangs'));
+	}
+
 	public function add(Request $request)
 	{
-//		dd($request->file('gambar'));
 		$input = new CreateBarangRequest(
 			$request->input('nama'),
 			$request->input('harga'),

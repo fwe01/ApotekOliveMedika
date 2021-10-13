@@ -40,9 +40,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 	});
 
 	Route::prefix('barang')->name('barangs.')->group(function () {
-		Route::get('index', function () {
-			return view('admin.barangs.index');
-		})->name('index');
+		Route::get('index', [BarangController::class, 'index'])->name('index');
 		Route::post('add', [BarangController::class, 'add'])->name('add');
 //		Route::post('update', [AccountsController::class, 'update'])->name('update');
 	});
