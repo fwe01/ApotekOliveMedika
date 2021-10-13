@@ -6,7 +6,7 @@
     <form class="content" action="{{route('admin.barangs.delete')}}" method="post">
         @csrf
         <div class="container">
-            <h2>Hapus Admin</h2>
+            <h2>Hapus Barang</h2>
             <p>Apakah anda yakin untuk menghapus barang ini?</p>
             <input id="delete-barang-id" type="text" name="id" value="" hidden>
             <div class="clearfix">

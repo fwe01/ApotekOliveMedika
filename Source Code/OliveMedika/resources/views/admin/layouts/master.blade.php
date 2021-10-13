@@ -316,7 +316,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script>
     var tables = document.getElementsByClassName("myTable");
     for (var i = 0; i < tables.length; i++) {
-        console.log(tables[i])
         $('#' + tables[i].id).DataTable({
             "responsive": true,
             "autoWidth": false,

@@ -83,4 +83,9 @@
             document.getElementById('delete-barang-id').value = value
         }
     </script>
+    <script>
+        function updateFilename(obj) {
+            obj.labels[0].innerHTML = obj.value
+        }
+    </script>
 @endsection
