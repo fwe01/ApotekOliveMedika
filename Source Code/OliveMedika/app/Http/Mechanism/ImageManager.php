@@ -18,7 +18,14 @@ class ImageManager
 	 */
 	static public function saveImage(string $filename, UploadedFile $image, string $path = ''): string
 	{
-		$path = Storage::putFileAs('OliveMedika/img/' . $path, $image, $filename . '.' . $image->clientExtension());
+		if ($path !== '') {
+			$path = '/' . $path;
+		}
+		$path = Storage::putFileAs(
+			'public/OliveMedika/img' . $path,
+			$image,
+			$filename . '.' . $image->clientExtension()
+		);
 		if (!$path) {
 			throw new OliveMedikaException('Failed to save image', 2003);
 		}
