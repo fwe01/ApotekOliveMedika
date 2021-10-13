@@ -22,6 +22,8 @@ class CreateRestocksTable extends Migration
 				$table->unsignedInteger('jumlah');
 				$table->float('harga_per_unit');
 				$table->timestamps();
+
+				$table->foreign('id_barang')->references('id')->on('barangs');
 			}
 		);
 	}
