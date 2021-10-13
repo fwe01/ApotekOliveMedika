@@ -170,8 +170,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     {{ session('warning') }}
                 </div>
             @endif
-            <br>
-            <br>
             @yield('content')
         </section>
         <!-- /.content -->
