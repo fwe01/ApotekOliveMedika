@@ -27,17 +27,17 @@
                             <th class="text-center w-13p">Dibuat pada</th>
                             </thead>
                             <tbody>
-                            {{--                            @foreach($restocks as $restock)--}}
-                            {{--                                <tr>--}}
-                            {{--                                    <td class="text-center w-13p">{{$restock->getNamaBarang()}}</td>--}}
-                            {{--                                    <td class="text-center w-13p">--}}
-                            {{--                                        {{ $restock->getJumlah() }}--}}
-                            {{--                                    </td>--}}
-                            {{--                                    <td class="text-center w-13p">{{ $restock->getHargaPerUnit() }}</td>--}}
-                            {{--                                    <td class="text-center w-13p">{{ $restock->getUsernameAdmin() }}</td>--}}
-                            {{--                                    <td class="text-center w-13p">{{ $restock->getCreatedAt()->format('Y-m-d')}}</td>--}}
-                            {{--                                </tr>--}}
-                            {{--                            @endforeach--}}
+                            @foreach($restocks as $restock)
+                                <tr>
+                                    <td class="text-center w-13p">{{$restock->getNamaBarang()}}</td>
+                                    <td class="text-center w-13p">
+                                        {{ $restock->getJumlah() }}
+                                    </td>
+                                    <td class="text-center w-13p">{{ $restock->getHargaPerUnit() }}</td>
+                                    <td class="text-center w-13p">{{ $restock->getUsernameAdmin() }}</td>
+                                    <td class="text-center w-13p">{{ $restock->getCreatedAt()->format('Y-m-d h:i:s')}}</td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>

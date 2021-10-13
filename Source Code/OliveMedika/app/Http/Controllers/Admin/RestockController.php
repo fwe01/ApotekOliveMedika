@@ -7,6 +7,7 @@ use App\Http\Services\Barang\ListBarang\ListBarangRequest;
 use App\Http\Services\Barang\ListBarang\ListBarangService;
 use App\Http\Services\Restock\CreateRestock\CreateRestockRequest;
 use App\Http\Services\Restock\CreateRestock\CreateRestockService;
+use App\Http\Services\Restock\ListRestock\ListRestockService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,12 @@ class RestockController
 		foreach ($barangs as $barang) {
 			$barang_options[$barang->getNama()] = $barang->getId();
 		}
-		return view('admin.restocks.index', compact('barang_options'));
+
+		/** @var ListRestockService $service */
+		$service = resolve(ListRestockService::class);
+		$restocks = $service->execute();
+
+		return view('admin.restocks.index', compact('barang_options', 'restocks'));
 	}
 
 	/**

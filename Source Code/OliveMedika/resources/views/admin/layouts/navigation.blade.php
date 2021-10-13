@@ -22,7 +22,7 @@
 <li class="nav-item">
     <a href="{{route('admin.restocks.index')}}"
        class="nav-link {{ route('admin.restocks.index') == request()->url() ? 'active' : '' }}">
-        <i class="nav-icon fas fa-plus"></i>
+        <i class="nav-icon fas fa-pallet"></i>
         <p class="text">Restock</p>
     </a>
 </li>
