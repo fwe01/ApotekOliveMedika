@@ -316,9 +316,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     })
 </script>
 <script>
-    var select2 = document.getElementsByClassName("tables");
-    for (var i = 0; i < select2.length; i++) {
-        $('#' + select2[i].id).DataTable({
+    var tables = document.getElementsByClassName("myTable");
+    for (var i = 0; i < tables.length; i++) {
+        console.log(tables[i])
+        $('#' + tables[i].id).DataTable({
             "responsive": true,
             "autoWidth": false,
         });
@@ -327,7 +328,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script>
     var date_inputs = document.getElementsByClassName("date-input");
     for (var i = 0; i < date_inputs.length; i++) {
-        console.log(date_inputs[i])
         $('#' + date_inputs[i].id).datetimepicker({
             format: 'L'
         });
@@ -336,7 +336,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script>
     var select2 = document.getElementsByClassName("select2");
     for (var i = 0; i < select2.length; i++) {
-        console.log(select2[i])
         $('#' + select2[i].id).select2();
     }
 </script>

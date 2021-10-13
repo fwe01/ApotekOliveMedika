@@ -19,7 +19,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="tables table table-striped">
+                        <table id="myTable" class="myTable table table-striped" style="font-size: large">
                             <thead class="text-primary">
                             <th class="text-center w-13p">Nama</th>
                             <th class="text-center w-13p">Alamat</th>
