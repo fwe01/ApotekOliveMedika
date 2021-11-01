@@ -4,6 +4,7 @@
 
 @section('content')
     @include('admin.promos.add-modal')
+    @include('admin.promos.delete-modal')
     <div class="row" id="promo-tables">
         <div class="col-md-12">
             <div class="card">
@@ -25,6 +26,7 @@
                             <th class="text-center w-13p">Promo Mulai</th>
                             <th class="text-center w-13p">Promo Berakhir</th>
                             <th class="text-center w-13p">Dibuat pada</th>
+                            <th class="text-center w-13p">Action</th>
                             </thead>
                             <tbody>
                             @foreach($promos as $promo)
@@ -36,6 +38,18 @@
                                     <td class="text-center w-13p">{{ $promo->getTanggalMulai()->format('d-m-Y')}}</td>
                                     <td class="text-center w-13p">{{ $promo->getTanggalBerakhir()->format('d-m-Y')}}</td>
                                     <td class="text-center w-13p">{{ $promo->getCreatedAt()->format('d-m-Y h:i:s')}}</td>
+                                    <td class="text-center w-13p">
+                                        <div class="btn btn-primary" data-toggle="modal"
+                                             data-target="#edit-promo-modal-{{$promo->getId()}}">
+                                            <i class="fas fa-tasks"></i>
+                                            <h7 class="d-inline"> Edit</h7>
+                                        </div>
+                                        &nbsp
+                                        <div class="btn btn-danger" onclick="confirmDelete({{$promo->getId()}})">
+                                            <i class="fas fa-trash-alt"></i>
+                                            <h7 class="d-inline"> Hapus</h7>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -45,4 +59,23 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        function confirmDelete(value) {
+            updateToBeDeletedId(value)
+            document.getElementById('promo-tables').style.display = 'none'
+            document.getElementById('confirm-delete').style.display = 'block'
+        }
+
+        function updateToBeDeletedId(value) {
+            document.getElementById('delete-promo-id').value = value
+        }
+    </script>
+    <script>
+        function updateFilename(obj) {
+            obj.labels[0].innerHTML = obj.value
+        }
+    </script>
 @endsection

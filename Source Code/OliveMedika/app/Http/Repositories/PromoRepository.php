@@ -11,7 +11,7 @@ class PromoRepository
 
 	public function getPromoById(int $id): ?Promo
 	{
-		$row = DB::table('promos')->where('id', $id)->first();
+		$row = DB::table('promos')->where('id', $id)->where('soft_deleted', false)->first();
 		if (!$row) {
 			return null;
 		}

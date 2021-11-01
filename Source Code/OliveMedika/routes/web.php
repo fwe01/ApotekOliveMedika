@@ -51,7 +51,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 	Route::prefix('promo')->name('promos.')->group(function () {
 		Route::get('index', [PromoController::class, 'index'])->name('index');
 		Route::post('add', [PromoController::class, 'add'])->name('add');
-//		Route::post('delete', [PromoController::class, 'delete'])->name('delete');
+		Route::post('delete', [PromoController::class, 'delete'])->name('delete');
 //		Route::post('update', [PromoController::class, 'update'])->name('update');
 	});
 
