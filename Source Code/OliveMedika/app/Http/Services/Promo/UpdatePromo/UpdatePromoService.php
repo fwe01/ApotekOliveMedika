@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Services\Promo\CreatePromo;
+namespace App\Http\Services\Promo\UpdatePromo;
 
+use App\Exceptions\OliveMedikaException;
 use App\Http\Repositories\PromoRepository;
 use App\Models\Promo;
 use Carbon\Carbon;
 
-class CreatePromoService
+class UpdatePromoService
 {
 	private PromoRepository $repository;
 
@@ -18,13 +19,21 @@ class CreatePromoService
 		$this->repository = $repository;
 	}
 
-	public function execute(CreatePromoRequest $request)
+	public function execute(UpdatePromoRequest $request)
 	{
-		$promo = Promo::create(
-			$request->getIdBarang(),
+		$promo = $this->repository->getPromoById($request->getId());
+
+		if (!$promo) {
+			throw OliveMedikaException::build('promo-not-found', 2010);
+		}
+
+		$promo = new Promo(
+			$promo->getId(),
+			$promo->getIdBarang(),
 			$request->getHargaPromoPerUnit(),
 			Carbon::createFromFormat('d/m/Y', $request->getTanggalMulai())->startOfDay(),
 			Carbon::createFromFormat('d/m/Y', $request->getTanggalBerakhir())->endOfDay(),
+			$promo->getCreatedAt()
 		);
 		$this->repository->persist($promo);
 	}

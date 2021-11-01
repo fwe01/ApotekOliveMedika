@@ -11,6 +11,8 @@ use App\Http\Services\Promo\CreatePromo\CreatePromoService;
 use App\Http\Services\Promo\DeletePromo\DeletePromoRequest;
 use App\Http\Services\Promo\DeletePromo\DeletePromoService;
 use App\Http\Services\Promo\ListPromo\ListPromoService;
+use App\Http\Services\Promo\UpdatePromo\UpdatePromoRequest;
+use App\Http\Services\Promo\UpdatePromo\UpdatePromoService;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -90,5 +92,35 @@ class PromoController
 			return redirect()->back()->with('alert', 'Gagal menghapus promo');
 		}
 		return redirect()->back()->with('success', 'Promo berhasil dihapus');
+	}
+
+	public function update(Request $request): RedirectResponse
+	{
+		$request->validate(
+			[
+				'id' => 'required',
+				'id_barang' => 'required',
+				'harga_promo_per_unit' => 'required',
+				'tanggal_mulai' => 'required',
+				'tanggal_berakhir' => 'required',
+			]
+		);
+
+		$input = new UpdatePromoRequest(
+			$request->input('id'),
+			$request->input('harga_promo_per_unit'),
+			$request->input('tanggal_mulai'),
+			$request->input('tanggal_berakhir'),
+		);
+
+		/** @var UpdatePromoService $service */
+		$service = resolve(UpdatePromoService::class);
+
+		try {
+			$service->execute($input);
+		} catch (Exception $e) {
+			return redirect()->back()->with('alert', 'Gagal mengubah promo');
+		}
+		return redirect()->back()->with('success', 'Promo berhasil diubah');
 	}
 }

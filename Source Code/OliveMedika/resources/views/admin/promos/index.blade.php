@@ -1,10 +1,11 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Barangs')
+@section('title', 'Promos')
 
 @section('content')
     @include('admin.promos.add-modal')
     @include('admin.promos.delete-modal')
+    @include('admin.promos.edit-modal')
     <div class="row" id="promo-tables">
         <div class="col-md-12">
             <div class="card">

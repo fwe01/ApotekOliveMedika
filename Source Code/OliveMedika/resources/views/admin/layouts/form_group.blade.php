@@ -15,7 +15,8 @@
     </label>
     <div class="col-md-6">
         @if($type == 'select')
-            <select class="select2 select2-hidden-accessible" name="{{$name}}" id="{{$id_input}}" style="width: 100%">
+            <select class="select2 select2-hidden-accessible" @if($readonly) readonly @endif name="{{$name}}"
+                    id="{{$id_input}}" style="width: 100%">
                 <option value=""> Pilih {{$label}}</option>
                 @foreach($options as $label=>$option)
                     <option value="{{$option}}" @if($value && $value == $option) selected @endif> {{$label}}</option>
