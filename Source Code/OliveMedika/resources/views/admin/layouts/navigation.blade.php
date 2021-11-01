@@ -22,6 +22,13 @@
     </a>
 </li>
 <li class="nav-item">
+    <a href="{{route('admin.promos.index')}}"
+       class="nav-link {{ route('admin.promos.index') == request()->url() ? 'active' : '' }}">
+        <i class="nav-icon fas fa-cubes"></i>
+        <p class="text">Promo</p>
+    </a>
+</li>
+<li class="nav-item">
     <a href="{{route('admin.restocks.index')}}"
        class="nav-link {{ route('admin.restocks.index') == request()->url() ? 'active' : '' }}">
         <i class="nav-icon fas fa-pallet"></i>
