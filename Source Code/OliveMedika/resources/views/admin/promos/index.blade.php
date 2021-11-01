@@ -10,7 +10,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Daftar Semua Restock</h3>
+                    <h3 class="card-title">Daftar Semua Promo</h3>
                     <button type="button" class="d-inline float-right btn btn-success" data-toggle="modal"
                             data-target="#add-promo-modal">
                         <i class="fa fa-plus"></i>
@@ -23,7 +23,7 @@
                                style="font-size: large">
                             <thead class="text-primary">
                             <th class="text-center w-13p">Nama Barang</th>
-                            <th class="text-center w-13p">Harga promo per unit</th>
+                            <th class="text-center w-13p">Harga Promo Per Unit</th>
                             <th class="text-center w-13p">Promo Mulai</th>
                             <th class="text-center w-13p">Promo Berakhir</th>
                             <th class="text-center w-13p">Dibuat pada</th>

@@ -24,7 +24,7 @@
 <li class="nav-item">
     <a href="{{route('admin.promos.index')}}"
        class="nav-link {{ route('admin.promos.index') == request()->url() ? 'active' : '' }}">
-        <i class="nav-icon fas fa-cubes"></i>
+        <i class="nav-icon fas fa-percentage"></i>
         <p class="text">Promo</p>
     </a>
 </li>
