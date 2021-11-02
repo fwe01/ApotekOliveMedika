@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\PromoController;
 use App\Http\Controllers\Admin\RestockController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\ResepController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,6 +55,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 		Route::post('update', [PromoController::class, 'update'])->name('update');
 	});
 
+
 	Route::prefix('restock')->name('restocks.')->group(function () {
 		Route::get('index', [RestockController::class, 'index'])->name('index');
 		Route::post('add', [RestockController::class, 'add'])->name('add');
@@ -63,5 +65,13 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 });
 
 Route::prefix('user')->name('user.')->middleware('user')->group(function () {
-    Route::get('/', [HomeController::class, 'showHome'])->name('home');
+	Route::get('/', [HomeController::class, 'showHome'])->name('home');
+
+	Route::prefix('resep')->name('reseps.')->group(function () {
+//		Route::get('index', [ResepController::class, 'index'])->name('index');
+		Route::get('create', function () {
+			return view('user.resep.add');
+		});
+		Route::post('add', [ResepController::class, 'add'])->name('add');
+	});
 });
