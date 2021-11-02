@@ -14,13 +14,14 @@ class CreateResepsTable extends Migration
     public function up()
     {
         Schema::create('reseps', function (Blueprint $table) {
-            $table->id();
+			$table->id();
 			$table->unsignedBigInteger('id_user');
 			$table->string('gambar');
 			$table->string('status');
 			$table->string('keterangan')->nullable();
-            $table->timestamps();
-        });
+			$table->boolean('soft_deleted')->default(false);
+			$table->timestamps();
+		});
     }
 
     /**
