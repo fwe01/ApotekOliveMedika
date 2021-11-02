@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PromoController;
 use App\Http\Controllers\Admin\RestockController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\User\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,20 +20,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-	//return view('welcome');
-});
+Route::get('/', [AuthController::class, 'showUserLogin'])->name('user.login');
 
 Route::name('auth.')->group(function () {
-	Route::get('admin/login', [AuthController::class, 'showAdminLogin'])->name('admin.login');
-	Route::post('admin/login', [AuthController::class, 'authenticateAdmin'])->name('admin.login');
-	Route::get('login', [AuthController::class, 'showUserLogin'])->name('user.login');
-	Route::post('login', [AuthController::class, 'authenticateUser'])->name('user.login');
-	Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('admin/login', [AuthController::class, 'showAdminLogin'])->name('admin.login');
+    Route::post('admin/login', [AuthController::class, 'authenticateAdmin'])->name('admin.login');
+    Route::get('login', [AuthController::class, 'showUserLogin'])->name('user.login');
+    Route::post('login', [AuthController::class, 'authenticateUser'])->name('user.login');
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
-	Route::get('/', [DashboardController::class, 'showDashboard'])->name('dashboard');
+    Route::get('/', [DashboardController::class, 'showDashboard'])->name('dashboard');
 
 	Route::prefix('accounts')->name('accounts.')->middleware('superadmin')->group(function () {
 		Route::get('index', [AccountsController::class, 'index'])->name('index');
@@ -61,4 +60,8 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 //		Route::post('delete', [RestockController::class, 'delete'])->name('delete');
 //		Route::post('update', [RestockController::class, 'update'])->name('update');
 	});
+});
+
+Route::prefix('user')->name('user.')->middleware('user')->group(function () {
+    Route::get('/', [HomeController::class, 'showHome'])->name('home');
 });

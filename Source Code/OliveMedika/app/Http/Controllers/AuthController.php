@@ -60,7 +60,7 @@ class AuthController
         } catch (Exception $e) {
             return redirect()->back()->with('alert', 'User tidak ditemukan');
         }
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('user.home');
     }
 
 
