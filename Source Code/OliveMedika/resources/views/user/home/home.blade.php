@@ -17,9 +17,11 @@
             display: inline-block;
             transform: translate(-30%, -88%);
             top: 0;
+            z-index: -1;
         }
 
         .navbar {
+            background-color: #584FF6;
             position: fixed;
             display: flex;
             width: 100vw;
@@ -27,6 +29,7 @@
             align-content: center;
             margin-top: 10px;
             top: 0;
+            z-index: 10;
         }
 
         .search-bar {
