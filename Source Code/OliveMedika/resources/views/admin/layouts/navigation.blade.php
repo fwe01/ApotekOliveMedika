@@ -29,6 +29,13 @@
     </a>
 </li>
 <li class="nav-item">
+    <a href="{{route('admin.reseps.index')}}"
+       class="nav-link {{ route('admin.reseps.index') == request()->url() ? 'active' : '' }}">
+        <i class="nav-icon fas fa-receipt"></i>
+        <p class="text">Resep</p>
+    </a>
+</li>
+<li class="nav-item">
     <a href="{{route('admin.restocks.index')}}"
        class="nav-link {{ route('admin.restocks.index') == request()->url() ? 'active' : '' }}">
         <i class="nav-icon fas fa-pallet"></i>

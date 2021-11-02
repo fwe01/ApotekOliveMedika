@@ -4,10 +4,11 @@ use App\Http\Controllers\Admin\AccountsController;
 use App\Http\Controllers\Admin\BarangController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PromoController;
+use App\Http\Controllers\Admin\ResepController as AdminResepController;
 use App\Http\Controllers\Admin\RestockController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\HomeController;
-use App\Http\Controllers\User\ResepController;
+use App\Http\Controllers\User\ResepController as UserResepController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,6 +56,12 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 		Route::post('update', [PromoController::class, 'update'])->name('update');
 	});
 
+	Route::prefix('resep')->name('reseps.')->group(function () {
+		Route::get('index', [AdminResepController::class, 'index'])->name('index');
+//		Route::post('add', [AdminResepController::class, 'add'])->name('add');
+//		Route::post('delete', [AdminResepController::class, 'delete'])->name('delete');
+//		Route::post('update', [AdminResepController::class, 'update'])->name('update');
+	});
 
 	Route::prefix('restock')->name('restocks.')->group(function () {
 		Route::get('index', [RestockController::class, 'index'])->name('index');
@@ -72,6 +79,6 @@ Route::prefix('user')->name('user.')->middleware('user')->group(function () {
 		Route::get('create', function () {
 			return view('user.resep.add');
 		});
-		Route::post('add', [ResepController::class, 'add'])->name('add');
+		Route::post('add', [UserResepController::class, 'add'])->name('add');
 	});
 });

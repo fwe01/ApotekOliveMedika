@@ -21,6 +21,8 @@ class CreateResepsTable extends Migration
 			$table->string('keterangan')->nullable();
 			$table->boolean('soft_deleted')->default(false);
 			$table->timestamps();
+
+			$table->foreign('id_user')->references('id')->on('users');
 		});
     }
 
