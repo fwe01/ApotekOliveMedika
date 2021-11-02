@@ -3,16 +3,16 @@
 @endsection
 
 <div id="confirm-delete" class="delete-confirmation">
-    <form class="content" action="{{route('admin.barangs.delete')}}" method="post">
+    <form class="content" action="{{route('admin.promos.delete')}}" method="post">
         @csrf
         <div class="container">
-            <h2>Hapus Barang</h2>
-            <p>Apakah anda yakin untuk menghapus barang ini?</p>
-            <input id="delete-barang-id" type="text" name="id" value="" hidden>
+            <h2>Hapus Promo</h2>
+            <p>Apakah anda yakin untuk menghapus promo ini?</p>
+            <input id="delete-promo-id" type="text" name="id" value="" hidden>
             <div class="clearfix">
                 <button type="button"
                         onclick="document.getElementById('confirm-delete').style.display='none';
-                                    document.getElementById('barang-tables').style.display='block'"
+                                    document.getElementById('promo-tables').style.display='block'"
                         class="cancelbtn">
                     Batal
                 </button>

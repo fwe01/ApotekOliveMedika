@@ -170,8 +170,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     {{ session('warning') }}
                 </div>
             @endif
-            <br>
-            <br>
             @yield('content')
         </section>
         <!-- /.content -->
@@ -318,7 +316,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script>
     var tables = document.getElementsByClassName("myTable");
     for (var i = 0; i < tables.length; i++) {
-        console.log(tables[i])
         $('#' + tables[i].id).DataTable({
             "responsive": true,
             "autoWidth": false,
@@ -329,7 +326,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     var date_inputs = document.getElementsByClassName("date-input");
     for (var i = 0; i < date_inputs.length; i++) {
         $('#' + date_inputs[i].id).datetimepicker({
-            format: 'L'
+            format: 'DD/MM/Y'
         });
     }
 </script>

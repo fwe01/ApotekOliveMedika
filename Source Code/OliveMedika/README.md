@@ -16,6 +16,7 @@
 2. Pakai arsitektur onion
 3. Pakai blade
 4. Logging untuk aktivitas admin (bisa dilihat superadmin)
+5. Input tanggal formatnya DD/MM/YYYY, tapi yang masuk di database mengikuti Carbon.
 
 ### Format Commit
 1. Feat : nambah baru yang berhubuangn dengan backend

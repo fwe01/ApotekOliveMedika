@@ -15,7 +15,8 @@
     </label>
     <div class="col-md-6">
         @if($type == 'select')
-            <select class="select2 select2-hidden-accessible" name="{{$name}}" id="{{$id_input}}" style="width: 100%">
+            <select class="select2 select2-hidden-accessible" @if($readonly) readonly @endif name="{{$name}}"
+                    id="{{$id_input}}" style="width: 100%">
                 <option value=""> Pilih {{$label}}</option>
                 @foreach($options as $label=>$option)
                     <option value="{{$option}}" @if($value && $value == $option) selected @endif> {{$label}}</option>
@@ -36,9 +37,10 @@
                 <div class="input-group">
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="{{$id_input}}" name="{{$name}}"
-                               value="{{$value ?? ""}}" @if($required) required @endif accept="image/*">
+                               value="{{$value ?? ""}}" @if($required) required @endif accept="image/*"
+                               onchange="updateFilename(this)">
                         <label class="custom-file-label"
-                               for="exampleInputFile">{{$value !== '' ? str_replace('public/OliveMedika/img/', '', $value) : "Pilih file"}}</label>
+                               for="{{$id_input}}">{{$value !== '' ? str_replace('public/OliveMedika/img/', '', $value) : "Pilih file"}}</label>
                     </div>
                 </div>
             </div>

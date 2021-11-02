@@ -28,7 +28,7 @@
         @include('admin.layouts.form_group', [
             'label' => 'Nama',
             'name' => 'nama',
-            'id_input' => 'nama_barang',
+            'id_input' => 'nama_barang' . ($barang ? $barang->getId() : ""),
             'required' => true,
             'type' => 'text',
             'value' => $barang ? $barang->getNama() : "",
@@ -36,7 +36,7 @@
         @include('admin.layouts.form_group', [
             'label' => 'Harga',
             'name' => 'harga',
-            'id_input' => 'harga_barang',
+            'id_input' => 'harga_barang' . ($barang ? $barang->getId() : ""),
             'required' => true,
             'type' => 'number',
             'value' => $barang ? $barang->getHarga() : "",
@@ -53,7 +53,7 @@
         @include('admin.layouts.form_group', [
             'label' => 'Generic',
             'name' => 'is_generic',
-            'id_input' => 'is_generic_barang',
+            'id_input' => 'is_generic_barang' . ($barang ? $barang->getId() : ""),
             'required' => true,
             'type' => 'select',
 			'options' => [
@@ -65,7 +65,7 @@
         @include('admin.layouts.form_group', [
             'label' => 'Tipe Barang',
             'name' => 'type',
-            'id_input' => 'type_barang',
+            'id_input' => 'type_barang' . ($barang ? $barang->getId() : ""),
             'required' => true,
             'type' => 'select',
 			'options' => [
@@ -77,7 +77,7 @@
         @include('admin.layouts.form_group', [
             'label' => 'Gambar',
             'name' => 'gambar',
-            'id_input' => 'gambar_barang',
+            'id_input' => 'gambar_barang' . ($barang ? $barang->getId() : ""),
             'required' => !(bool) $barang,
             'type' => 'image',
             'value' => $barang ? $barang->getGambar() : "",

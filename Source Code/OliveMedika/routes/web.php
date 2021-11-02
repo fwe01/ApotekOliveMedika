@@ -31,19 +31,33 @@ Route::name('auth.')->group(function () {
 Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'showDashboard'])->name('dashboard');
 
-    Route::prefix('accounts')->name('accounts.')->group(function () {
-        Route::get('index', [AccountsController::class, 'index'])->name('index');
-        Route::post('add', [AccountsController::class, 'add'])->name('add');
-        Route::post('update', [AccountsController::class, 'update'])->name('update');
-        Route::post('delete', [AccountsController::class, 'delete'])->name('delete');
-    });
+	Route::prefix('accounts')->name('accounts.')->middleware('superadmin')->group(function () {
+		Route::get('index', [AccountsController::class, 'index'])->name('index');
+		Route::post('add', [AccountsController::class, 'add'])->name('add');
+		Route::post('update', [AccountsController::class, 'update'])->name('update');
+		Route::post('delete', [AccountsController::class, 'delete'])->name('delete');
+	});
 
-    Route::prefix('barang')->name('barangs.')->group(function () {
-        Route::get('index', [BarangController::class, 'index'])->name('index');
-        Route::post('add', [BarangController::class, 'add'])->name('add');
-        Route::post('delete', [BarangController::class, 'delete'])->name('delete');
-        Route::post('update', [BarangController::class, 'update'])->name('update');
-    });
+	Route::prefix('barang')->name('barangs.')->group(function () {
+		Route::get('index', [BarangController::class, 'index'])->name('index');
+		Route::post('add', [BarangController::class, 'add'])->name('add');
+		Route::post('delete', [BarangController::class, 'delete'])->name('delete');
+		Route::post('update', [BarangController::class, 'update'])->name('update');
+	});
+
+	Route::prefix('promo')->name('promos.')->group(function () {
+		Route::get('index', [PromoController::class, 'index'])->name('index');
+		Route::post('add', [PromoController::class, 'add'])->name('add');
+		Route::post('delete', [PromoController::class, 'delete'])->name('delete');
+		Route::post('update', [PromoController::class, 'update'])->name('update');
+	});
+
+	Route::prefix('restock')->name('restocks.')->group(function () {
+		Route::get('index', [RestockController::class, 'index'])->name('index');
+		Route::post('add', [RestockController::class, 'add'])->name('add');
+//		Route::post('delete', [RestockController::class, 'delete'])->name('delete');
+//		Route::post('update', [RestockController::class, 'update'])->name('update');
+	});
 });
 
 Route::prefix('user')->name('user.')->middleware('user')->group(function () {
