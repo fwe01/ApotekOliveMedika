@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\AccountsController;
 use App\Http\Controllers\Admin\BarangController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PromoController;
+use App\Http\Controllers\Admin\RestockController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\HomeController;
 use Illuminate\Support\Facades\Route;
