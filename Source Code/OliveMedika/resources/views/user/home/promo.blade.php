@@ -91,20 +91,22 @@
 
     <div class="row justify-content-center">
         <div class="promo-item-row">
-            @for($i = 0; $i < 4;$i++)
+            @foreach($barang_promos as $barang_promo)
                 <div class="promo-item">
-                    <img class="promo-image" src="https://picsum.photos/1000/1000" alt="lorem-picsum"/>
+                    <img class="promo-image"
+                         src="{{ url(\Illuminate\Support\Facades\Storage::url($barang_promo->getGambar())) }}"
+                         alt="lorem-picsum"/>
                     <p class="promo-name">
-                        Masker King Murah
+                        {{$barang_promo->getNama()}}
                     </p>
-                    <div class="price-tag"> Rp. 7000</div>
+                    <div class="price-tag"> Rp. {{$barang_promo->getHargaPromo()}}</div>
                     <div class="item-min-detail">
                         <div class="discount-tag"> 50%</div>
-                        <div class="old-price"> Rp. 12.000</div>
-                        <div class="stock"> Sisa 10 pcs</div>
+                        <div class="old-price"> Rp. {{$barang_promo->getHarga()}}</div>
+                        <div class="stock"> Sisa {{$barang_promo->getStock()}} pcs</div>
                     </div>
                 </div>
-            @endfor
+            @endforeach
         </div>
     </div>
 @endpush

@@ -3,7 +3,7 @@
 @section('title', "Apotek Olive Medika")
 
 @include("user.home.billboard")
-@include("user.home.promo")
+@include("user.home.promo", ['barang_promos' => $barang_promos])
 @include("user.home.product")
 
 @section('style')
