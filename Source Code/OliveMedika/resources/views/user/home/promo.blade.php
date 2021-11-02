@@ -45,18 +45,19 @@
         .item-min-detail {
             display: flex;
             flex-direction: row;
-            margin-top: 5px;
+            margin-top: 10px;
             height: 30px;
+            padding-left: 10px;
         }
 
         .discount-tag {
-            width: 18px;
-            height: 18px;
+            width: 24px;
+            height: 24px;
             padding: 5px;
             background-color: #FFACAC;
             color: #FF4949;
             border-radius: 5px;
-            font-size: .375rem;
+            font-size: .5rem;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -66,7 +67,7 @@
         .old-price {
             color: #A4A4B2;
             text-decoration: line-through;
-            font-size: .375rem;
+            font-size: .5rem;
             display: flex;
             align-items: center;
             height: 18px;
@@ -74,10 +75,12 @@
         }
 
         .stock {
-            font-size: .5rem;
+            font-size: .8rem;
             height: 18px;
             display: flex;
             align-items: center;
+            padding-left: 10px;
+            margin-bottom: 10px;
 
         }
     </style>
@@ -103,8 +106,8 @@
                     <div class="item-min-detail">
                         <div class="discount-tag"> 50%</div>
                         <div class="old-price"> Rp. {{$barang_promo->getHarga()}}</div>
-                        <div class="stock"> Sisa {{$barang_promo->getStock()}} pcs</div>
                     </div>
+                    <div class="stock"> Sisa {{$barang_promo->getStock()}} pcs</div>
                 </div>
             @endforeach
         </div>
