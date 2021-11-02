@@ -7,9 +7,9 @@ use App\Http\Mechanism\OliveMedikaEnum;
 
 class StatusResep extends OliveMedikaEnum
 {
-	public const KONFIRMASI = 'menunggu_konfirmasi';
-	public const DITOLAK = 'ditolak';
-	public const DITERIMA = 'diterima';
+	const KONFIRMASI = 'menunggu_konfirmasi';
+	const DITOLAK = 'ditolak';
+	const DITERIMA = 'diterima';
 
 	protected function onErrorException(): OliveMedikaException
 	{
