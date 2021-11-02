@@ -55,23 +55,24 @@
 @push("user-home-content")
 
     <div class="product-section">
-        @for($i = 0; $i < 4;$i++)
+        @foreach($barangs as $barang)
             <div class="row justify-content-center product-row">
                 <div class="col-11">
                     <div class="product-card">
-                        <img class="product-image" src="https://picsum.photos/1000/1000" alt="lorem-picsum"/>
+                        <img class="product-image"
+                             src="{{ url(\Illuminate\Support\Facades\Storage::url($barang->getGambar())) }}"
+                             alt="lorem-picsum"/>
                         <div class="product-detail">
-                            <p class="product-name">Masker King 25 Lembar</p>
-                            <p class="product-price">Rp. 24.000</p>
+                            <p class="product-name">{{$barang->getNama()}}</p>
+                            <p class="product-price">{{$barang->getHarga()}}</p>
                             <div class="product-stock-and-button">
-                                <p class="product-stock">stock 10 pcs</p>
+                                <p class="product-stock">stock {{$barang->getStock()}} pcs</p>
                                 <img class="button-pesan" src="{{asset("img/plus-icon.svg")}}" alt="plus-icon"/>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-        @endfor
+        @endforeach
     </div>
 @endpush

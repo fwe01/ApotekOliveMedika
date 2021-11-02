@@ -4,7 +4,7 @@
 
 @include("user.home.billboard")
 @include("user.home.promo", ['barang_promos' => $barang_promos])
-@include("user.home.product")
+@include("user.home.product", ['barangs' => $barang])
 
 @section('style')
     <style>
