@@ -63,7 +63,7 @@ class ResepRepository
 					'id_user' => $resep->getIdUser(),
 					'gambar' => $resep->getGambar(),
 					'status' => $resep->getStatus()->getValue(),
-					'stock' => $resep->getKeterangan(),
+					'keterangan' => $resep->getKeterangan(),
 					'updated_at' => $current_time,
 				]
 			);
@@ -74,7 +74,7 @@ class ResepRepository
 					'id_user' => $resep->getIdUser(),
 					'gambar' => $resep->getGambar(),
 					'status' => $resep->getStatus()->getValue(),
-					'stock' => $resep->getKeterangan(),
+					'keterangan' => $resep->getKeterangan(),
 					'created_at' => $current_time,
 					'updated_at' => $current_time,
 				]
