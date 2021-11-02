@@ -49,7 +49,7 @@ class Resep extends Model
 	 * @param StatusResep $status
 	 * @return Resep
 	 */
-	public function create(
+	public static function create(
 		int $id_user,
 		string $gambar,
 		?string $keterangan,
