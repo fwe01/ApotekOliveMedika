@@ -23,6 +23,7 @@
 
         .product-detail {
             display: block;
+            flex-grow: 1
         }
 
         .product-name {
@@ -36,14 +37,16 @@
             margin-bottom: 10px;
         }
 
-        .product-stock-and-button {
+        .product-stock-and-button{
             display: flex;
+            width: 100%
             justify-content: space-between;
+            flex-grow:1
         }
 
         .product-stock {
-            align-self: end;
             margin: 0;
+            flex: 50%;
         }
 
         .button-pesan:hover {
@@ -68,7 +71,7 @@
                             <div class="product-stock-and-button">
                                 <p class="product-stock">stock {{$barang->getStock()}} pcs</p>
                                 <img class="button-pesan" src="{{asset("img/plus-icon.svg")}}" alt="plus-icon"/>
-                            </div>
+                            <div>
                         </div>
                     </div>
                 </div>
