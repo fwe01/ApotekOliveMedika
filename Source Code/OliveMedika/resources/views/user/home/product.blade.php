@@ -61,7 +61,7 @@
         @foreach($barangs as $barang)
             <div class="row justify-content-center product-row">
                 <div class="col-11">
-                    <div class="product-card">
+                    <div class="product-card" onclick = "open_detail({{$barang->getId()}})">
                         <img class="product-image"
                              src="{{ url(\Illuminate\Support\Facades\Storage::url($barang->getGambar())) }}"
                              alt="lorem-picsum"/>
@@ -78,4 +78,13 @@
             </div>
         @endforeach
     </div>
+@endpush
+
+@push("user-home-scripts")
+    <script>
+        function open_detail(id){
+            window.location.replace("{{config('app.url')}}/user/detil_barang/" + id);
+        }
+
+    </script>
 @endpush

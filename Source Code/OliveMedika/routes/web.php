@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\RestockController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ResepController as UserResepController;
+use App\Http\Controllers\User\UserBarangController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,50 +36,51 @@ Route::name('auth.')->group(function () {
 Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'showDashboard'])->name('dashboard');
 
-	Route::prefix('accounts')->name('accounts.')->middleware('superadmin')->group(function () {
-		Route::get('index', [AccountsController::class, 'index'])->name('index');
-		Route::post('add', [AccountsController::class, 'add'])->name('add');
-		Route::post('update', [AccountsController::class, 'update'])->name('update');
-		Route::post('delete', [AccountsController::class, 'delete'])->name('delete');
-	});
+    Route::prefix('accounts')->name('accounts.')->middleware('superadmin')->group(function () {
+        Route::get('index', [AccountsController::class, 'index'])->name('index');
+        Route::post('add', [AccountsController::class, 'add'])->name('add');
+        Route::post('update', [AccountsController::class, 'update'])->name('update');
+        Route::post('delete', [AccountsController::class, 'delete'])->name('delete');
+    });
 
-	Route::prefix('barang')->name('barangs.')->group(function () {
-		Route::get('index', [BarangController::class, 'index'])->name('index');
-		Route::post('add', [BarangController::class, 'add'])->name('add');
-		Route::post('delete', [BarangController::class, 'delete'])->name('delete');
-		Route::post('update', [BarangController::class, 'update'])->name('update');
-	});
+    Route::prefix('barang')->name('barangs.')->group(function () {
+        Route::get('index', [BarangController::class, 'index'])->name('index');
+        Route::post('add', [BarangController::class, 'add'])->name('add');
+        Route::post('delete', [BarangController::class, 'delete'])->name('delete');
+        Route::post('update', [BarangController::class, 'update'])->name('update');
+    });
 
-	Route::prefix('promo')->name('promos.')->group(function () {
-		Route::get('index', [PromoController::class, 'index'])->name('index');
-		Route::post('add', [PromoController::class, 'add'])->name('add');
-		Route::post('delete', [PromoController::class, 'delete'])->name('delete');
-		Route::post('update', [PromoController::class, 'update'])->name('update');
-	});
+    Route::prefix('promo')->name('promos.')->group(function () {
+        Route::get('index', [PromoController::class, 'index'])->name('index');
+        Route::post('add', [PromoController::class, 'add'])->name('add');
+        Route::post('delete', [PromoController::class, 'delete'])->name('delete');
+        Route::post('update', [PromoController::class, 'update'])->name('update');
+    });
 
-	Route::prefix('resep')->name('reseps.')->group(function () {
-		Route::get('index', [AdminResepController::class, 'index'])->name('index');
+    Route::prefix('resep')->name('reseps.')->group(function () {
+        Route::get('index', [AdminResepController::class, 'index'])->name('index');
 //		Route::post('add', [AdminResepController::class, 'add'])->name('add');
 //		Route::post('delete', [AdminResepController::class, 'delete'])->name('delete');
 //		Route::post('update', [AdminResepController::class, 'update'])->name('update');
-	});
+    });
 
-	Route::prefix('restock')->name('restocks.')->group(function () {
-		Route::get('index', [RestockController::class, 'index'])->name('index');
-		Route::post('add', [RestockController::class, 'add'])->name('add');
+    Route::prefix('restock')->name('restocks.')->group(function () {
+        Route::get('index', [RestockController::class, 'index'])->name('index');
+        Route::post('add', [RestockController::class, 'add'])->name('add');
 //		Route::post('delete', [RestockController::class, 'delete'])->name('delete');
 //		Route::post('update', [RestockController::class, 'update'])->name('update');
-	});
+    });
 });
 
 Route::prefix('user')->name('user.')->middleware('user')->group(function () {
-	Route::get('/', [HomeController::class, 'showHome'])->name('home');
+    Route::get('/', [HomeController::class, 'showHome'])->name('home');
+    Route::get('/detil_barang/{id}', [UserBarangController::class, 'barangDetail'])->name('barangDetail');
 
-	Route::prefix('resep')->name('reseps.')->group(function () {
+    Route::prefix('resep')->name('reseps.')->group(function () {
 //		Route::get('index', [ResepController::class, 'index'])->name('index');
-		Route::get('create', function () {
-			return view('user.resep.add');
-		});
-		Route::post('add', [UserResepController::class, 'add'])->name('add');
-	});
+        Route::get('create', function () {
+            return view('user.resep.add');
+        });
+        Route::post('add', [UserResepController::class, 'add'])->name('add');
+    });
 });

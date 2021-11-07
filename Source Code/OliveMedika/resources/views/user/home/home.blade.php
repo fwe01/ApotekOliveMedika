@@ -62,3 +62,7 @@
         @stack("user-home-content")
     </div>
 @endsection
+
+@section('script')
+    @stack('user-home-scripts')
+@endsection
