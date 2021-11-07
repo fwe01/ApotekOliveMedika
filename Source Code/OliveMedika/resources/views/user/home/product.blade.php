@@ -83,8 +83,7 @@
 @push("user-home-scripts")
     <script>
         function open_detail(id){
-            window.location.replace("{{config('app.url')}}/user/detil_barang/" + id);
+            window.location.replace("/user/detil_barang/" + id);
         }
-
     </script>
 @endpush

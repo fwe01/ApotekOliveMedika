@@ -3,6 +3,9 @@
 namespace App\Http\Services\Barang\FindBarang;
 
 
+use App\Exceptions\OliveMedikaException;
+use App\Http\Repositories\BarangRepository;
+
 class FindBarangService
 {
     private BarangRepository $repository;

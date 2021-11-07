@@ -15,6 +15,6 @@ class UserBarangController
         /** @var FindBarangService $service */
         $barang_service = resolve(FindBarangService::class);
         $barang = $barang_service->execute($barang_input);
-        return view('user.home.home', compact('barang'));
+        return view('user.detilBarang.detilBarang', compact('barang'));
     }
 }
