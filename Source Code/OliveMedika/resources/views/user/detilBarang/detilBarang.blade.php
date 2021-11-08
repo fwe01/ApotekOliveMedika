@@ -146,7 +146,7 @@
 
         //popup card event listeners
         $('.check-pesanan-btn').click(() => {
-            window.location.replace("/detail_pesanan");
+            window.location.replace("/user/detil_pesanan");
         })
 
         $('.close-icon').click(() => {
