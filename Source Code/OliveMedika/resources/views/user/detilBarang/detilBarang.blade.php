@@ -128,7 +128,6 @@
     <script>
         $('.pesan-btn').click(() => {
             addBarangToSession()
-            showPopUp()
         })
 
         function showPopUp() {
@@ -136,15 +135,24 @@
         }
 
         function addBarangToSession() {
-            let barang_pesanan = JSON.parse(sessionStorage.getItem("barang_pesanan"))
-            if (barang_pesanan === null) barang_pesanan = []
-            if (!barang_pesanan.includes({{$barang->getId()}})) {
-                barang_pesanan.push({{$barang->getId()}})
-            }
-            sessionStorage.setItem("barang_pesanan", JSON.stringify(barang_pesanan))
+            $.ajax(
+                {
+                    url: "/user/detil_pesanan_proses",
+                    type: "POST",
+                    data: {
+                        barang_id: {{$barang->getId()}},
+                        _token: '{{csrf_token()}}'
+                    },
+                    success: function () {
+                        showPopUp()
+                    },
+                    error: function (error) {
+                        console.log(error)
+                    }
+                }
+            )
         }
 
-        //popup card event listeners
         $('.check-pesanan-btn').click(() => {
             window.location.replace("/user/detil_pesanan");
         })

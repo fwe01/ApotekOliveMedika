@@ -76,6 +76,7 @@ Route::prefix('user')->name('user.')->middleware('user')->group(function () {
     Route::get('/', [HomeController::class, 'showHome'])->name('home');
     Route::get('/detil_barang/{id}', [UserBarangController::class, 'barangDetail'])->name('barangDetail');
     Route::get('/detil_pesanan', [UserBarangController::class, 'pesananDetil'])->name('pesananDetail');
+    Route::post('/detil_pesanan_proses', [UserBarangController::class, 'pesananDetilProses'])->name('pesananDetail');
 
     Route::prefix('resep')->name('reseps.')->group(function () {
 //		Route::get('index', [ResepController::class, 'index'])->name('index');
