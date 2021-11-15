@@ -17,6 +17,8 @@ use App\Http\Services\Pemesanan\DeletePemesanan\DeletePemesananRequest;
 use App\Http\Services\Pemesanan\DeletePemesanan\DeletePemesananService;
 use App\Http\Services\Pemesanan\FindPemesanan\FindPemesananRequest;
 use App\Http\Services\Pemesanan\FindPemesanan\FindPemesananService;
+use App\Http\Services\Pemesanan\ListPemesanan\ListPemesananRequest;
+use App\Http\Services\Pemesanan\ListPemesanan\ListPemesananService;
 use App\Models\UserType;
 use Illuminate\Support\Facades\Route;
 
@@ -67,6 +69,17 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 
 	Route::prefix('pemesanan')->name('pemesanans.')->group(function () {
 //		Route::get('index', [AdminResepController::class, 'index'])->name('index');
+		Route::get('index', function () {
+			/** @var ListPemesananService $service */
+			$service = resolve(ListPemesananService::class);
+			$response = $service->execute(
+				new ListPemesananRequest(
+					new UserType(UserType::ADMIN),
+					1
+				)
+			);
+			dd($response);
+		})->name('index');
 		Route::get('add', function () {
 			/** @var CreatePemesananService $service */
 			$service = resolve(CreatePemesananService::class);
