@@ -13,6 +13,9 @@ use App\Http\Controllers\User\UserBarangController;
 use App\Http\Services\Pemesanan\CreatePemesanan\BarangPemesanan;
 use App\Http\Services\Pemesanan\CreatePemesanan\CreatePemesananRequest;
 use App\Http\Services\Pemesanan\CreatePemesanan\CreatePemesananService;
+use App\Http\Services\Pemesanan\DeletePemesanan\DeletePemesananRequest;
+use App\Http\Services\Pemesanan\DeletePemesanan\DeletePemesananService;
+use App\Models\UserType;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -81,6 +84,17 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 		})->name('add');
 //		Route::post('add', [AdminResepController::class, 'add'])->name('add');
 //		Route::post('delete', [AdminResepController::class, 'delete'])->name('delete');
+		Route::get('delete', function () {
+			/** @var DeletePemesananService $service */
+			$service = resolve(DeletePemesananService::class);
+			$service->execute(
+				new DeletePemesananRequest(
+					1,
+					new \App\Models\UserType(UserType::ADMIN),
+					0
+				)
+			);
+		})->name('delete');
 //		Route::post('update', [AdminResepController::class, 'update'])->name('update');
 	});
 
