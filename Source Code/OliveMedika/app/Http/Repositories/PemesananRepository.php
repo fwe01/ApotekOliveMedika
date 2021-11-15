@@ -15,11 +15,18 @@ class PemesananRepository
 	 * @return Pemesanan[]|null
 	 * @throws OliveMedikaException
 	 */
-	public function getAllPemesananWithoutBarang(): ?array
+	public function getAllPemesananWithoutBarang(?int $id_user = null): ?array
 	{
-		$rows = DB::table('pemesanans')
-			->where('soft_deleted', false)
-			->get();
+		if ($id_user == null) {
+			$rows = DB::table('pemesanans')
+				->where('soft_deleted', false)
+				->get();
+		} else {
+			$rows = DB::table('pemesanans')
+				->where('id_user', $id_user)
+				->where('soft_deleted', false)
+				->get();
+		}
 
 		if (!$rows) {
 			return null;

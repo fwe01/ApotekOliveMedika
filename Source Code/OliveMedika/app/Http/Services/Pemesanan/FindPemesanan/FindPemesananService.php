@@ -9,7 +9,6 @@ use App\Models\UserType;
 
 class FindPemesananService
 {
-
 	private PemesananRepository $repository;
 
 	/**
@@ -29,7 +28,7 @@ class FindPemesananService
 		if (!$pemesanan) {
 			throw OliveMedikaException::build('pemesanan-not-found', 2020);
 		}
-		switch ($request->getUserType()) {
+		switch ($request->getUserType()->getValue()) {
 			case UserType::USER:
 				if (
 					$pemesanan->getIdUser() != $request->getIdUser()

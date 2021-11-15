@@ -28,7 +28,7 @@ class DeletePemesananService
 		if (!$pemesanan) {
 			throw OliveMedikaException::build('pemesanan-not-found', 2018);
 		}
-		switch ($request->getUserType()) {
+		switch ($request->getUserType()->getValue()) {
 			case UserType::USER:
 				$current_time = Carbon::now();
 				if (
