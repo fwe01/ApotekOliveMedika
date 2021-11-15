@@ -34,7 +34,7 @@ class BarangPemesanan extends Model
 		$this->id_barang = $id_barang;
 		$this->nama = $nama;
 		$this->harga = $harga;
-		$this->stock = $quantity;
+		$this->quantity = $quantity;
 	}
 
 	public static function create(

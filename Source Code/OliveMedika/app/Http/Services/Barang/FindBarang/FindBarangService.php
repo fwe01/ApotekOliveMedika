@@ -3,29 +3,32 @@
 namespace App\Http\Services\Barang\FindBarang;
 
 
+use App\Exceptions\OliveMedikaException;
+use App\Http\Repositories\BarangRepository;
+
 class FindBarangService
 {
-    private BarangRepository $repository;
+	private BarangRepository $repository;
 
-    /**
-     * @param BarangRepository $repository
-     */
-    public function __construct(BarangRepository $repository)
-    {
-        $this->repository = $repository;
-    }
+	/**
+	 * @param BarangRepository $repository
+	 */
+	public function __construct(BarangRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
-    /**
-     * @throws OliveMedikaException
-     */
-    public function execute(FindBarangRequest $request)
-    {
-        $barang = $this->repository->getBarangById($request->getId());
+	/**
+	 * @throws OliveMedikaException
+	 */
+	public function execute(FindBarangRequest $request)
+	{
+		$barang = $this->repository->getBarangById($request->getId());
 
-        if (!$barang) {
-            throw OliveMedikaException::build('barang-not-found', 2008);
-        }
+		if (!$barang) {
+			throw OliveMedikaException::build('barang-not-found', 2008);
+		}
 
-        return $barang;
-    }
+		return $barang;
+	}
 }
