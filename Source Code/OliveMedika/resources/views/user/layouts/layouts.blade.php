@@ -1,4 +1,5 @@
-<!doctype html>
+@include('user.layouts.header')
+    <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,9 +18,11 @@
 
     </style>
 
+    @stack('layout-style-stack')
     @yield('style')
 </head>
 <body>
+@stack('layout-content-stack')
 
 @yield('content')
 </body>

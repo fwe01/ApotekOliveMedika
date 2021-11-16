@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Services\Barang\ListBarang\ListBarangOptions;
 use App\Http\Services\Barang\ListBarang\ListBarangRequest;
 use App\Http\Services\Barang\ListBarang\ListBarangService;
-use App\Http\Services\FullDetailPromo\FullDetailPromoService;
+use App\Http\Services\Promo\FullDetailPromo\FullDetailPromoService;
 
 class HomeController
 {
