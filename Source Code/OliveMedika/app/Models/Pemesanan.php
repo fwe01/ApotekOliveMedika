@@ -56,7 +56,7 @@ class Pemesanan extends Model
 	{
 		$total = 0;
 		foreach ($barangs as $barang) {
-			$total += $barang->getHarga();
+			$total += $barang->getHarga() * $barang->getQuantity();
 		}
 		return $total;
 	}
