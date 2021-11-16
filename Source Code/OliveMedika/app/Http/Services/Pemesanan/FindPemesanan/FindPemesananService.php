@@ -62,7 +62,7 @@ class FindPemesananService
 			$barang_pemesanan_response,
 			$pemesanan->getTotal(),
 			$pemesanan->getCreatedAt(),
-			User::where('id', $pemesanan->getId())->first()->name
+			User::where('id', $pemesanan->getIdUser())->first()->name
 		);
 	}
 }
