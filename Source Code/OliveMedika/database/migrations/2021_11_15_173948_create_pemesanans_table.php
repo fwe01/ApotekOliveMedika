@@ -14,12 +14,13 @@ class CreatePemesanansTable extends Migration
     public function up()
     {
         Schema::create('pemesanans', function (Blueprint $table) {
-			$table->id();
-			$table->unsignedBigInteger('id_user');
-			$table->float('total', 16, 2);
-			$table->boolean('soft_deleted')->default(false);
-			$table->timestamps();
-			$table->foreign('id_user')->references('id')->on('users');
+            $table->id();
+            $table->unsignedBigInteger('id_user');
+            $table->float('total', 16, 2);
+            $table->boolean('soft_deleted')->default(false);
+            $table->string('status');
+            $table->timestamps();
+            $table->foreign('id_user')->references('id')->on('users');
         });
     }
 
