@@ -12,6 +12,7 @@ class FindPemesananResponse
 	private array $barangs;
 	private float $total;
 	private Carbon $created_at;
+	private string $name;
 
 	/**
 	 * @param int $id
@@ -19,14 +20,30 @@ class FindPemesananResponse
 	 * @param BarangPemesanan[] $barangs
 	 * @param float $total
 	 * @param Carbon $created_at
+	 * @param string $name
 	 */
-	public function __construct(int $id, int $id_user, array $barangs, float $total, Carbon $created_at)
-	{
+	public function __construct(
+		int $id,
+		int $id_user,
+		array $barangs,
+		float $total,
+		Carbon $created_at,
+		string $name
+	) {
 		$this->id = $id;
 		$this->id_user = $id_user;
 		$this->barangs = $barangs;
 		$this->total = $total;
 		$this->created_at = $created_at;
+		$this->name = $name;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getName(): string
+	{
+		return $this->name;
 	}
 
 	/**

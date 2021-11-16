@@ -22,6 +22,13 @@
     </a>
 </li>
 <li class="nav-item">
+    <a href="{{route('admin.pemesanans.index')}}"
+       class="nav-link {{ route('admin.pemesanans.index') == request()->url() ? 'active' : '' }}">
+        <i class="nav-icon fas fa-shopping-cart"></i>
+        <p class="text">Pemesanan</p>
+    </a>
+</li>
+<li class="nav-item">
     <a href="{{route('admin.promos.index')}}"
        class="nav-link {{ route('admin.promos.index') == request()->url() ? 'active' : '' }}">
         <i class="nav-icon fas fa-percentage"></i>

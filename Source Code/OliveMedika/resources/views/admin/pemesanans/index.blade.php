@@ -35,11 +35,11 @@
                                     <td class="text-center w-13p">{{ $pemesanan->getTotal() }}</td>
                                     <td class="text-center w-13p">{{ $pemesanan->getCreatedAt()->format('d-m-Y h:i:s')}}</td>
                                     <td class="text-center w-13p">
-                                        <div class="btn btn-primary" data-toggle="modal"
-                                             data-target="#edit-pemesanan-modal-{{$pemesanan->getId()}}">
+                                        <a href="{{route('admin.pemesanans.detail', ['id' =>$pemesanan->getId()])}}"
+                                           class="btn btn-primary">
                                             <i class="fas fa-tasks"></i>
                                             <h7 class="d-inline"> Detail</h7>
-                                        </div>
+                                        </a>
                                         &nbsp
                                         <div class="btn btn-danger" onclick="confirmDelete({{$pemesanan->getId()}})">
                                             <i class="fas fa-trash-alt"></i>

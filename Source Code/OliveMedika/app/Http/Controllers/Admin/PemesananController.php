@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Exceptions\OliveMedikaException;
 use App\Http\Services\Pemesanan\DeletePemesanan\DeletePemesananRequest;
 use App\Http\Services\Pemesanan\DeletePemesanan\DeletePemesananService;
+use App\Http\Services\Pemesanan\FindPemesanan\FindPemesananRequest;
+use App\Http\Services\Pemesanan\FindPemesanan\FindPemesananService;
 use App\Http\Services\Pemesanan\ListPemesanan\ListPemesananRequest;
 use App\Http\Services\Pemesanan\ListPemesanan\ListPemesananService;
 use App\Models\UserType;
 use Exception;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class PemesananController
@@ -26,15 +28,11 @@ class PemesananController
 		return view('admin.pemesanans.index', compact('pemesanans'));
 	}
 
-	/**
-	 * @throws OliveMedikaException
-	 */
-	public function delete(Request $request)
+	public function delete(Request $request): RedirectResponse
 	{
-		$request->validate(
-			[
-				'id' => 'required'
-			]
+		$request->validate([
+							   'id' => 'required'
+						   ]
 		);
 
 		$input = new DeletePemesananRequest($request->input('id'), new UserType(UserType::ADMIN), 0);
@@ -47,5 +45,15 @@ class PemesananController
 			return redirect()->back()->with('alert', 'Gagal menghapus pemesanan');
 		}
 		return redirect()->back()->with('success', 'Pemesanan berhasil dihapus');
+	}
+
+	public function detail(int $id)
+	{
+		$input = new FindPemesananRequest($id, new UserType(UserType::ADMIN), 0);
+		/** @var FindPemesananService $service */
+		$service = resolve(FindPemesananService::class);
+		$pemesanan = $service->execute($input);
+
+		return view('admin.pemesanans.detail', compact('pemesanan'));
 	}
 }

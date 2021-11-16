@@ -5,18 +5,19 @@ namespace App\Http\Services\Pemesanan\FindPemesanan;
 use App\Exceptions\OliveMedikaException;
 use App\Http\Repositories\PemesananRepository;
 use App\Models\Pemesanan;
+use App\Models\User;
 use App\Models\UserType;
 
 class FindPemesananService
 {
-	private PemesananRepository $repository;
+	private PemesananRepository $pemesanan_repository;
 
 	/**
-	 * @param PemesananRepository $repository
+	 * @param PemesananRepository $pemesanan_repository
 	 */
-	public function __construct(PemesananRepository $repository)
+	public function __construct(PemesananRepository $pemesanan_repository)
 	{
-		$this->repository = $repository;
+		$this->pemesanan_repository = $pemesanan_repository;
 	}
 
 	/**
@@ -24,7 +25,7 @@ class FindPemesananService
 	 */
 	public function execute(FindPemesananRequest $request)
 	{
-		$pemesanan = $this->repository->getPemesananById($request->getId());
+		$pemesanan = $this->pemesanan_repository->getPemesananById($request->getId());
 		if (!$pemesanan) {
 			throw OliveMedikaException::build('pemesanan-not-found', 2020);
 		}
@@ -60,7 +61,8 @@ class FindPemesananService
 			$pemesanan->getIdUser(),
 			$barang_pemesanan_response,
 			$pemesanan->getTotal(),
-			$pemesanan->getCreatedAt()
+			$pemesanan->getCreatedAt(),
+			User::where('id', $pemesanan->getId())->first()->name
 		);
 	}
 }

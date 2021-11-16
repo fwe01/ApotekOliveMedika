@@ -84,7 +84,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 				)
 			);
 		})->name('add');
-//		Route::post('add', [AdminResepController::class, 'add'])->name('add');
+		Route::get('detail/{id}', [AdminPemesananController::class, 'detail'])->name('detail');
 //		Route::post('delete', [AdminResepController::class, 'delete'])->name('delete');
 		Route::post('delete', [AdminPemesananController::class, 'delete'])->name('delete');
 		Route::get('find', function () {
