@@ -202,7 +202,7 @@
                             _token: '{{csrf_token()}}'
                         },
                         success: function () {
-                            console.log('request success')
+                            window.location.replace('/user')
                         },
                         error: function (error) {
                             console.log(error)

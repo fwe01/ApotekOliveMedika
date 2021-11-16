@@ -48,6 +48,8 @@ class PesananController
         $barang = $barang_service->execute($barang_input);
         $this->unit_of_work->commit();
 
+        $request->session()->forget('barang_pesanan');
+
     }
 
 }
