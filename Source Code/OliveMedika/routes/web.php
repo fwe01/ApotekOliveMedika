@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AccountsController;
 use App\Http\Controllers\Admin\BarangController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PemesananController as AdminPemesananController;
 use App\Http\Controllers\Admin\PromoController;
 use App\Http\Controllers\Admin\ResepController as AdminResepController;
 use App\Http\Controllers\Admin\RestockController;
@@ -13,12 +14,8 @@ use App\Http\Controllers\User\UserBarangController;
 use App\Http\Services\Pemesanan\CreatePemesanan\BarangPemesanan;
 use App\Http\Services\Pemesanan\CreatePemesanan\CreatePemesananRequest;
 use App\Http\Services\Pemesanan\CreatePemesanan\CreatePemesananService;
-use App\Http\Services\Pemesanan\DeletePemesanan\DeletePemesananRequest;
-use App\Http\Services\Pemesanan\DeletePemesanan\DeletePemesananService;
 use App\Http\Services\Pemesanan\FindPemesanan\FindPemesananRequest;
 use App\Http\Services\Pemesanan\FindPemesanan\FindPemesananService;
-use App\Http\Services\Pemesanan\ListPemesanan\ListPemesananRequest;
-use App\Http\Services\Pemesanan\ListPemesanan\ListPemesananService;
 use App\Models\UserType;
 use Illuminate\Support\Facades\Route;
 
@@ -69,17 +66,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 
 	Route::prefix('pemesanan')->name('pemesanans.')->group(function () {
 //		Route::get('index', [AdminResepController::class, 'index'])->name('index');
-		Route::get('index', function () {
-			/** @var ListPemesananService $service */
-			$service = resolve(ListPemesananService::class);
-			$response = $service->execute(
-				new ListPemesananRequest(
-					new UserType(UserType::ADMIN),
-					1
-				)
-			);
-			dd($response);
-		})->name('index');
+		Route::get('index', [AdminPemesananController::class, 'index'])->name('index');
 		Route::get('add', function () {
 			/** @var CreatePemesananService $service */
 			$service = resolve(CreatePemesananService::class);
@@ -99,24 +86,14 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 		})->name('add');
 //		Route::post('add', [AdminResepController::class, 'add'])->name('add');
 //		Route::post('delete', [AdminResepController::class, 'delete'])->name('delete');
-		Route::get('delete', function () {
-			/** @var DeletePemesananService $service */
-			$service = resolve(DeletePemesananService::class);
-			$service->execute(
-				new DeletePemesananRequest(
-					1,
-					new \App\Models\UserType(UserType::ADMIN),
-					0
-				)
-			);
-		})->name('delete');
+		Route::post('delete', [AdminPemesananController::class, 'delete'])->name('delete');
 		Route::get('find', function () {
 			/** @var FindPemesananService $service */
 			$service = resolve(FindPemesananService::class);
 			$response = $service->execute(
 				new FindPemesananRequest(
 					2,
-					new \App\Models\UserType(UserType::ADMIN),
+					new UserType(UserType::ADMIN),
 					0
 				)
 			);
