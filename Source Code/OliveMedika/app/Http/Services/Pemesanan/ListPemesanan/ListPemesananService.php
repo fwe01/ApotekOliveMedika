@@ -4,8 +4,9 @@ namespace App\Http\Services\Pemesanan\ListPemesanan;
 
 use App\Exceptions\OliveMedikaException;
 use App\Http\Repositories\PemesananRepository;
-use App\Models\Pemesanan;
 use App\Models\UserType;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ListPemesananService
 {
@@ -32,39 +33,45 @@ class ListPemesananService
 		}
 	}
 
-	/**
-	 * @throws OliveMedikaException
-	 */
 	private function getUserResponse(int $id_user): array
 	{
-		$pemesanans = $this->repository->getAllPemesananWithoutBarang($id_user);
+		$pemesanans = DB::select(
+			'
+			select p.*, u.name
+			from (select * from pemesanans where soft_deleted = false and id_user = ?) p
+			join users u on u.id = p.id_user
+		',
+			[
+				$id_user
+			]
+		);
 		return $this->buildResponseFromPemesanans($pemesanans);
 	}
 
-	/**
-	 * @param Pemesanan[]|null $pemesanans
-	 * @throws OliveMedikaException
-	 */
-	private function buildResponseFromPemesanans(?array $pemesanans): array
+	private function buildResponseFromPemesanans(array $pemesanans): array
 	{
 		$response = [];
 		foreach ($pemesanans as $pemesanan) {
 			$response[] = new ListPemesananResponse(
-				$pemesanan->getId(),
-				$pemesanan->getIdUser(),
-				$pemesanan->getTotal(),
-				$pemesanan->getCreatedAt(),
+				$pemesanan->id,
+				$pemesanan->id_user,
+				$pemesanan->name,
+				$pemesanan->total,
+				Carbon::parse($pemesanan->created_at),
 			);
 		}
 		return $response;
 	}
 
-	/**
-	 * @throws OliveMedikaException
-	 */
 	private function getAdminResponse(): array
 	{
-		$pemesanans = $this->repository->getAllPemesananWithoutBarang();
+		$pemesanans = DB::select(
+			'
+			select p.*, u.name
+			from (select * from pemesanans where soft_deleted = false) p
+			join users u on u.id = p.id_user
+		'
+		);
 		return $this->buildResponseFromPemesanans($pemesanans);
 	}
 }
