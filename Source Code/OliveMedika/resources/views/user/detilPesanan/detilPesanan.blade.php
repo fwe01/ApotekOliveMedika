@@ -180,16 +180,45 @@
 @section('script')
     <script>
         $(window).ready(() => {
-            let barang_pesanan = JSON.parse(sessionStorage.getItem("barang_pesanan"))
-            console.log(barang_pesanan)
+            $('.tambah-barang-btn').click(() => {
+                window.location.replace('/user')
+            })
+
+            $('.bottom-btn').click(() => {
+                $.ajax(
+                    {
+                        url: '/user/pesan',
+                        type: 'POST',
+                        data: {
+                            barang: [
+                                @foreach($barangs as $barang)
+                                {{"{
+                                    id: {$barang->getId()},
+                                    quantity:"}}
+                                Number($('#qty-' + {{$barang->getId()}}).html())
+                                {{"},"}}
+                                    @endforeach
+                            ],
+                            _token: '{{csrf_token()}}'
+                        },
+                        success: function () {
+                            console.log('request success')
+                        },
+                        error: function (error) {
+                            console.log(error)
+                        }
+                    }
+                )
+
+            })
         })
 
-        function onQtyChanged(id, harga, amount) {
+        function onQtyChanged (id, harga, amount) {
             let qty_element = $('#qty-' + id)
-            let qty = Number(qty_element.html());
-            if (qty + amount < 1) return;
+            let qty = Number(qty_element.html())
+            if (qty + amount < 1) return
             qty += amount
-            qty_element.html(qty);
+            qty_element.html(qty)
 
             let total_element = $('#harga')
             let total_harga = Number(total_element.html())
