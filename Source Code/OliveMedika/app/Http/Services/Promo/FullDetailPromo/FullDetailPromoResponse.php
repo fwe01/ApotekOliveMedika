@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services\FullDetailPromo;
+namespace App\Http\Services\Promo\FullDetailPromo;
 
 class FullDetailPromoResponse
 {
