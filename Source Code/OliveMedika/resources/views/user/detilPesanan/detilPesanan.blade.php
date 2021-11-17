@@ -202,7 +202,7 @@
                             _token: '{{csrf_token()}}'
                         },
                         success: function () {
-                            window.location.replace('/user')
+                            window.location.replace('/user/list_pemesanan')
                         },
                         error: function (error) {
                             console.log(error)

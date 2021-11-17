@@ -6,6 +6,9 @@ use App\Http\Mechanism\UnitOfWork;
 use App\Http\Services\Pemesanan\CreatePemesanan\BarangPemesanan;
 use App\Http\Services\Pemesanan\CreatePemesanan\CreatePemesananRequest;
 use App\Http\Services\Pemesanan\CreatePemesanan\CreatePemesananService;
+use App\Http\Services\Pemesanan\ListPemesanan\ListPemesananRequest;
+use App\Http\Services\Pemesanan\ListPemesanan\ListPemesananService;
+use App\Models\UserType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +23,6 @@ class PesananController
     {
         $this->unit_of_work = $unit_of_work;
     }
-
 
     function pesan(Request $request)
     {
@@ -50,6 +52,19 @@ class PesananController
 
         $request->session()->forget('barang_pesanan');
 
+    }
+
+    function listPesanan()
+    {
+        $input = new ListPemesananRequest(
+            new UserType(UserType::USER),
+            Auth::guard('user')->id()
+        );
+        /** @var ListPemesananService $service */
+        $service = resolve(ListPemesananService::class);
+        $pemesanans = $service->execute($input);
+
+        return view('user.listPemesanan.listPemesanan', compact('pemesanans'));
     }
 
 }
