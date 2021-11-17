@@ -36,7 +36,8 @@ class ListResepService
 				   r.updated_at
 			from reseps r
 					 join users u on r.id_user = u.id
-			where r.soft_deleted = false;
+			where r.soft_deleted = false
+			order by r.created_at desc 
 		'
 		);
 	}
@@ -57,7 +58,8 @@ class ListResepService
 				from reseps r
 						 join users u on r.id_user = u.id
 				where r.soft_deleted = false
-				and r.id_user = ?;
+				and r.id_user = ?
+				order by r.created_at desc 
 			',
 			[
 				$id_user

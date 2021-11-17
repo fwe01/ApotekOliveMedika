@@ -14,6 +14,7 @@ class ListRestockService
 				select r.id, id_barang, nama, username_admin, jumlah, harga_per_unit, r.created_at
 				from restocks r
 				join barangs b on r.id_barang = b.id
+				order by r.created_at desc 
 			',
 		);
 

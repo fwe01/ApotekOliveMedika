@@ -40,6 +40,7 @@ class ListPemesananService
 			select p.*, u.name
 			from (select * from pemesanans where soft_deleted = false and id_user = ?) p
 			join users u on u.id = p.id_user
+			order by p.created_at desc 
 		',
 			[
 				$id_user
@@ -70,6 +71,7 @@ class ListPemesananService
 			select p.*, u.name
 			from (select * from pemesanans where soft_deleted = false) p
 			join users u on u.id = p.id_user
+			order by p.created_at desc 
 		'
 		);
 		return $this->buildResponseFromPemesanans($pemesanans);
