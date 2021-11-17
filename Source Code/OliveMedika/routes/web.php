@@ -115,6 +115,7 @@ Route::prefix('user')->name('user.')->middleware('user')->group(function () {
     Route::post('/pesan', [PesananController::class, 'pesan'])->name('pesan');
 
     Route::get('/list_pemesanan', [PesananController::class, 'listPesanan'])->name('listPesanan');
+    Route::get('/detil_status_pesanan/{id}', [PesananController::class, 'status'])->name('barangDetail');
 
     Route::prefix('resep')->name('reseps.')->group(function () {
 //		Route::get('index', [ResepController::class, 'index'])->name('index');
