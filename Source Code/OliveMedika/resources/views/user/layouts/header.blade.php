@@ -46,7 +46,15 @@
     <div class="huge-circle"></div>
     <div class="navbar">
         <input class="search-bar" placeholder="search"/>
-        <img src="{{asset("img/list.svg")}}" class="list-icon" alt="list"/>
+        <img src="{{asset("img/list.svg")}}" class="list-icon" alt="list" onclick="open_list()"/>
         <img src="{{asset("img/user-icon.svg")}}" class="list-icon" alt="list"/>
     </div>
+@endpush
+
+@push('layout-script-stack')
+    <script>
+        function open_list () {
+            window.location.replace('/user/list_pemesanan')
+        }
+    </script>
 @endpush
