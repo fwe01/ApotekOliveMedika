@@ -6,7 +6,7 @@
 @endsection
 
 @section('windowTitle')
-    Laporan Keuangan
+    Laporan Keuangan Periode {{$periode}}
 @endsection
 
 @section('content')

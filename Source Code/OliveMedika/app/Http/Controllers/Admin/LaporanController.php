@@ -20,8 +20,9 @@ class LaporanController
 		$service = resolve(GetLaporanService::class);
 
 		$laporan = $service->execute($input);
+		$periode = $input->getStartDate()->format('Y/m/d') . ' - ' . $input->getEndDate()->format('Y/m/d');
 
-		return view('admin.laporans.index', compact('laporan'));
+		return view('admin.laporans.index', compact('laporan', 'periode'));
 	}
 
 	public function find(Request $request)
@@ -42,6 +43,8 @@ class LaporanController
 
 		$laporan = $service->execute($input);
 
-		return view('admin.laporans.index', compact('laporan'));
+		$periode = $input->getStartDate()->format('Y/m/d') . ' - ' . $input->getEndDate()->format('Y/m/d');
+
+		return view('admin.laporans.index', compact('laporan', 'periode'));
 	}
 }
