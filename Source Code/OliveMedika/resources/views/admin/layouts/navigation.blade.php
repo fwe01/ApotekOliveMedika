@@ -22,6 +22,13 @@
     </a>
 </li>
 <li class="nav-item">
+    <a href="{{route('admin.laporans.index')}}"
+       class="nav-link {{ route('admin.laporans.index') == request()->url() ? 'active' : '' }}">
+        <i class="nav-icon fas fa-calculator"></i>
+        <p class="text">Laporan</p>
+    </a>
+</li>
+<li class="nav-item">
     <a href="{{route('admin.pemesanans.index')}}"
        class="nav-link {{ route('admin.pemesanans.index') == request()->url() ? 'active' : '' }}">
         <i class="nav-icon fas fa-shopping-cart"></i>
