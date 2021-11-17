@@ -7,12 +7,12 @@ use App\Http\Mechanism\OliveMedikaEnum;
 
 class StatusPemesanan extends OliveMedikaEnum
 {
-    const MENUNGGU_PROSES = 'menunggu_proses';
-    const SEDANG_DIPROSES = 'sedang_diproses';
-    const SELESAI = 'selesai';
+	const SEDANG_DIPROSES = 'sedang_diproses';
+	const DIBATALKAN = 'dibatalkan';
+	const SELESAI = 'selesai';
 
-    protected function onErrorException(): OliveMedikaException
-    {
-        return new OliveMedikaException('Status Pesanan Invalid', 2019);
-    }
+	protected function onErrorException(): OliveMedikaException
+	{
+		return new OliveMedikaException('Status Pesanan Invalid', 2019);
+	}
 }

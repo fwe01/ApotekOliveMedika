@@ -68,8 +68,12 @@ class CreatePemesananService
 				throw OliveMedikaException::build('barang-not-found', 2016);
 			}
 
-			$harga = $barang_from_repo->getHarga() < $promo_barang[0]->getHargaPromoPerUnit() ?
-				$barang_from_repo->getHarga() : $promo_barang[0]->getHargaPromoPerUnit();
+			if ($promo_barang) {
+				$harga = $barang_from_repo->getHarga() < $promo_barang[0]->getHargaPromoPerUnit() ?
+					$barang_from_repo->getHarga() : $promo_barang[0]->getHargaPromoPerUnit();
+			} else {
+				$harga = $barang_from_repo->getHarga();
+			}
 
 			$barang_pemesanan[] = BarangPemesananModels::create(
 				$barang_from_repo->getId(),

@@ -5,6 +5,7 @@
 @section('content')
     {{--    @include('admin.pemesanans.add-modal')--}}
     @include('admin.pemesanans.delete-modal')
+    @include('admin.pemesanans.cancel-modal')
     <div class="row" id="pemesanan-tables">
         <div class="col-md-12">
             <div class="card">
@@ -25,6 +26,7 @@
                             <th class="text-center w-13p">Nama Pemesan</th>
                             <th class="text-center w-13p">Total</th>
                             <th class="text-center w-13p">Dibuat pada</th>
+                            <th class="text-center w-13p">Status</th>
                             <th class="text-center w-13p">Action</th>
                             </thead>
                             <tbody>
@@ -34,6 +36,13 @@
                                     <td class="text-center w-13p">{{ $pemesanan->getName()}}</td>
                                     <td class="text-center w-13p">{{ $pemesanan->getTotal() }}</td>
                                     <td class="text-center w-13p">{{ $pemesanan->getCreatedAt()->format('d-m-Y h:i:s')}}</td>
+                                    @if($pemesanan->getStatus()->getValue() == \App\Models\StatusPemesanan::DIBATALKAN)
+                                        <td class="text-center w-13p"><p class="badge badge-danger">Dibatalkan</p></td>
+                                    @elseif($pemesanan->getStatus()->getValue() == \App\Models\StatusPemesanan::SEDANG_DIPROSES)
+                                        <td class="text-center w-13p"><p class="badge badge-primary">Diproses</p></td>
+                                    @elseif($pemesanan->getStatus()->getValue() == \App\Models\StatusPemesanan::SELESAI)
+                                        <td class="text-center w-13p"><p class="badge badge-success">Selesai</p></td>
+                                    @endif
                                     <td class="text-center w-13p">
                                         <a href="{{route('admin.pemesanans.detail', ['id' =>$pemesanan->getId()])}}"
                                            class="btn btn-primary">
@@ -41,7 +50,14 @@
                                             <h7 class="d-inline"> Detail</h7>
                                         </a>
                                         &nbsp
-                                        <div class="btn btn-danger" onclick="confirmDelete({{$pemesanan->getId()}})">
+                                        <div class="btn btn-warning"
+                                             onclick="confirmCancel({{$pemesanan->getId()}})">
+                                            <i class="fas fa-times"></i>
+                                            <h7 class="d-inline"> Cancel</h7>
+                                        </div>
+                                        &nbsp
+                                        <div class="btn btn-danger"
+                                             onclick="confirmDelete({{$pemesanan->getId()}})">
                                             <i class="fas fa-trash-alt"></i>
                                             <h7 class="d-inline"> Hapus</h7>
                                         </div>
@@ -65,8 +81,18 @@
             document.getElementById('confirm-delete').style.display = 'block'
         }
 
+        function confirmCancel(value) {
+            updateToBeCanceledId(value)
+            document.getElementById('pemesanan-tables').style.display = 'none'
+            document.getElementById('confirm-cancel').style.display = 'block'
+        }
+
         function updateToBeDeletedId(value) {
             document.getElementById('delete-pemesanan-id').value = value
+        }
+
+        function updateToBeCanceledId(value) {
+            document.getElementById('cancel-pemesanan-id').value = value
         }
     </script>
     <script>

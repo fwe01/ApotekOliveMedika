@@ -83,22 +83,33 @@ class PemesananRepository
     {
         $current_time = Carbon::now();
         if ($pemesanan->getId()) {
-            throw OliveMedikaException::build('pemesanan-not-editable', 2014);
-        } else {
-            //Create
-            $id_pemesanan = DB::table('pemesanans')->insertGetId(
-                [
-                    'id_user' => $pemesanan->getIdUser(),
-                    'total' => $pemesanan->getTotal(),
-                    'created_at' => $current_time,
-                    'updated_at' => $current_time,
-                    'status' => $pemesanan->getStatus()->getValue(),
-                ]
-            );
+			DB::table('pemesanans')->updateOrInsert(
+				[
+					'id' => $pemesanan->getId()
+				],
+				[
+					'id_user' => $pemesanan->getIdUser(),
+					'total' => $pemesanan->getTotal(),
+					'created_at' => $current_time,
+					'updated_at' => $current_time,
+					'status' => $pemesanan->getStatus()->getValue(),
+				]
+			);
+		} else {
+			//Create
+			$id_pemesanan = DB::table('pemesanans')->insertGetId(
+				[
+					'id_user' => $pemesanan->getIdUser(),
+					'total' => $pemesanan->getTotal(),
+					'created_at' => $current_time,
+					'updated_at' => $current_time,
+					'status' => $pemesanan->getStatus()->getValue(),
+				]
+			);
 
-            $barang_pemesanan_payload = $this->createBarangPemesananPayload($pemesanan->getBarangs(), $id_pemesanan);
+			$barang_pemesanan_payload = $this->createBarangPemesananPayload($pemesanan->getBarangs(), $id_pemesanan);
 
-            DB::table('barang_pemesanans')->insert($barang_pemesanan_payload);
+			DB::table('barang_pemesanans')->insert($barang_pemesanan_payload);
         }
     }
 

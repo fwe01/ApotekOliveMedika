@@ -33,7 +33,7 @@ class PromoRepository
 			->where('soft_deleted', false)
 			->where('tanggal_mulai', '>=', $current_time_string)
 			->where('tanggal_berakhir', '<=', $current_time_string)
-			->orderBy('harga_per_unit')
+			->orderBy('harga_promo_per_unit')
 			->get();
 
 		if (!$rows) {

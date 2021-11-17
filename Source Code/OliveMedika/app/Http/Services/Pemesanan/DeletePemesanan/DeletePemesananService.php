@@ -5,7 +5,6 @@ namespace App\Http\Services\Pemesanan\DeletePemesanan;
 use App\Exceptions\OliveMedikaException;
 use App\Http\Repositories\PemesananRepository;
 use App\Models\UserType;
-use Carbon\Carbon;
 
 class DeletePemesananService
 {
@@ -30,14 +29,7 @@ class DeletePemesananService
 		}
 		switch ($request->getUserType()->getValue()) {
 			case UserType::USER:
-				$current_time = Carbon::now();
-				if (
-					$pemesanan->getIdUser() != $request->getIdUser() ||
-					$current_time->getTimestamp() > $pemesanan->getCreatedAt()->addMinutes(30)->getTimestamp()
-				) {
-					throw new OliveMedikaException('Pemesanan tidak dapat dihapus setelah melewati 30 menit', 2019);
-				}
-				break;
+				throw new OliveMedikaException('Tidak berhak akses', 2024);
 			case UserType::ADMIN:
 				break;
 		}

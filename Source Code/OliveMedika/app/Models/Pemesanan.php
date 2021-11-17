@@ -43,7 +43,7 @@ class Pemesanan extends Model
         $this->created_at = $created_at;
 
         if (!$status)
-            $this->status = new StatusPemesanan(StatusPemesanan::MENUNGGU_PROSES);
+            $this->status = new StatusPemesanan(StatusPemesanan::SEDANG_DIPROSES);
         else
             $this->status = $status;
     }

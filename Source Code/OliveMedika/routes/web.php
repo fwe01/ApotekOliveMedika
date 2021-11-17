@@ -81,17 +81,18 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
                         new BarangPemesanan(
                             1, 2
                         ),
-                        new BarangPemesanan(
-                            2, 5
-                        )
-                    ]
-                )
-            );
-        })->name('add');
-        Route::get('detail/{id}', [AdminPemesananController::class, 'detail'])->name('detail');
+						new BarangPemesanan(
+							2, 5
+						)
+					]
+				)
+			);
+		})->name('add');
+		Route::get('detail/{id}', [AdminPemesananController::class, 'detail'])->name('detail');
 //		Route::post('delete', [AdminResepController::class, 'delete'])->name('delete');
-        Route::post('delete', [AdminPemesananController::class, 'delete'])->name('delete');
-    });
+		Route::post('delete', [AdminPemesananController::class, 'delete'])->name('delete');
+		Route::post('cancel', [AdminPemesananController::class, 'cancel'])->name('cancel');
+	});
 
     Route::prefix('resep')->name('reseps.')->group(function () {
         Route::get('index', [AdminResepController::class, 'index'])->name('index');
