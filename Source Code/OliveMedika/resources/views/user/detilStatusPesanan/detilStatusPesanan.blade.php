@@ -89,7 +89,7 @@
     </div>
 
     <div class="bottom">
-        @if($pemesanan->getStatus()->getValue() != "selesai")
+        @if($pemesanan->getStatus()->getValue() != "selesai" && $bisa_batal)
             <div class="bottom-btn btn-batal"> Batal</div>
         @endif
         <div class="bottom-btn btn-kembali" onclick="kembali()">Kembali</div>

@@ -11,6 +11,7 @@ use App\Http\Services\Pemesanan\FindPemesanan\FindPemesananService;
 use App\Http\Services\Pemesanan\ListPemesanan\ListPemesananRequest;
 use App\Http\Services\Pemesanan\ListPemesanan\ListPemesananService;
 use App\Models\UserType;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -81,7 +82,11 @@ class PesananController
         $service = resolve(FindPemesananService::class);
 
         $pemesanan = $service->execute($input);
-        return view('user.detilStatusPesanan.detilStatusPesanan', compact('pemesanan'));
+
+        $bisa_batal = $pemesanan->getCreatedAt()->addMinutes(30)->getTimestamp() > Carbon::now()->getTimestamp();
+
+
+        return view('user.detilStatusPesanan.detilStatusPesanan', compact(['pemesanan', 'bisa_batal']));
     }
 
 }
