@@ -40,21 +40,21 @@ Route::name('auth.')->group(function () {
 });
 
 Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
-	Route::get('/', [DashboardController::class, 'showDashboard'])->name('dashboard');
+    Route::get('/', [DashboardController::class, 'showDashboard'])->name('dashboard');
 
-	Route::prefix('accounts')->name('accounts.')->middleware('superadmin')->group(function () {
-		Route::get('index', [AccountsController::class, 'index'])->name('index');
-		Route::post('add', [AccountsController::class, 'add'])->name('add');
-		Route::post('update', [AccountsController::class, 'update'])->name('update');
-		Route::post('delete', [AccountsController::class, 'delete'])->name('delete');
-	});
+    Route::prefix('accounts')->name('accounts.')->middleware('superadmin')->group(function () {
+        Route::get('index', [AccountsController::class, 'index'])->name('index');
+        Route::post('add', [AccountsController::class, 'add'])->name('add');
+        Route::post('update', [AccountsController::class, 'update'])->name('update');
+        Route::post('delete', [AccountsController::class, 'delete'])->name('delete');
+    });
 
-	Route::prefix('barang')->name('barangs.')->group(function () {
-		Route::get('index', [BarangController::class, 'index'])->name('index');
-		Route::post('add', [BarangController::class, 'add'])->name('add');
-		Route::post('delete', [BarangController::class, 'delete'])->name('delete');
-		Route::post('update', [BarangController::class, 'update'])->name('update');
-	});
+    Route::prefix('barang')->name('barangs.')->group(function () {
+        Route::get('index', [BarangController::class, 'index'])->name('index');
+        Route::post('add', [BarangController::class, 'add'])->name('add');
+        Route::post('delete', [BarangController::class, 'delete'])->name('delete');
+        Route::post('update', [BarangController::class, 'update'])->name('update');
+    });
 
 	Route::prefix('laporan')->name('laporans.')->group(function () {
 		Route::get('index', [LaporanController::class, 'index'])->name('index');
@@ -68,7 +68,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 		Route::post('update', [PromoController::class, 'update'])->name('update');
 	});
 
-	Route::prefix('pemesanan')->name('pemesanans.')->group(function () {
+    Route::prefix('pemesanan')->name('pemesanans.')->group(function () {
 //		Route::get('index', [AdminResepController::class, 'index'])->name('index');
         Route::get('index', [AdminPemesananController::class, 'index'])->name('index');
         Route::get('add', function () {

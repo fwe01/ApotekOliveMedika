@@ -6,6 +6,8 @@ use App\Http\Mechanism\UnitOfWork;
 use App\Http\Services\Pemesanan\CreatePemesanan\BarangPemesanan;
 use App\Http\Services\Pemesanan\CreatePemesanan\CreatePemesananRequest;
 use App\Http\Services\Pemesanan\CreatePemesanan\CreatePemesananService;
+use App\Http\Services\Pemesanan\FindPemesanan\FindPemesananRequest;
+use App\Http\Services\Pemesanan\FindPemesanan\FindPemesananService;
 use App\Http\Services\Pemesanan\ListPemesanan\ListPemesananRequest;
 use App\Http\Services\Pemesanan\ListPemesanan\ListPemesananService;
 use App\Models\UserType;
@@ -65,6 +67,21 @@ class PesananController
         $pemesanans = $service->execute($input);
 
         return view('user.listPemesanan.listPemesanan', compact('pemesanans'));
+    }
+
+    function status($id_pemesanan)
+    {
+        $input = new FindPemesananRequest(
+            $id_pemesanan,
+            new UserType(UserType::USER),
+            Auth::guard('user')->id()
+        );
+
+        /** @var FindPemesananService $service */
+        $service = resolve(FindPemesananService::class);
+
+        $pemesanan = $service->execute($input);
+        return view('user.detilStatusPesanan.detilStatusPesanan', compact('pemesanan'));
     }
 
 }
