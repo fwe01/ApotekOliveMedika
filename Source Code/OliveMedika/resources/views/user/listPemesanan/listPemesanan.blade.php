@@ -22,6 +22,10 @@
             display: flex;
         }
 
+        .pesanan-item:hover {
+            cursor: pointer;
+        }
+
         .pesanan-icon {
             width: 60px;
             height: 60px;
@@ -44,14 +48,6 @@
 
         .pesanan-total, .pesanan-id {
             margin: 0;
-        }
-
-        .status-success {
-            background-color: #04D141;
-        }
-
-        .status-pending {
-            background-color: #FFBC11;
         }
 
         .status-icon {
@@ -78,7 +74,7 @@
             List Pesanan
         </div>
         @foreach($pemesanans as $pemesanan)
-            <div class="pesanan-item">
+            <div class="pesanan-item" onclick="open_detail_status_pesanan({{$pemesanan->getId()}})">
                 <div class="pesanan-icon">
                     <img src="{{ url("img/bi_box_white.svg") }}" alt="lorem-picsum"/>
                     <div class="status-icon">
@@ -104,5 +100,8 @@
 
         })
 
+        function open_detail_status_pesanan (id) {
+            window.location.replace('/user/detil_status_pesanan/' + id)
+        }
     </script>
 @endsection
