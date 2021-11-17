@@ -31,7 +31,8 @@ class ListPromoService
 			'
 				select p.id, nama, harga_promo_per_unit, tanggal_mulai, tanggal_berakhir ,p.created_at
 				from (select * from promos where soft_deleted = false) p
-				join barangs b on p.id_barang = b.id;
+				join barangs b on p.id_barang = b.id
+				order by p.created_at desc 
 			',
 		);
 

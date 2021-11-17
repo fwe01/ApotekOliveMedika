@@ -12,12 +12,15 @@ use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\PesananController;
 use App\Http\Controllers\User\ResepController as UserResepController;
 use App\Http\Controllers\User\UserBarangController;
+use App\Http\Services\Laporan\GetLaporan\GetLaporanRequest;
+use App\Http\Services\Laporan\GetLaporan\GetLaporanService;
 use App\Http\Services\Pemesanan\CreatePemesanan\BarangPemesanan;
 use App\Http\Services\Pemesanan\CreatePemesanan\CreatePemesananRequest;
 use App\Http\Services\Pemesanan\CreatePemesanan\CreatePemesananService;
 use App\Http\Services\Pemesanan\FindPemesanan\FindPemesananRequest;
 use App\Http\Services\Pemesanan\FindPemesanan\FindPemesananService;
 use App\Models\UserType;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,30 +45,44 @@ Route::name('auth.')->group(function () {
 });
 
 Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
-    Route::get('/', [DashboardController::class, 'showDashboard'])->name('dashboard');
+	Route::get('/', [DashboardController::class, 'showDashboard'])->name('dashboard');
 
-    Route::prefix('accounts')->name('accounts.')->middleware('superadmin')->group(function () {
-        Route::get('index', [AccountsController::class, 'index'])->name('index');
-        Route::post('add', [AccountsController::class, 'add'])->name('add');
-        Route::post('update', [AccountsController::class, 'update'])->name('update');
-        Route::post('delete', [AccountsController::class, 'delete'])->name('delete');
-    });
+	Route::prefix('accounts')->name('accounts.')->middleware('superadmin')->group(function () {
+		Route::get('index', [AccountsController::class, 'index'])->name('index');
+		Route::post('add', [AccountsController::class, 'add'])->name('add');
+		Route::post('update', [AccountsController::class, 'update'])->name('update');
+		Route::post('delete', [AccountsController::class, 'delete'])->name('delete');
+	});
 
-    Route::prefix('barang')->name('barangs.')->group(function () {
-        Route::get('index', [BarangController::class, 'index'])->name('index');
-        Route::post('add', [BarangController::class, 'add'])->name('add');
-        Route::post('delete', [BarangController::class, 'delete'])->name('delete');
-        Route::post('update', [BarangController::class, 'update'])->name('update');
-    });
+	Route::prefix('barang')->name('barangs.')->group(function () {
+		Route::get('index', [BarangController::class, 'index'])->name('index');
+		Route::post('add', [BarangController::class, 'add'])->name('add');
+		Route::post('delete', [BarangController::class, 'delete'])->name('delete');
+		Route::post('update', [BarangController::class, 'update'])->name('update');
+	});
 
-    Route::prefix('promo')->name('promos.')->group(function () {
-        Route::get('index', [PromoController::class, 'index'])->name('index');
-        Route::post('add', [PromoController::class, 'add'])->name('add');
-        Route::post('delete', [PromoController::class, 'delete'])->name('delete');
-        Route::post('update', [PromoController::class, 'update'])->name('update');
-    });
+	Route::prefix('laporan')->name('laporans.')->group(function () {
+		Route::get('index', function () {
+			/** @var GetLaporanService $service */
+			$service = resolve(GetLaporanService::class);
+			$response = $service->execute(
+				new GetLaporanRequest(
+					Carbon::now()->startOfMonth(),
+					Carbon::now()->endOfDay()
+				)
+			);
+			dd($response);
+		})->name('index');
+	});
 
-    Route::prefix('pemesanan')->name('pemesanans.')->group(function () {
+	Route::prefix('promo')->name('promos.')->group(function () {
+		Route::get('index', [PromoController::class, 'index'])->name('index');
+		Route::post('add', [PromoController::class, 'add'])->name('add');
+		Route::post('delete', [PromoController::class, 'delete'])->name('delete');
+		Route::post('update', [PromoController::class, 'update'])->name('update');
+	});
+
+	Route::prefix('pemesanan')->name('pemesanans.')->group(function () {
 //		Route::get('index', [AdminResepController::class, 'index'])->name('index');
         Route::get('index', [AdminPemesananController::class, 'index'])->name('index');
         Route::get('add', function () {
