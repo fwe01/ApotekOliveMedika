@@ -56,17 +56,17 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
         Route::post('update', [BarangController::class, 'update'])->name('update');
     });
 
-	Route::prefix('laporan')->name('laporans.')->group(function () {
-		Route::get('index', [LaporanController::class, 'index'])->name('index');
-		Route::post('find', [LaporanController::class, 'find'])->name('find');
-	});
+    Route::prefix('laporan')->name('laporans.')->group(function () {
+        Route::get('index', [LaporanController::class, 'index'])->name('index');
+        Route::post('find', [LaporanController::class, 'find'])->name('find');
+    });
 
-	Route::prefix('promo')->name('promos.')->group(function () {
-		Route::get('index', [PromoController::class, 'index'])->name('index');
-		Route::post('add', [PromoController::class, 'add'])->name('add');
-		Route::post('delete', [PromoController::class, 'delete'])->name('delete');
-		Route::post('update', [PromoController::class, 'update'])->name('update');
-	});
+    Route::prefix('promo')->name('promos.')->group(function () {
+        Route::get('index', [PromoController::class, 'index'])->name('index');
+        Route::post('add', [PromoController::class, 'add'])->name('add');
+        Route::post('delete', [PromoController::class, 'delete'])->name('delete');
+        Route::post('update', [PromoController::class, 'update'])->name('update');
+    });
 
     Route::prefix('pemesanan')->name('pemesanans.')->group(function () {
 //		Route::get('index', [AdminResepController::class, 'index'])->name('index');
@@ -81,18 +81,18 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
                         new BarangPemesanan(
                             1, 2
                         ),
-						new BarangPemesanan(
-							2, 5
-						)
-					]
-				)
-			);
-		})->name('add');
-		Route::get('detail/{id}', [AdminPemesananController::class, 'detail'])->name('detail');
+                        new BarangPemesanan(
+                            2, 5
+                        )
+                    ]
+                )
+            );
+        })->name('add');
+        Route::get('detail/{id}', [AdminPemesananController::class, 'detail'])->name('detail');
 //		Route::post('delete', [AdminResepController::class, 'delete'])->name('delete');
-		Route::post('delete', [AdminPemesananController::class, 'delete'])->name('delete');
-		Route::post('cancel', [AdminPemesananController::class, 'cancel'])->name('cancel');
-	});
+        Route::post('delete', [AdminPemesananController::class, 'delete'])->name('delete');
+        Route::post('cancel', [AdminPemesananController::class, 'cancel'])->name('cancel');
+    });
 
     Route::prefix('resep')->name('reseps.')->group(function () {
         Route::get('index', [AdminResepController::class, 'index'])->name('index');
@@ -118,6 +118,7 @@ Route::prefix('user')->name('user.')->middleware('user')->group(function () {
 
     Route::get('/list_pemesanan', [PesananController::class, 'listPesanan'])->name('listPesanan');
     Route::get('/detil_status_pesanan/{id}', [PesananController::class, 'status'])->name('barangDetail');
+    Route::post('/batalkan_pesanan', [PesananController::class, 'batalkan'])->name('pesananBatal');
 
     Route::prefix('resep')->name('reseps.')->group(function () {
 //		Route::get('index', [ResepController::class, 'index'])->name('index');
