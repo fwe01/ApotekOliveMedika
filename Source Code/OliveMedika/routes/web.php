@@ -92,6 +92,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 //		Route::post('delete', [AdminResepController::class, 'delete'])->name('delete');
 		Route::post('delete', [AdminPemesananController::class, 'delete'])->name('delete');
 		Route::post('cancel', [AdminPemesananController::class, 'cancel'])->name('cancel');
+		Route::post('finish', [AdminPemesananController::class, 'finish'])->name('finish');
 	});
 
     Route::prefix('resep')->name('reseps.')->group(function () {
