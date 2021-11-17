@@ -25,6 +25,37 @@ class PromoRepository
 		);
 	}
 
+	public function getActivePromoByIdBarang(int $id_barang): ?array
+	{
+		$current_time_string = Carbon::now()->format('Y-m-d h:i:s');
+		$rows = DB::table('promos')
+			->where('id_barang', $id_barang)
+			->where('soft_deleted', false)
+			->where('tanggal_mulai', '>=', $current_time_string)
+			->where('tanggal_berakhir', '<=', $current_time_string)
+			->orderBy('harga_per_unit')
+			->get();
+
+		if (!$rows) {
+			return null;
+		}
+
+		/** @var Promo[] $promos */
+		$promos = [];
+		foreach ($rows as $row) {
+			$promos[] = new Promo(
+				$row->id,
+				$row->id_barang,
+				$row->harga_promo_per_unit,
+				Carbon::parse($row->tanggal_mulai),
+				Carbon::parse($row->tanggal_berakhir),
+				Carbon::parse($row->created_at),
+			);
+		}
+
+		return $promos;
+	}
+
 	/**
 	 * Get all promo except deleted promo
 	 * @return Promo[]|null
