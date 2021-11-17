@@ -37,7 +37,7 @@ class GetLaporanService
 				$request->getEndDate()->format('Y-m-d h:i:s'),
 				$request->getStartDate()->format('Y-m-d h:i:s')
 			]
-		)[0]->total;
+			)[0]->total ?? 0;
 
 		return $pendapatan;
 	}
@@ -45,17 +45,17 @@ class GetLaporanService
 	private function getTotalPengeluaranResponse(GetLaporanRequest $request)
 	{
 		$pengeluaran = DB::select(
-			'
+				'
 				select sum(jumlah * harga_per_unit) as total
 				from restocks
 				where created_at < ?
 				  and created_at > ?;
 			',
-			[
-				$request->getEndDate()->format('Y-m-d h:i:s'),
-				$request->getStartDate()->format('Y-m-d h:i:s')
-			]
-		)[0]->total;
+				[
+					$request->getEndDate()->format('Y-m-d h:i:s'),
+					$request->getStartDate()->format('Y-m-d h:i:s')
+				]
+			)[0]->total ?? 0;
 
 		return $pengeluaran;
 	}

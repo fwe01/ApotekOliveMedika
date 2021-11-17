@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AccountsController;
 use App\Http\Controllers\Admin\BarangController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\PemesananController as AdminPemesananController;
 use App\Http\Controllers\Admin\PromoController;
 use App\Http\Controllers\Admin\ResepController as AdminResepController;
@@ -12,15 +13,9 @@ use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\PesananController;
 use App\Http\Controllers\User\ResepController as UserResepController;
 use App\Http\Controllers\User\UserBarangController;
-use App\Http\Services\Laporan\GetLaporan\GetLaporanRequest;
-use App\Http\Services\Laporan\GetLaporan\GetLaporanService;
 use App\Http\Services\Pemesanan\CreatePemesanan\BarangPemesanan;
 use App\Http\Services\Pemesanan\CreatePemesanan\CreatePemesananRequest;
 use App\Http\Services\Pemesanan\CreatePemesanan\CreatePemesananService;
-use App\Http\Services\Pemesanan\FindPemesanan\FindPemesananRequest;
-use App\Http\Services\Pemesanan\FindPemesanan\FindPemesananService;
-use App\Models\UserType;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,17 +57,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 	});
 
 	Route::prefix('laporan')->name('laporans.')->group(function () {
-		Route::get('index', function () {
-			/** @var GetLaporanService $service */
-			$service = resolve(GetLaporanService::class);
-			$response = $service->execute(
-				new GetLaporanRequest(
-					Carbon::now()->startOfMonth(),
-					Carbon::now()->endOfDay()
-				)
-			);
-			dd($response);
-		})->name('index');
+		Route::get('index', [LaporanController::class, 'index'])->name('index');
 	});
 
 	Route::prefix('promo')->name('promos.')->group(function () {
@@ -105,18 +90,6 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
         Route::get('detail/{id}', [AdminPemesananController::class, 'detail'])->name('detail');
 //		Route::post('delete', [AdminResepController::class, 'delete'])->name('delete');
         Route::post('delete', [AdminPemesananController::class, 'delete'])->name('delete');
-        Route::get('find', function () {
-            /** @var FindPemesananService $service */
-            $service = resolve(FindPemesananService::class);
-            $response = $service->execute(
-                new FindPemesananRequest(
-                    2,
-                    new UserType(UserType::ADMIN),
-                    0
-                )
-            );
-            dd($response);
-        })->name('find');
     });
 
     Route::prefix('resep')->name('reseps.')->group(function () {
