@@ -49,12 +49,27 @@
                                             <i class="fas fa-tasks"></i>
                                             <h7 class="d-inline"> Detail</h7>
                                         </a>
-                                        &nbsp
-                                        <div class="btn btn-warning"
-                                             onclick="confirmCancel({{$pemesanan->getId()}})">
-                                            <i class="fas fa-times"></i>
-                                            <h7 class="d-inline"> Cancel</h7>
-                                        </div>
+                                        @if($pemesanan->getStatus()->getValue() == \App\Models\StatusPemesanan::SEDANG_DIPROSES)
+                                            &nbsp
+                                            <div class="btn">
+                                                <form action="{{route('admin.pemesanans.finish')}}" method="post">
+                                                    @csrf
+                                                    <input hidden type="text" name="id" value="{{$pemesanan->getId()}}">
+                                                    <button class="btn btn-success" type="submit">
+                                                        <i class="fas fa-check"></i>
+                                                        <h7 class="d-inline"> Selesai</h7>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        @endif
+                                        @if($pemesanan->getStatus()->getValue() == \App\Models\StatusPemesanan::SEDANG_DIPROSES)
+                                            &nbsp
+                                            <div class="btn btn-warning"
+                                                 onclick="confirmCancel({{$pemesanan->getId()}})">
+                                                <i class="fas fa-times"></i>
+                                                <h7 class="d-inline"> Cancel</h7>
+                                            </div>
+                                        @endif
                                         &nbsp
                                         <div class="btn btn-danger"
                                              onclick="confirmDelete({{$pemesanan->getId()}})">

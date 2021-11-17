@@ -8,6 +8,8 @@ use App\Http\Services\Pemesanan\DeletePemesanan\DeletePemesananRequest;
 use App\Http\Services\Pemesanan\DeletePemesanan\DeletePemesananService;
 use App\Http\Services\Pemesanan\FindPemesanan\FindPemesananRequest;
 use App\Http\Services\Pemesanan\FindPemesanan\FindPemesananService;
+use App\Http\Services\Pemesanan\FinishPemesanan\FinishPemesananRequest;
+use App\Http\Services\Pemesanan\FinishPemesanan\FinishPemesananService;
 use App\Http\Services\Pemesanan\ListPemesanan\ListPemesananRequest;
 use App\Http\Services\Pemesanan\ListPemesanan\ListPemesananService;
 use App\Models\UserType;
@@ -75,9 +77,28 @@ class PemesananController
 		try {
 			$service->execute($input);
 		} catch (Exception $e) {
-			throw $e;
 			return redirect()->back()->with('alert', 'Gagal membatalkan pemesanan');
 		}
 		return redirect()->back()->with('success', 'Pemesanan berhasil dibatalkan');
+	}
+
+	public function finish(Request $request): RedirectResponse
+	{
+		$request->validate(
+			[
+				'id' => 'required'
+			]
+		);
+
+		$input = new FinishPemesananRequest($request->input('id'));
+		/** @var FinishPemesananService $service */
+		$service = resolve(FinishPemesananService::class);
+
+		try {
+			$service->execute($input);
+		} catch (Exception $e) {
+			return redirect()->back()->with('alert', 'Gagal menyelesaikan pemesanan');
+		}
+		return redirect()->back()->with('success', 'Pemesanan berhasil diselesaikan');
 	}
 }
