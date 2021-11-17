@@ -6,7 +6,7 @@
 @endsection
 
 @section('windowTitle')
-    Laporan Bulan Ini
+    Laporan Keuangan
 @endsection
 
 @section('content')
@@ -70,12 +70,14 @@
                 <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
                     @include('admin.laporans.tab_header', ['tab_id'=>"pendapatan-tab", 'tab_href'=>"#tab-pendapatan", 'tab_title'=>'Pendapatan'])
                     @include('admin.laporans.tab_header', ['tab_id'=>"pengeluaran-tab", 'tab_href'=>"#tab-pengeluaran", 'tab_title'=>'Pengeluaran'])
+                    @include('admin.laporans.tab_header', ['tab_id'=>"pencarian-tab", 'tab_href'=>"#tab-pencarian", 'tab_title'=>'Cari Laporan'])
                 </ul>
             </div>
             <div class="card-body">
                 <div class="tab-content" id="custom-tabs-three-tabContent">
                     @include('admin.laporans.tab_pendapatan')
                     @include('admin.laporans.tab_pengeluaran')
+                    @include('admin.laporans.tab_pencarian')
                 </div>
             </div>
             <!-- /.card -->
