@@ -3,6 +3,7 @@
 namespace App\Http\Services\Laporan\GetLaporan;
 
 use App\Exceptions\OliveMedikaException;
+use App\Models\StatusPemesanan;
 use App\Models\TypeBarang;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -26,17 +27,19 @@ class GetLaporanService
 	private function getTotalPendapatanResponse(GetLaporanRequest $request): float
 	{
 		$pendapatan = DB::select(
-			'
+				'
 				select sum(total) as total
 				from pemesanans
 				where soft_deleted = false
+				  and status = ?
 				  and created_at < ?
 				  and created_at > ?;
 			',
-			[
-				$request->getEndDate()->format('Y-m-d h:i:s'),
-				$request->getStartDate()->format('Y-m-d h:i:s')
-			]
+				[
+					StatusPemesanan::SELESAI,
+					$request->getEndDate()->format('Y-m-d h:i:s'),
+					$request->getStartDate()->format('Y-m-d h:i:s')
+				]
 			)[0]->total ?? 0;
 
 		return $pendapatan;
@@ -117,6 +120,7 @@ class GetLaporanService
 						select *
 						from pemesanans
 						where soft_deleted = false
+						  and status = ?
 						  and created_at < ?
 						  and created_at > ?
 					) p
@@ -124,6 +128,7 @@ class GetLaporanService
 					order by p.created_at desc
 			',
 			[
+				StatusPemesanan::SELESAI,
 				$request->getEndDate()->format('Y-m-d h:i:s'),
 				$request->getStartDate()->format('Y-m-d h:i:s')
 			]
