@@ -7,24 +7,23 @@
         <div class="table-responsive">
             <table id="pengeluaran_table" class="table table-striped">
                 <thead class="text-primary">
-                <th class="text-center w-13p">Id Pemesanan</th>
-                <th class="text-center w-13p">Nama Pemesan</th>
-                <th class="text-center w-13p">Total</th>
+                <th class="text-center w-13p">Nama Barang</th>
+                <th class="text-center w-13p">Nama Admin</th>
                 <th class="text-center w-13p">Dibuat Pada</th>
-                <th class="text-center w-13p">Detail</th>
+                <th class="text-center w-13p">Jumlah Restock</th>
+                <th class="text-center w-13p">Harga Per Unit</th>
+                <th class="text-center w-13p">Total Biaya</th>
                 {{--        <th class="text-center w-13p">Aksi</th>--}}
                 </thead>
                 <tbody>
                 @foreach($laporan->getPengeluaran() as $pengeluaran)
                     <tr>
-                        <td class="text-center w-13p">{{ $pengeluaran->getIdPemesanan()}}</td>
-                        <td class="text-center w-13p">{{ $pengeluaran->getName()}}</td>
-                        <td class="text-center w-13p">{{ $pengeluaran->getTotal() }}</td>
+                        <td class="text-center w-13p">{{ $pengeluaran->getNamaBarang()}}</td>
+                        <td class="text-center w-13p">{{ $pengeluaran->getUsernameAdmin()}}</td>
                         <td class="text-center w-13p">{{ $pengeluaran->getCreatedAt()->format('d-m-Y h:i:s')}}</td>
-                        <td class="text-center w-13p">
-                            <a href="{{route('admin.pemesanans.detail', ['id'=> $pengeluaran->getIdPemesanan()])}}"
-                               class="btn btn-primary">Detail Pemesanan</a>
-                        </td>
+                        <td class="text-center w-13p">{{ $pengeluaran->getJumlah() }}</td>
+                        <td class="text-center w-13p">{{ $pengeluaran->getHargaPerUnit() }}</td>
+                        <td class="text-center w-13p">{{ $pengeluaran->getJumlah() * $pengeluaran->getHargaPerUnit() }}</td>
                     </tr>
                 @endforeach
                 </tbody>
