@@ -58,6 +58,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 
 	Route::prefix('laporan')->name('laporans.')->group(function () {
 		Route::get('index', [LaporanController::class, 'index'])->name('index');
+		Route::post('find', [LaporanController::class, 'find'])->name('find');
 	});
 
 	Route::prefix('promo')->name('promos.')->group(function () {
