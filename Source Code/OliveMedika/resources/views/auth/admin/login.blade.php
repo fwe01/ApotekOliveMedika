@@ -1,65 +1,43 @@
-@extends('auth.admin.base-out')
-
-@section('title')
-    Masuk
-@endsection
-
-@section('header_title')
-    Masuk
-@endsection
-
-@section('content')
-    <div class="wrapper">
-		<div class="box shadow-sm">
-			<img src="{{ url('assets/img/logo.png') }}" alt="Logo Olive Medika" class="logo">
-			</a>
-						
-            <form method="post" action="{{route('auth.admin.login')}}" autocomplete="off">
-                @method('POST')
-                @csrf
-                <!-- Email -->
-                <div class="inputbox form-input @error('username') is-invalid @enderror">
-                    <label for="">Email</label>
-                    <input id="username" type="username" name="username"
-                        value="{{ old('username') }}" autocomplete="username" autofocus>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Login Form</title>
+    @include('auth.user.style')
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<img class="wave" src="{{asset('img/wave.png')}}">
+<div class="container">
+    <div class="img">
+        <img src="{{asset('img/bg.svg')}}">
+    </div>
+    <div class="login-content">
+        <form method="post" action="{{route('auth.admin.login')}}" autocomplete="off">
+            @csrf
+            <img src="{{asset('img/profile_pic.svg')}}">
+            <h2 class="title">ADMIN LOGIN</h2>
+            <div class="input-div one">
+                <div class="i">
+                    <i class="fas fa-user"></i>
                 </div>
-                @error('username')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-                <!-- Email / -->
-                <!-- Password -->
-                <div class="inputbox @error('password') is-invalid @enderror">
-                    <label for="">Password</label>
-                    <input id="password" type="password" name="password" value="{{ old('password') }}" class="inputbox"
-                        autocomplete="current-password" autofocus>
+                <div class="div">
+                    <input type="text" class="input" name="username" placeholder="Username">
                 </div>
-                @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-                
-                <div class="inputbox">
-                    <button type="submit" class="btn btn-its btn-block btn-hover">Masuk</button>
+            </div>
+            <div class="input-div pass">
+                <div class="i">
+                    <i class="fas fa-lock"></i>
                 </div>
-            </form>
-		</div>
-        @if ($errors->any())
-        <div class="alert alert-danger mt-3" role="alert">
-            <ul class="pd-l-15">
-                @foreach ($errors->all() as $error)
-                <li>{{$error}}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
-		<footer class="m-sm-t-30">&copy; {{\Carbon\Carbon::now()->year}} OliveMedika.</footer>
-	</div>
-@endsection
-
-@section('scripts')
-<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
-@endsection
-
+                <div class="div">
+                    <input type="password" class="input" name="password" placeholder="Password">
+                </div>
+            </div>
+            <input type="submit" class="btn" value="Login">
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
