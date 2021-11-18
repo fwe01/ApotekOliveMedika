@@ -35,7 +35,7 @@
                                     </td>
                                     <td class="text-center w-13p">{{ $restock->getHargaPerUnit() }}</td>
                                     <td class="text-center w-13p">{{ $restock->getUsernameAdmin() }}</td>
-                                    <td class="text-center w-13p">{{ $restock->getCreatedAt()->format('d-m-Y h:i:s')}}</td>
+                                    <td class="text-center w-13p">{{ $restock->getCreatedAt()->format('d-m-Y H:i:s')}}</td>
                                 </tr>
                             @endforeach
                             </tbody>

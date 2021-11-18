@@ -49,7 +49,7 @@
                                         @endif
                                     </td>
                                     <td class="text-center w-13p">{{ $resep->getKeterangan() ? $resep->getKeterangan() : '-' }}</td>
-                                    <td class="text-center w-13p">{{ $resep->getCreatedAt()->format('d-m-Y h:i:s') }}</td>
+                                    <td class="text-center w-13p">{{ $resep->getCreatedAt()->format('d-m-Y H:i:s') }}</td>
                                     <td class="text-center w-13p">
                                         <div class="btn btn-primary"
                                              data-toggle="modal"

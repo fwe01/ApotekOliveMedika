@@ -38,7 +38,7 @@
                                     </td>
                                     <td class="text-center w-13p">{{ $promo->getTanggalMulai()->format('d-m-Y')}}</td>
                                     <td class="text-center w-13p">{{ $promo->getTanggalBerakhir()->format('d-m-Y')}}</td>
-                                    <td class="text-center w-13p">{{ $promo->getCreatedAt()->format('d-m-Y h:i:s')}}</td>
+                                    <td class="text-center w-13p">{{ $promo->getCreatedAt()->format('d-m-Y H:i:s')}}</td>
                                     <td class="text-center w-13p">
                                         <div class="btn btn-primary" data-toggle="modal"
                                              data-target="#edit-promo-modal-{{$promo->getId()}}">

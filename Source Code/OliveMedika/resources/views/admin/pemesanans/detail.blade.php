@@ -26,7 +26,7 @@
                             </tr>
                             <tr>
                                 <th class="text-center w-13p">Dibuat pada</th>
-                                <th class="text-center w-13p">{{$pemesanan->getCreatedAt()->format('d-m-Y h:i:s')}}</th>
+                                <th class="text-center w-13p">{{$pemesanan->getCreatedAt()->format('d-m-Y H:i:s')}}</th>
                             </tr>
                             <tr>
                                 <th class="text-center w-13p">Status Pemesanan</th>

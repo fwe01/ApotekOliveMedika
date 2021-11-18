@@ -35,7 +35,7 @@
                                     <td class="text-center w-13p">{{ $pemesanan->getId()}}</td>
                                     <td class="text-center w-13p">{{ $pemesanan->getName()}}</td>
                                     <td class="text-center w-13p">{{ $pemesanan->getTotal() }}</td>
-                                    <td class="text-center w-13p">{{ $pemesanan->getCreatedAt()->format('d-m-Y h:i:s')}}</td>
+                                    <td class="text-center w-13p">{{ $pemesanan->getCreatedAt()->format('d-m-Y H:i:s')}}</td>
                                     @if($pemesanan->getStatus()->getValue() == \App\Models\StatusPemesanan::DIBATALKAN)
                                         <td class="text-center w-13p"><p class="badge badge-danger">Dibatalkan</p></td>
                                     @elseif($pemesanan->getStatus()->getValue() == \App\Models\StatusPemesanan::SEDANG_DIPROSES)

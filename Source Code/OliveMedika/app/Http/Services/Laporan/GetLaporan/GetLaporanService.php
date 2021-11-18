@@ -32,13 +32,13 @@ class GetLaporanService
 				from pemesanans
 				where soft_deleted = false
 				  and status = ?
-				  and created_at < ?
-				  and created_at > ?;
+				  and created_at <= ?
+				  and created_at > ?
 			',
 				[
 					StatusPemesanan::SELESAI,
-					$request->getEndDate()->format('Y-m-d h:i:s'),
-					$request->getStartDate()->format('Y-m-d h:i:s')
+					$request->getEndDate()->format('Y-m-d H:i:s'),
+					$request->getStartDate()->format('Y-m-d H:i:s')
 				]
 			)[0]->total ?? 0;
 
@@ -51,12 +51,12 @@ class GetLaporanService
 				'
 				select sum(jumlah * harga_per_unit) as total
 				from restocks
-				where created_at < ?
-				  and created_at > ?;
+				where created_at <= ?
+				  and created_at > ?
 			',
 				[
-					$request->getEndDate()->format('Y-m-d h:i:s'),
-					$request->getStartDate()->format('Y-m-d h:i:s')
+					$request->getEndDate()->format('Y-m-d H:i:s'),
+					$request->getStartDate()->format('Y-m-d H:i:s')
 				]
 			)[0]->total ?? 0;
 
@@ -78,7 +78,7 @@ class GetLaporanService
 							 select id
 							 from pemesanans
 							 where soft_deleted = false
-							 and created_at < ?
+							 and created_at <=  ?
 							 and created_at > ?
 							 ) p
 						join barang_pemesanans bp on p.id = bp.id_pemesanan
@@ -88,8 +88,8 @@ class GetLaporanService
 					order by total_terjual desc
 			',
 			[
-				$request->getEndDate()->format('Y-m-d h:i:s'),
-				$request->getStartDate()->format('Y-m-d h:i:s')
+				$request->getEndDate()->format('Y-m-d H:i:s'),
+				$request->getStartDate()->format('Y-m-d H:i:s')
 			]
 		);
 
@@ -121,7 +121,7 @@ class GetLaporanService
 						from pemesanans
 						where soft_deleted = false
 						  and status = ?
-						  and created_at < ?
+						  and created_at <= ?
 						  and created_at > ?
 					) p
 					join users u on u.id = p.id_user
@@ -129,8 +129,8 @@ class GetLaporanService
 			',
 			[
 				StatusPemesanan::SELESAI,
-				$request->getEndDate()->format('Y-m-d h:i:s'),
-				$request->getStartDate()->format('Y-m-d h:i:s')
+				$request->getEndDate()->format('Y-m-d H:i:s'),
+				$request->getStartDate()->format('Y-m-d H:i:s')
 			]
 		);
 
@@ -157,14 +157,14 @@ class GetLaporanService
 					from (
 						select *
 						from restocks
-						where created_at < ?
+						where created_at <= ?
 						and created_at > ?
 					) r join barangs b on b.id = r.id_barang
 					order by r.created_at desc
 			',
 			[
-				$request->getEndDate()->format('Y-m-d h:i:s'),
-				$request->getStartDate()->format('Y-m-d h:i:s')
+				$request->getEndDate()->format('Y-m-d H:i:s'),
+				$request->getStartDate()->format('Y-m-d H:i:s')
 			]
 		);
 

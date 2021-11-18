@@ -20,7 +20,7 @@
                         <td class="text-center w-13p">{{ $pendapatan->getIdPemesanan()}}</td>
                         <td class="text-center w-13p">{{ $pendapatan->getName()}}</td>
                         <td class="text-center w-13p">{{ $pendapatan->getTotal() }}</td>
-                        <td class="text-center w-13p">{{ $pendapatan->getCreatedAt()->format('d-m-Y h:i:s')}}</td>
+                        <td class="text-center w-13p">{{ $pendapatan->getCreatedAt()->format('d-m-Y H:i:s')}}</td>
                         <td class="text-center w-13p">
                             <a href="{{route('admin.pemesanans.detail', ['id'=> $pendapatan->getIdPemesanan()])}}"
                                class="btn btn-primary">Detail Pemesanan</a>

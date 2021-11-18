@@ -20,7 +20,7 @@
                     <tr>
                         <td class="text-center w-13p">{{ $pengeluaran->getNamaBarang()}}</td>
                         <td class="text-center w-13p">{{ $pengeluaran->getUsernameAdmin()}}</td>
-                        <td class="text-center w-13p">{{ $pengeluaran->getCreatedAt()->format('d-m-Y h:i:s')}}</td>
+                        <td class="text-center w-13p">{{ $pengeluaran->getCreatedAt()->format('d-m-Y H:i:s')}}</td>
                         <td class="text-center w-13p">{{ $pengeluaran->getJumlah() }}</td>
                         <td class="text-center w-13p">{{ $pengeluaran->getHargaPerUnit() }}</td>
                         <td class="text-center w-13p">{{ $pengeluaran->getJumlah() * $pengeluaran->getHargaPerUnit() }}</td>
