@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Http\RedirectResponse;
+
 class DashboardController
 {
-	public function showDashboard()
+	public function showDashboard(): RedirectResponse
 	{
-		return view('admin.dashboard');
+		return redirect()->route('admin.pemesanans.index');
 	}
 }
+

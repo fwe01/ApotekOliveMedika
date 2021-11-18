@@ -1,10 +1,3 @@
-<li class="nav-item">
-    <a href="{{route('admin.dashboard')}}"
-       class="nav-link {{ route('admin.dashboard') == request()->url() ? 'active' : '' }}">
-        <i class="nav-icon fas fa-th"></i>
-        <p class="text">Dashboard</p>
-    </a>
-</li>
 @if(\Illuminate\Support\Facades\Auth::guard('admin')->user()->username === 'superadmin')
     <li class="nav-item">
         <a href="{{route('admin.accounts.index')}}"
