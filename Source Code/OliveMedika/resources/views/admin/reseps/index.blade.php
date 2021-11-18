@@ -3,7 +3,7 @@
 @section('title', 'Reseps')
 
 @section('content')
-    {{--    @include('admin.reseps.delete-modal')--}}
+    @include('admin.reseps.cancel-modal')
     {{--    @include('admin.reseps.add-modal')--}}
     {{--    @include('admin.reseps.edit-modal')--}}
     <div class="row" id="resep-tables">
@@ -27,7 +27,7 @@
                             <th class="text-center w-13p">Status</th>
                             <th class="text-center w-13p">Keterangan</th>
                             <th class="text-center w-13p">Dibuat pada</th>
-                            {{--                            <th class="text-center w-13p">Action</th>--}}
+                            <th class="text-center w-13p">Action</th>
                             </thead>
                             <tbody>
                             @foreach($reseps as $resep)
@@ -50,18 +50,20 @@
                                     </td>
                                     <td class="text-center w-13p">{{ $resep->getKeterangan() ? $resep->getKeterangan() : '-' }}</td>
                                     <td class="text-center w-13p">{{ $resep->getCreatedAt()->format('d-m-Y h:i:s') }}</td>
-                                    {{--                                    <td class="text-center w-13p">--}}
-                                    {{--                                        <div class="btn btn-primary" data-toggle="modal"--}}
-                                    {{--                                             data-target="#edit-resep-modal-{{$resep->getId()}}">--}}
-                                    {{--                                            <i class="fas fa-tasks"></i>--}}
-                                    {{--                                            <h7 class="d-inline"> Edit</h7>--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                        &nbsp--}}
-                                    {{--                                        <div class="btn btn-danger" onclick="confirmDelete({{$resep->getId()}})">--}}
-                                    {{--                                            <i class="fas fa-trash-alt"></i>--}}
-                                    {{--                                            <h7 class="d-inline"> Hapus</h7>--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </td>--}}
+                                    <td class="text-center w-13p">
+                                        <div class="btn btn-primary"
+                                             data-toggle="modal"
+                                             data-target="#edit-resep-modal-{{$resep->getId()}}">
+                                            <i class="fas fa-check"></i>
+                                            <h7 class="d-inline"> Buat Pemesanan</h7>
+                                        </div>
+                                        &nbsp
+                                        <div class="btn btn-danger"
+                                             onclick="confirmCancel({{$resep->getId()}})">
+                                            <i class="fas fa-times"></i>
+                                            <h7 class="d-inline"> Tolak</h7>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -75,14 +77,14 @@
 
 @section('script')
     <script>
-        function confirmDelete(value) {
-            updateToBeDeletedId(value)
+        function confirmCancel(value) {
+            updateToBeCanceldId(value)
             document.getElementById('resep-tables').style.display = 'none'
-            document.getElementById('confirm-delete').style.display = 'block'
+            document.getElementById('confirm-cancel').style.display = 'block'
         }
 
-        function updateToBeDeletedId(value) {
-            document.getElementById('delete-resep-id').value = value
+        function updateToBeCanceldId(value) {
+            document.getElementById('cancel-resep-id').value = value
         }
     </script>
     <script>
