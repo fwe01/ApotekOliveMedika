@@ -4,6 +4,7 @@ namespace App\Http\Services\Pemesanan\DeletePemesanan;
 
 use App\Exceptions\OliveMedikaException;
 use App\Http\Repositories\PemesananRepository;
+use App\Models\StatusPemesanan;
 use App\Models\UserType;
 
 class DeletePemesananService
@@ -32,6 +33,11 @@ class DeletePemesananService
 				throw new OliveMedikaException('Tidak berhak akses', 2024);
 			case UserType::ADMIN:
 				break;
+		}
+		if ($pemesanan->getStatus()->getValue() == StatusPemesanan::SEDANG_DIPROSES ||
+			$pemesanan->getStatus()->getValue() == StatusPemesanan::SELESAI
+		) {
+			throw new OliveMedikaException('Pemesanan sudah selesai atau masih di proses', 2027);
 		}
 		$this->repository->delete($request->getId());
 	}

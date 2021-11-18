@@ -13,9 +13,6 @@ use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\PesananController;
 use App\Http\Controllers\User\ResepController as UserResepController;
 use App\Http\Controllers\User\UserBarangController;
-use App\Http\Services\Pemesanan\CreatePemesanan\BarangPemesanan;
-use App\Http\Services\Pemesanan\CreatePemesanan\CreatePemesananRequest;
-use App\Http\Services\Pemesanan\CreatePemesanan\CreatePemesananService;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -70,25 +67,9 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 
     Route::prefix('pemesanan')->name('pemesanans.')->group(function () {
 //		Route::get('index', [AdminResepController::class, 'index'])->name('index');
-        Route::get('index', [AdminPemesananController::class, 'index'])->name('index');
-        Route::get('add', function () {
-            /** @var CreatePemesananService $service */
-            $service = resolve(CreatePemesananService::class);
-            $service->execute(
-                new CreatePemesananRequest(
-                    1,
-                    [
-                        new BarangPemesanan(
-                            1, 2
-                        ),
-                        new BarangPemesanan(
-                            2, 5
-                        )
-                    ]
-                )
-            );
-        })->name('add');
-        Route::get('detail/{id}', [AdminPemesananController::class, 'detail'])->name('detail');
+		Route::get('index', [AdminPemesananController::class, 'index'])->name('index');
+		Route::post('add', [AdminPemesananController::class, 'add'])->name('add');
+		Route::get('detail/{id}', [AdminPemesananController::class, 'detail'])->name('detail');
 //		Route::post('delete', [AdminResepController::class, 'delete'])->name('delete');
 		Route::post('delete', [AdminPemesananController::class, 'delete'])->name('delete');
 		Route::post('cancel', [AdminPemesananController::class, 'cancel'])->name('cancel');

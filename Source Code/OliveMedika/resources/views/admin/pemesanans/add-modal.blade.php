@@ -1,5 +1,5 @@
 <div id="add-pemesanan-modal" class="modal fade" role="dialog" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">

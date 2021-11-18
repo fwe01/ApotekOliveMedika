@@ -6,6 +6,7 @@ use App\Exceptions\OliveMedikaException;
 use App\Http\Repositories\BarangRepository;
 use App\Http\Repositories\PemesananRepository;
 use App\Http\Repositories\PromoRepository;
+use App\Models\Barang;
 use App\Models\BarangPemesanan as BarangPemesananModels;
 use App\Models\Pemesanan;
 use App\Models\User;
@@ -34,7 +35,7 @@ class CreatePemesananService
 	/**
 	 * @throws OliveMedikaException
 	 */
-	public function execute(CreatePemesananRequest $request)
+	public function execute(CreatePemesananRequest $request): CreatePemesananResponse
 	{
 		$user = User::where('id', $request->getUserId())->first();
 
@@ -49,7 +50,9 @@ class CreatePemesananService
 			$barang_pemesanan
 		);
 
-		$this->pemesanan_repository->persist($pemesanan);
+		$id = $this->pemesanan_repository->persist($pemesanan);
+
+		return new CreatePemesananResponse($id);
 	}
 
 
@@ -81,6 +84,17 @@ class CreatePemesananService
 				$harga,
 				$barang->getQuantity()
 			);
+
+			$barang_from_repo = new Barang(
+				$barang_from_repo->getId(),
+				$barang_from_repo->getNama(),
+				$barang_from_repo->getHarga(),
+				$barang_from_repo->getStock() - $barang->getQuantity(),
+				$barang_from_repo->getGambar(),
+				$barang_from_repo->getType(),
+				$barang_from_repo->isGeneric()
+			);
+			$this->barang_repository->persist($barang_from_repo);
 		}
 		return $barang_pemesanan;
 	}

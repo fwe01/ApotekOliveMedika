@@ -3,7 +3,7 @@
 @section('title', 'Barangs')
 
 @section('content')
-    {{--    @include('admin.pemesanans.add-modal')--}}
+    @include('admin.pemesanans.add-modal')
     @include('admin.pemesanans.delete-modal')
     @include('admin.pemesanans.cancel-modal')
     <div class="row" id="pemesanan-tables">
@@ -70,12 +70,14 @@
                                                 <h7 class="d-inline"> Cancel</h7>
                                             </div>
                                         @endif
+                                        @if($pemesanan->getStatus()->getValue() == \App\Models\StatusPemesanan::DIBATALKAN)
                                         &nbsp
                                         <div class="btn btn-danger"
                                              onclick="confirmDelete({{$pemesanan->getId()}})">
                                             <i class="fas fa-trash-alt"></i>
                                             <h7 class="d-inline"> Hapus</h7>
                                         </div>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -88,7 +90,7 @@
     </div>
 @endsection
 
-@section('script')
+@section('scripts')
     <script>
         function confirmDelete(value) {
             updateToBeDeletedId(value)

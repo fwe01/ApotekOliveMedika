@@ -40,7 +40,6 @@ class PesananController
                 $barang['id'],
                 $barang['quantity'],
             );
-
         }
 
         $barang_input = new CreatePemesananRequest(
