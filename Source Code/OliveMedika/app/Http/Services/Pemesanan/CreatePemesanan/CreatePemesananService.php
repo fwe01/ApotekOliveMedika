@@ -71,11 +71,16 @@ class CreatePemesananService
 				throw OliveMedikaException::build('barang-not-found', 2016);
 			}
 
-			if ($promo_barang) {
-				$harga = $barang_from_repo->getHarga() < $promo_barang[0]->getHargaPromoPerUnit() ?
-					$barang_from_repo->getHarga() : $promo_barang[0]->getHargaPromoPerUnit();
+			if ($promo_barang && $barang_from_repo->getHarga() > $promo_barang[0]->getHargaPromoPerUnit()) {
+				$harga = $promo_barang[0]->getHargaPromoPerUnit();
 			} else {
 				$harga = $barang_from_repo->getHarga();
+			}
+
+			if ($barang_from_repo->getStock() - $barang->getQuantity() < 0) {
+				throw new OliveMedikaException(
+					'Stock barang ' . $barang_from_repo->getNama() . ' tidak mencukupi', 2028
+				);
 			}
 
 			$barang_pemesanan[] = BarangPemesananModels::create(
