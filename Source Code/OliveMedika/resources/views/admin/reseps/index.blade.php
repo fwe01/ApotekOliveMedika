@@ -4,7 +4,7 @@
 
 @section('content')
     @include('admin.reseps.cancel-modal')
-    {{--    @include('admin.reseps.add-modal')--}}
+    @include('admin.reseps.add-modal')
     {{--    @include('admin.reseps.edit-modal')--}}
     <div class="row" id="resep-tables">
         <div class="col-md-12">
@@ -51,18 +51,23 @@
                                     <td class="text-center w-13p">{{ $resep->getKeterangan() ? $resep->getKeterangan() : '-' }}</td>
                                     <td class="text-center w-13p">{{ $resep->getCreatedAt()->format('d-m-Y H:i:s') }}</td>
                                     <td class="text-center w-13p">
-                                        <div class="btn btn-primary"
-                                             data-toggle="modal"
-                                             data-target="#edit-resep-modal-{{$resep->getId()}}">
-                                            <i class="fas fa-check"></i>
-                                            <h7 class="d-inline"> Buat Pemesanan</h7>
-                                        </div>
-                                        &nbsp
-                                        <div class="btn btn-danger"
-                                             onclick="confirmCancel({{$resep->getId()}})">
-                                            <i class="fas fa-times"></i>
-                                            <h7 class="d-inline"> Tolak</h7>
-                                        </div>
+                                        @if ($resep->getStatus() === \App\Models\StatusResep::KONFIRMASI)
+                                            <button type="button" class="btn btn-primary"
+                                                    data-toggle="modal"
+                                                    data-target="#add-pemesanan-modal"
+                                                    onclick="updateIdUserPemesanan({{$resep->getIdUser()}}, {{$resep->getId()}}, '{{str_replace('public/OliveMedika/img/resep/', "", $resep->getGambar())}}')">
+                                                <i class="fas fa-check"></i>
+                                                <h7 class="d-inline"> Buat Pemesanan</h7>
+                                            </button>
+                                            &nbsp
+                                            <div class="btn btn-danger"
+                                                 onclick="confirmCancel({{$resep->getId()}})">
+                                                <i class="fas fa-times"></i>
+                                                <h7 class="d-inline"> Tolak</h7>
+                                            </div>
+                                        @else
+                                            -
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -75,8 +80,15 @@
     </div>
 @endsection
 
-@section('script')
+@section('scripts')
     <script>
+        function updateIdUserPemesanan(userId, resepId, namaGambar) {
+            document.getElementById('user_id').value = userId;
+            document.getElementById('resep_id').value = resepId;
+            document.getElementById('gambar-resep').src = "{{url(\Illuminate\Support\Facades\Storage::url('public/OliveMedika/img/resep/'))}}/" + namaGambar;
+            console.log(userId, resepId, namaGambar)
+        }
+
         function confirmCancel(value) {
             updateToBeCanceldId(value)
             document.getElementById('resep-tables').style.display = 'none'

@@ -79,7 +79,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
     Route::prefix('resep')->name('reseps.')->group(function () {
 		Route::get('index', [AdminResepController::class, 'index'])->name('index');
 		Route::post('cancel', [AdminResepController::class, 'cancel'])->name('cancel');
-//		Route::post('add', [AdminResepController::class, 'add'])->name('add');
+		Route::post('add', [AdminResepController::class, 'add'])->name('add');
 //		Route::post('delete', [AdminResepController::class, 'delete'])->name('delete');
 //		Route::post('update', [AdminResepController::class, 'update'])->name('update');
 	});

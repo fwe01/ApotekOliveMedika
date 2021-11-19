@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Services\Resep\CancelResep;
+namespace App\Http\Services\Resep\AcceptResep;
 
 use App\Exceptions\OliveMedikaException;
 use App\Http\Repositories\ResepRepository;
 use App\Models\Resep;
 use App\Models\StatusResep;
 
-class CancelResepService
+class AcceptResepService
 {
 	private ResepRepository $repository;
 
@@ -22,7 +22,7 @@ class CancelResepService
 	/**
 	 * @throws OliveMedikaException
 	 */
-	public function execute(CancelResepRequest $request)
+	public function execute(AcceptResepRequest $request)
 	{
 		$resep = $this->repository->getResepById($request->getId());
 
@@ -35,7 +35,7 @@ class CancelResepService
 			$resep->getIdUser(),
 			$resep->getGambar(),
 			$resep->getKeterangan(),
-			new StatusResep(StatusResep::DITOLAK),
+			new StatusResep(StatusResep::DITERIMA),
 			$resep->getCreatedAt()
 		);
 

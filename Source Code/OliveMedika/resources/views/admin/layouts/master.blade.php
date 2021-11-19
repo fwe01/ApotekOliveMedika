@@ -266,7 +266,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script>
     var select2 = document.getElementsByClassName("select2");
     for (var i = 0; i < select2.length; i++) {
-        console.log(select2[i].id)
         $('#' + select2[i].id).select2();
     }
 </script>

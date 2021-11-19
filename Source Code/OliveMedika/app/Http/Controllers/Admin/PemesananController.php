@@ -163,7 +163,7 @@ class PemesananController
 		try {
 			$response = $service->execute($input);
 		} catch (Exception $e) {
-			return redirect()->back()->with('alert', 'Gagal membuat pemesanan');
+			return redirect()->back()->with('alert', 'Gagal membuat pemesanan - ' . $e->getMessage());
 		}
 		$this->unit_of_work->commit();
 		return redirect()->route('admin.pemesanans.detail', ['id' => $response->getId()])
