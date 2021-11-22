@@ -55,10 +55,24 @@
             cursor: pointer;
 
         }
+
+        .button-resep {
+            margin-top: 25px;
+            background-color: #584FF6;
+            border-radius: 5px;
+            padding: 5px 10px;
+            color: white;
+            text-align: center;
+        }
     </style>
 @endpush
 @push("user-home-content")
 
+    <div class="row justify-content-center promo-title-row">
+        <div class="col-11">
+            <div class="button-resep" onclick="pesan_resep()">Pesan Menggunakan Resep</div>
+        </div>
+    </div>
     <div class="product-section">
         <div class="row justify-content-center product-row">
             <div class="col-11">
@@ -78,12 +92,19 @@
                 @endforeach
             </div>
         </div>
-        @endpush
-
-        @push("user-home-scripts")
-            <script>
-                function open_detail (id) {
-                    window.location.replace('/user/detil_barang/' + id)
-                }
-            </script>
+    </div>
 @endpush
+
+@push("user-home-scripts")
+    <script>
+        function open_detail (id) {
+            window.location.replace('/user/detil_barang/' + id)
+        }
+
+        function pesan_resep () {
+            window.location.replace('/user/resep/create')
+        }
+    </script>
+@endpush
+
+
