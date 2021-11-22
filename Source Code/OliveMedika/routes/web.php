@@ -67,22 +67,22 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
 
     Route::prefix('pemesanan')->name('pemesanans.')->group(function () {
 //		Route::get('index', [AdminResepController::class, 'index'])->name('index');
-		Route::get('index', [AdminPemesananController::class, 'index'])->name('index');
-		Route::post('add', [AdminPemesananController::class, 'add'])->name('add');
-		Route::get('detail/{id}', [AdminPemesananController::class, 'detail'])->name('detail');
+        Route::get('index', [AdminPemesananController::class, 'index'])->name('index');
+        Route::post('add', [AdminPemesananController::class, 'add'])->name('add');
+        Route::get('detail/{id}', [AdminPemesananController::class, 'detail'])->name('detail');
 //		Route::post('delete', [AdminResepController::class, 'delete'])->name('delete');
-		Route::post('delete', [AdminPemesananController::class, 'delete'])->name('delete');
-		Route::post('cancel', [AdminPemesananController::class, 'cancel'])->name('cancel');
-		Route::post('finish', [AdminPemesananController::class, 'finish'])->name('finish');
-	});
+        Route::post('delete', [AdminPemesananController::class, 'delete'])->name('delete');
+        Route::post('cancel', [AdminPemesananController::class, 'cancel'])->name('cancel');
+        Route::post('finish', [AdminPemesananController::class, 'finish'])->name('finish');
+    });
 
     Route::prefix('resep')->name('reseps.')->group(function () {
-		Route::get('index', [AdminResepController::class, 'index'])->name('index');
-		Route::post('cancel', [AdminResepController::class, 'cancel'])->name('cancel');
-		Route::post('add', [AdminResepController::class, 'add'])->name('add');
+        Route::get('index', [AdminResepController::class, 'index'])->name('index');
+        Route::post('cancel', [AdminResepController::class, 'cancel'])->name('cancel');
+        Route::post('add', [AdminResepController::class, 'add'])->name('add');
 //		Route::post('delete', [AdminResepController::class, 'delete'])->name('delete');
 //		Route::post('update', [AdminResepController::class, 'update'])->name('update');
-	});
+    });
 
     Route::prefix('restock')->name('restocks.')->group(function () {
         Route::get('index', [RestockController::class, 'index'])->name('index');
@@ -105,9 +105,7 @@ Route::prefix('user')->name('user.')->middleware('user')->group(function () {
 
     Route::prefix('resep')->name('reseps.')->group(function () {
 //		Route::get('index', [ResepController::class, 'index'])->name('index');
-        Route::get('create', function () {
-            return view('user.resep.add');
-        });
+        Route::get('create', [UserResepController::class, 'create'])->name('create');
         Route::post('add', [UserResepController::class, 'add'])->name('add');
     });
 });
