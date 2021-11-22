@@ -5,20 +5,22 @@
         }
 
         .product-row {
-            margin-bottom: 10px;
+            margin-bottom: 40px;
         }
 
         .product-card {
-            border: 1px #584FF6 solid;
             padding: 10px;
-            border-radius: 5px;
+            border-radius: 20px;
             display: flex;
+            box-shadow: 5px 5px 10px #9a9a9a;
+            margin-bottom: 40px;
         }
 
         .product-image {
             width: 100px;
             height: 100px;
             margin-right: 20px;
+            border-radius: 10px;
         }
 
         .product-detail {
@@ -27,21 +29,21 @@
         }
 
         .product-name {
-            font-size: .9rem;
+            font-size: 1rem;
+            font-weight: bold;
             margin-bottom: 10px;
         }
 
         .product-price {
-            font-size: 1.2rem;
-            font-weight: 500;
+            font-size: 1rem;
             margin-bottom: 10px;
         }
 
-        .product-stock-and-button{
+        .product-stock-and-button {
             display: flex;
             width: 100%
             justify-content: space-between;
-            flex-grow:1
+            flex-grow: 1
         }
 
         .product-stock {
@@ -58,32 +60,30 @@
 @push("user-home-content")
 
     <div class="product-section">
-        @foreach($barangs as $barang)
-            <div class="row justify-content-center product-row">
-                <div class="col-11">
-                    <div class="product-card" onclick = "open_detail({{$barang->getId()}})">
+        <div class="row justify-content-center product-row">
+            <div class="col-11">
+                @foreach($barangs as $barang)
+                    <div class="product-card" onclick="open_detail({{$barang->getId()}})">
                         <img class="product-image"
                              src="{{ url(\Illuminate\Support\Facades\Storage::url($barang->getGambar())) }}"
                              alt="lorem-picsum"/>
                         <div class="product-detail">
                             <p class="product-name">{{$barang->getNama()}}</p>
-                            <p class="product-price">{{$barang->getHarga()}}</p>
+                            <p class="product-price">Rp. {{$barang->getHarga()}}</p>
                             <div class="product-stock-and-button">
                                 <p class="product-stock">stock {{$barang->getStock()}} pcs</p>
-                                <img class="button-pesan" src="{{asset("img/plus-icon.svg")}}" alt="plus-icon"/>
-                            <div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
-        @endforeach
-    </div>
-@endpush
+        </div>
+        @endpush
 
-@push("user-home-scripts")
-    <script>
-        function open_detail(id){
-            window.location.replace("/user/detil_barang/" + id);
-        }
-    </script>
+        @push("user-home-scripts")
+            <script>
+                function open_detail (id) {
+                    window.location.replace('/user/detil_barang/' + id)
+                }
+            </script>
 @endpush
