@@ -78,6 +78,39 @@
             width: 20px;
             height: 20px;
         }
+
+        @media only screen and (min-width: 600px) {
+            .container {
+                display: flex;
+                flex-direction: row-reverse;
+                justify-content: space-around;
+                padding: 0 300px;
+
+            }
+
+            .btn-custom {
+                width: 100%;
+
+            }
+
+            form {
+                border-radius: 20px;
+                box-shadow: 5px 5px 10px #5d5d5d;
+                width: 250px;
+                padding: 10px 20px;
+                height: 200px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+            }
+
+            label {
+                width: 200px;
+                text-align: center;
+
+            }
+        }
     </style>
 @endsection
 @section('content')
