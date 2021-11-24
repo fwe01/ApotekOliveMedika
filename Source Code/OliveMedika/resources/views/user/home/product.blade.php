@@ -64,6 +64,46 @@
             color: white;
             text-align: center;
         }
+
+        .button-resep:hover {
+            cursor: pointer;
+        }
+
+        @media only screen and (min-width: 600px) {
+            .product-container {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .product-card {
+                width: 15vw;
+                margin-right: 50px;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .product-card img {
+                width: 100%;
+                height: auto;
+                margin: 0;
+            }
+
+            .product-detail {
+                width: 100%;
+
+            }
+
+            .product-name {
+                font-size: 1.5rem;
+            }
+
+            .line {
+                width: 100%;
+                height: 2px;
+                background-color: #584FF6;
+            }
+        }
     </style>
 @endpush
 @push("user-home-content")
@@ -75,7 +115,7 @@
     </div>
     <div class="product-section">
         <div class="row justify-content-center product-row">
-            <div class="col-11">
+            <div class="col-11 product-container">
                 @foreach($barangs as $barang)
                     <div class="product-card" onclick="open_detail({{$barang->getId()}})">
                         <img class="product-image"
@@ -83,9 +123,12 @@
                              alt="lorem-picsum"/>
                         <div class="product-detail">
                             <p class="product-name">{{$barang->getNama()}}</p>
-                            <p class="product-price">Rp. {{$barang->getHarga()}}</p>
-                            <div class="product-stock-and-button">
-                                <p class="product-stock">stock {{$barang->getStock()}} pcs</p>
+                            <div class="line"></div>
+                            <div class="harga-stock">
+                                <p class="product-price">Rp. {{$barang->getHarga()}}</p>
+                                <div class="product-stock-and-button">
+                                    <p class="product-stock">stock {{$barang->getStock()}} pcs</p>
+                                </div>
                             </div>
                         </div>
                     </div>
