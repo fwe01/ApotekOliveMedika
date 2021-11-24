@@ -78,6 +78,30 @@
             color: white;
             font-size: 1.5rem;
         }
+
+        @media only screen and (min-width: 600px) {
+            .detil-barang-page {
+                margin-top: 150px;
+                padding: 0 250px;
+                display: flex;
+
+            }
+
+            .product-image {
+                width: 50%;
+                margin-right: 50px;
+            }
+
+            .product-name {
+                font-size: 2rem;
+            }
+
+
+            .product-price {
+                font-size: 1rem;
+
+            }
+        }
     </style>
 @endsection
 
@@ -87,25 +111,27 @@
              src="{{ url(\Illuminate\Support\Facades\Storage::url($barang->getGambar())) }}"
              alt="lorem-picsum"/>
 
-        <div class="row">
-            <div class="col product-name">
-                {{$barang->getNama()}}
+        <div class="detail-container">
+            <div class="row">
+                <div class="col product-name">
+                    {{$barang->getNama()}}
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class=" col product-price">
-                Rp. {{$barang->getHarga()}}
+            <div class="row">
+                <div class=" col product-price">
+                    Rp. {{$barang->getHarga()}}
+                </div>
+                <div class="col-2 col-lg-4 product-stock">
+                    <img src="{{asset("img/bi_box.svg")}}" alt="list"/>
+                    {{$barang->getStock()}}
+                </div>
             </div>
-            <div class="col-2 product-stock">
-                <img src="{{asset("img/bi_box.svg")}}" alt="list"/>
-                {{$barang->getStock()}}
-            </div>
-        </div>
-        {{--TODO: DESCRIPTION--}}
+            {{--TODO: DESCRIPTION--}}
 
-        <div class="btn pesan-btn">
-            Pesan Sekarang
+            <div class="btn pesan-btn">
+                Pesan Sekarang
+            </div>
         </div>
     </div>
     <div class="popup hidden">
@@ -130,15 +156,15 @@
             addBarangToSession()
         })
 
-        function showPopUp() {
-            $('.popup').removeClass("hidden")
+        function showPopUp () {
+            $('.popup').removeClass('hidden')
         }
 
-        function addBarangToSession() {
+        function addBarangToSession () {
             $.ajax(
                 {
-                    url: "/user/detil_pesanan_proses",
-                    type: "POST",
+                    url: '/user/detil_pesanan_proses',
+                    type: 'POST',
                     data: {
                         barang_id: {{$barang->getId()}},
                         _token: '{{csrf_token()}}'
@@ -154,11 +180,11 @@
         }
 
         $('.check-pesanan-btn').click(() => {
-            window.location.replace("/user/detil_pesanan");
+            window.location.replace('/user/detil_pesanan')
         })
 
         $('.close-icon').click(() => {
-            $('.popup').addClass("hidden")
+            $('.popup').addClass('hidden')
         })
 
     </script>
