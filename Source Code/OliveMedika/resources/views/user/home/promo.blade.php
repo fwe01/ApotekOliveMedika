@@ -83,6 +83,46 @@
             margin-bottom: 10px;
 
         }
+
+        @media only screen and (min-width: 600px) {
+            .promo-title {
+                margin-top: 150px;
+                position: absolute;
+                z-index: -10;
+                font-size: 2.8rem;
+                width: 250px;
+                height: 425px;
+                border-radius: 20px;
+            }
+
+            .promo-item-row {
+                margin-top: 200px;
+                margin-left: 250px;
+            }
+
+            .promo-item {
+                box-shadow: none;
+                background-color: white;
+                width: 150px;
+                height: 300px;
+            }
+
+            .promo-image {
+                width: 150px;
+                height: 150px;
+                border-radius: 10px;
+            }
+
+            .promo-name {
+                font-size: 1rem;
+                font-weight: bold;
+            }
+
+            .price-tag {
+                background-color: white;
+                color: black;
+            }
+        }
     </style>
 @endpush
 @push("user-home-content")
