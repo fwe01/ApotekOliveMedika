@@ -4,7 +4,7 @@
 
 @section('style')
     <style>
-        .detil-status-pesanan-page {
+        .page-wrapper {
             margin-top: 120px;
         }
 
@@ -61,6 +61,7 @@
 
         .btn-kembali {
             background-color: #584FF6;
+            box-shadow: 5px 5px 10px #444444;
         }
 
         .batal-popup {
@@ -79,8 +80,8 @@
         .popup-card {
             background-color: white;
             border-radius: 20px;
-            width: 80vw;
-            height: 50vh;
+            width: 300px;
+            height: 380px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -138,39 +139,100 @@
         .hidden {
             display: none;
         }
+
+        .pesanan-id, .ringkasan-title, .total-harga {
+            display: none;
+        }
+
+        @media only screen and (min-width: 600px) {
+            .page-wrapper {
+                padding: 0 300px;
+            }
+
+            .pesanan-id, .ringkasan-title, .total-harga {
+                display: block;
+            }
+
+            .pesanan-id {
+                display: block;
+                font-weight: bold;
+                font-size: 2rem;
+                margin-bottom: 50px;
+            }
+
+            .bottom {
+                position: relative;
+                width: 500px
+            }
+
+            .status-and-detail {
+                display: flex;
+
+            }
+
+            .ringkasan-card {
+                background-color: white;
+                box-shadow: 5px 5px 10px #5e5e5e;
+                border-radius: 15px;
+                padding: 20px;
+            }
+
+            .ringkasan-title {
+                background-color: #584FF6;
+                color: white;
+                padding: 10px 20px;
+                border-radius: 14px;
+                text-align: center;
+                font-weight: bold;
+            }
+
+            .total-harga {
+                font-weight: bold;
+                font-size: 1.4rem;
+                margin-left: 20px;
+            }
+        }
     </style>
 @endsection
 
 @section('content')
-    <div class="container-fluid detil-status-pesanan-page">
-        @if($pemesanan->getStatus()->getValue() == "selesai")
-            <div class="announcement announcement-success">
-                <img alt="lorem-picsum" src="{{ url("img/plain_clock.svg") }}"/>
-                <p>
-                    Pesanan anda selesai di proses !
+    <div class="page-wrapper">
+        <div class="pesanan-id">Pesanan Id : {{$pemesanan->getId()}}</div>
+        <div class="status-and-detail">
+            <div class="container-fluid status-wrapper">
+                @if($pemesanan->getStatus()->getValue() == "selesai")
+                    <div class="announcement announcement-success">
+                        <img alt="lorem-picsum" src="{{ url("img/plain_clock.svg") }}"/>
+                        <p>
+                            Pesanan anda selesai di proses !
 
-                    silahkan ambil di
+                            silahkan ambil di
 
-                    JL. MT. Haryono No 4, Kota Bontang, Kalimantan Timur
-                </p>
+                            JL. MT. Haryono No 4, Kota Bontang, Kalimantan Timur
+                        </p>
+                    </div>
+                @else
+                    <div class="announcement announcement-pending">
+                        <img alt="lorem-picsum" src="{{ url("img/plain_clock.svg") }}"/>
+                        <p>
+                            Pesanan di proses, Mohon Tunggu...
+                        </p>
+                    </div>
+                @endif
             </div>
-        @else
-            <div class="announcement announcement-pending">
-                <img alt="lorem-picsum" src="{{ url("img/plain_clock.svg") }}"/>
-                <p>
-                    Pesanan di proses, Mohon Tunggu...
-                </p>
+            <div class="bottom">
+                <div class="bottom-btn btn-kembali" onclick="kembali()">Kembali</div>
+                <div class="ringkasan-card">
+                    <div class="ringkasan-title">Ringkasan Harga</div>
+                    <div class="ringkasan-line"></div>
+                    <div class="total-harga">Total : Rp. {{$pemesanan->getTotal()}}</div>
+                    @if($pemesanan->getStatus()->getValue() != "selesai" && $bisa_batal)
+                        <div class="bottom-btn btn-batal" onclick="showPopup()"> Batalkan Pesanan</div>
+                    @endif
+                </div>
             </div>
-        @endif
+        </div>
     </div>
-
-    <div class="bottom">
-        @if($pemesanan->getStatus()->getValue() != "selesai" && $bisa_batal)
-            <div class="bottom-btn btn-batal" onclick="showPopup()"> Batalkan Pesanan</div>
-        @endif
-        <div class="bottom-btn btn-kembali" onclick="kembali()">Kembali</div>
-    </div>
-
     <div class="batal-popup hidden">
         <div class="popup-card">
             <img alt="lorem-picsum" src="{{ url("img/batal-warning.svg") }}"/>
