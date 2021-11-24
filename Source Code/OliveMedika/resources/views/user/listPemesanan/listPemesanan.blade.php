@@ -65,6 +65,23 @@
             width: 20px;
             height: 20px;
         }
+
+        @media only screen and (min-width: 600px) {
+            .list-pemesanan-page {
+                padding: 0 300px;
+
+            }
+
+            .list-title {
+                background-color: #584FF6;
+                color: white;
+                padding: 5px 20px;
+                border-radius: 20px;
+                font-size: 1.5rem;
+                font-weight: bold;
+
+            }
+        }
     </style>
 @endsection
 
