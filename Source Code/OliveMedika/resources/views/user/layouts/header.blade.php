@@ -66,18 +66,23 @@
                 font-size: 3rem;
             }
 
+            .nama-toko:hover {
+                cursor: pointer;
+
+            }
+
         }
     </style>
 @endpush
 @push('layout-style-stack')
     <div class="huge-circle"></div>
     <div class="navbar">
-        <div class="nama-toko"> Olive Medika</div>
+        <div class="nama-toko" onclick="home()"> Olive Medika</div>
         <input class="search-bar" placeholder="search"/>
         <div class="wrapper">
 
             <img src="{{asset("img/list.svg")}}" class="list-icon" alt="list" onclick="open_list()"/>
-            <img src="{{asset("img/home-icon.svg")}}" class="list-icon" alt="list"/>
+            <img src="{{asset("img/home-icon.svg")}}" class="list-icon" alt="list" onclick="home()"/>
         </div>
     </div>
 @endpush
@@ -86,6 +91,10 @@
     <script>
         function open_list () {
             window.location.replace('/user/list_pemesanan')
+        }
+
+        function home () {
+            window.location.replace('/user')
         }
     </script>
 @endpush
