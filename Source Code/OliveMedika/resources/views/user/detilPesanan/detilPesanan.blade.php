@@ -15,6 +15,7 @@
             display: flex;
             box-shadow: 1px 2px 10px #4d4d4d;
             border-radius: 20px;
+            margin-bottom: 30px;
         }
 
         .barang-image {
@@ -124,55 +125,110 @@
             font-weight: bold;
         }
 
+        .title {
+            display: none;
+        }
+
+        @media only screen and (min-width: 600px) {
+            .detil-barang-page {
+                padding: 0 300px;
+            }
+
+            .title {
+                display: block;
+                background-color: #584FF6;
+                padding: 20px;
+                font-size: 2rem;
+                color: white;
+                border-radius: 20px;
+                margin-bottom: 20px;
+            }
+
+            .detil-barang-wrapper {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .barang-group {
+                width: 50%;
+            }
+
+            .barang-card {
+
+            }
+
+            .tambah-barang-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 30%;
+                top: 0;
+                justify-content: start;
+            }
+
+            .bottom-part {
+                margin-top: 40px;
+                padding: 20px;
+                position: relative;
+                width: 100%;
+                border-radius: 30px;
+                box-shadow: 5px 5px 10px #575757;
+            }
+        }
     </style>
+
 @endsection
 
 @section('content')
     <div class="container-fluid detil-barang-page">
         <div class="row top-spacer"></div>
 
-        @php $total_harga = 0 @endphp
-        @foreach($barangs as $barang)
-            @php
-                $total_harga += $barang->getHarga();
-            @endphp
-            <div class="barang-card">
-                <img class="barang-image"
-                     src="{{ url(\Illuminate\Support\Facades\Storage::url($barang->getGambar())) }}"
-                     alt="lorem-picsum"/>
-                <div class="barang-detail">
-                    <div class="nama-tag">{{$barang->getNama()}}</div>
-                    <div class="harga-tag">Rp. {{$barang->getHarga()}}</div>
-                    <div class="d-flex justify-content-end qty flex-fill">
-                        Qty
-                        <div class="qty-control">
-                            <div class="decrease-qty"
-                                 onClick="onQtyChanged({{$barang->getId()}},{{$barang->getHarga()}}, -1)">-
+        <div class="title"> Detil Pesanan</div>
+        <div class="detil-barang-wrapper">
+            <div class="barang-group">
+                @php $total_harga = 0 @endphp
+                @foreach($barangs as $barang)
+                    @php
+                        $total_harga += $barang->getHarga();
+                    @endphp
+
+                    <div class="barang-card">
+                        <img class="barang-image"
+                             src="{{ url(\Illuminate\Support\Facades\Storage::url($barang->getGambar())) }}"
+                             alt="lorem-picsum"/>
+                        <div class="barang-detail">
+                            <div class="nama-tag">{{$barang->getNama()}}</div>
+                            <div class="harga-tag">Rp. {{$barang->getHarga()}}</div>
+                            <div class="d-flex justify-content-end qty flex-fill">
+                                Qty
+                                <div class="qty-control">
+                                    <div class="decrease-qty"
+                                         onClick="onQtyChanged({{$barang->getId()}},{{$barang->getHarga()}}, -1)">-
+                                    </div>
+                                    <div class="amount-qty" id="qty-{{$barang->getId()}}">1</div>
+                                    <div class="increase-qty"
+                                         onClick="onQtyChanged({{$barang->getId()}}, {{$barang->getHarga()}}, 1)">+
+                                    </div>
+                                </div>
                             </div>
-                            <div class="amount-qty" id="qty-{{$barang->getId()}}">1</div>
-                            <div class="increase-qty"
-                                 onClick="onQtyChanged({{$barang->getId()}}, {{$barang->getHarga()}}, 1)">+
-                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <div class="tambah-barang-container">
+                <div class="tambah-barang-btn">
+                    Tambah Barang
+                </div>
+                <div class="bottom-part">
+                    <div class="harga">Total Rp. <a id="harga">{{$total_harga}}</a></div>
+                    <div class="d-flex justify-content-center">
+                        <div class="bottom-btn">
+                            Selesaikan Pesanan
                         </div>
                     </div>
                 </div>
             </div>
-        @endforeach
-        <div class="tambah-barang-container">
-            <div class="tambah-barang-btn">
-                Tambah Barang
-            </div>
         </div>
-
-        <div class="bottom-part">
-            <div class="harga">Total Rp. <a id="harga">{{$total_harga}}</a></div>
-            <div class="d-flex justify-content-center">
-                <div class="bottom-btn">
-                    Selesaikan Pesanan
-                </div>
-            </div>
-        </div>
-
     </div>
 
 @endsection

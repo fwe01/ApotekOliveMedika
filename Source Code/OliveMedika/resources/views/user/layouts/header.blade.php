@@ -24,6 +24,11 @@
             z-index: 10;
         }
 
+        .nama-toko {
+            display: none;
+
+        }
+
         .search-bar {
             width: 60%;
             border-radius: 5px;
@@ -40,14 +45,45 @@
             cursor: pointer;
             fill: red;
         }
+
+        @media only screen and (min-width: 600px) {
+            .huge-circle {
+                display: none;
+            }
+
+            .navbar {
+                margin-top: 0;
+                width: 100vw;
+                height: 75px;
+                background-color: #584FF6;
+                padding: 0 30px;
+                justify-content: space-between;
+            }
+
+            .nama-toko {
+                display: block;
+                color: white;
+                font-size: 3rem;
+            }
+
+            .nama-toko:hover {
+                cursor: pointer;
+
+            }
+
+        }
     </style>
 @endpush
 @push('layout-style-stack')
     <div class="huge-circle"></div>
     <div class="navbar">
+        <div class="nama-toko" onclick="home()"> Olive Medika</div>
         <input class="search-bar" placeholder="search"/>
-        <img src="{{asset("img/list.svg")}}" class="list-icon" alt="list" onclick="open_list()"/>
-        <img src="{{asset("img/user-icon.svg")}}" class="list-icon" alt="list"/>
+        <div class="wrapper">
+
+            <img src="{{asset("img/list.svg")}}" class="list-icon" alt="list" onclick="open_list()"/>
+            <img src="{{asset("img/home-icon.svg")}}" class="list-icon" alt="list" onclick="home()"/>
+        </div>
     </div>
 @endpush
 
@@ -55,6 +91,10 @@
     <script>
         function open_list () {
             window.location.replace('/user/list_pemesanan')
+        }
+
+        function home () {
+            window.location.replace('/user')
         }
     </script>
 @endpush

@@ -20,11 +20,18 @@
         .contact-wa {
             font-size: .9rem;
         }
+
+        @media only screen and (min-width: 600px) {
+            .bill-board-section {
+                display: none;
+            }
+
+        }
     </style>
 @endpush
 
 @push("user-home-content")
-    <div class="row first-line justify-content-center">
+    <div class="row first-line justify-content-center bill-board-section">
         <div class="col-11">
             <div class="card card-info">
                 <div class="row">
