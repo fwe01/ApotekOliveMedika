@@ -4,7 +4,6 @@ namespace App\Http\Services\Laporan\GetLaporan;
 
 use App\Exceptions\OliveMedikaException;
 use App\Models\StatusPemesanan;
-use App\Models\TypeBarang;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -102,7 +101,7 @@ class GetLaporanService
 				$row->harga,
 				$row->stock,
 				$row->gambar,
-				new TypeBarang($row->type),
+				$row->type,
 				$row->is_generic,
 				$row->total_terjual,
 			);

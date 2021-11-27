@@ -2,8 +2,6 @@
 
 namespace App\Http\Services\Laporan\GetLaporan;
 
-use App\Models\TypeBarang;
-
 class BarangTerlaris
 {
 	private int $id;
@@ -11,7 +9,7 @@ class BarangTerlaris
 	private float $harga;
 	private int $stock;
 	private string $gambar;
-	private TypeBarang $type;
+	private string $type;
 	private bool $is_generic;
 	private int $terjual;
 
@@ -21,7 +19,7 @@ class BarangTerlaris
 	 * @param float $harga
 	 * @param int $stock
 	 * @param string $gambar
-	 * @param TypeBarang $type
+	 * @param string $type
 	 * @param bool $is_generic
 	 * @param int $terjual
 	 */
@@ -31,7 +29,7 @@ class BarangTerlaris
 		float $harga,
 		int $stock,
 		string $gambar,
-		TypeBarang $type,
+		string $type,
 		bool $is_generic,
 		int $terjual
 	) {
@@ -86,9 +84,9 @@ class BarangTerlaris
 	}
 
 	/**
-	 * @return TypeBarang
+	 * @return string
 	 */
-	public function getType(): TypeBarang
+	public function getType(): string
 	{
 		return $this->type;
 	}
