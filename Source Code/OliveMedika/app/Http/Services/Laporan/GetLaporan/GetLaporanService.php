@@ -77,6 +77,7 @@ class GetLaporanService
 							 select id
 							 from pemesanans
 							 where soft_deleted = false
+							 and status = ?
 							 and created_at <=  ?
 							 and created_at > ?
 							 ) p
@@ -87,6 +88,7 @@ class GetLaporanService
 					order by total_terjual desc
 			',
 			[
+				StatusPemesanan::SELESAI,
 				$request->getEndDate()->format('Y-m-d H:i:s'),
 				$request->getStartDate()->format('Y-m-d H:i:s')
 			]
