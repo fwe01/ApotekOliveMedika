@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [AuthController::class, 'showUserLogin'])->name('user.login');
+Route::get('/register', [AuthController::class, 'showUserRegister'])->name('registerView');
+Route::post('/register', [AuthController::class, 'userRegister'])->name('registerProcess');
 
 Route::name('auth.')->group(function () {
     Route::get('admin/login', [AuthController::class, 'showAdminLogin'])->name('admin.login');
