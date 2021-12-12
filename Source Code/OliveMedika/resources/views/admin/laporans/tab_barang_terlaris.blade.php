@@ -1,4 +1,4 @@
-<div class="tab-pane fade" id="tab-barang-terlaris" role="tabpanel"
+<div class="tab-pane fade active show" id="tab-barang-terlaris" role="tabpanel"
      aria-labelledby="barang-terlaris-tab">
     <div class="card-header">
         <h4 class="d-inline card-title">Barang Terlaris</h4>

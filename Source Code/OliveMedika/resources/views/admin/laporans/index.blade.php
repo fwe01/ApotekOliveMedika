@@ -68,10 +68,10 @@
         <div class="card card-primary card-outline card-outline-tabs">
             <div class="card-header p-0 border-bottom-0">
                 <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
-                    @include('admin.laporans.tab_header', ['tab_id'=>"barang-terlaris-tab", 'tab_href'=>"#tab-barang-terlaris", 'tab_title'=>'Barang Terlaris'])
-                    @include('admin.laporans.tab_header', ['tab_id'=>"pendapatan-tab", 'tab_href'=>"#tab-pendapatan", 'tab_title'=>'Pendapatan'])
-                    @include('admin.laporans.tab_header', ['tab_id'=>"pengeluaran-tab", 'tab_href'=>"#tab-pengeluaran", 'tab_title'=>'Pengeluaran'])
-                    @include('admin.laporans.tab_header', ['tab_id'=>"pencarian-tab", 'tab_href'=>"#tab-pencarian", 'tab_title'=>'Cari Laporan'])
+                    @include('admin.laporans.tab_header', ['tab_id'=>"barang-terlaris-tab", 'tab_href'=>"#tab-barang-terlaris", 'tab_title'=>'Barang Terlaris', 'active' => true])
+                    @include('admin.laporans.tab_header', ['tab_id'=>"pendapatan-tab", 'tab_href'=>"#tab-pendapatan", 'tab_title'=>'Pendapatan', 'active' => false])
+                    @include('admin.laporans.tab_header', ['tab_id'=>"pengeluaran-tab", 'tab_href'=>"#tab-pengeluaran", 'tab_title'=>'Pengeluaran', 'active' => false])
+                    @include('admin.laporans.tab_header', ['tab_id'=>"pencarian-tab", 'tab_href'=>"#tab-pencarian", 'tab_title'=>'Cari Laporan', 'active' => false])
                 </ul>
             </div>
             <div class="card-body">
@@ -91,8 +91,8 @@
     <script>
         $(document).ready(function () {
             //data tables
-            $('#pendapatan_table').DataTable();
-            $('#pengeluaran_table').DataTable();
-        });
+            $('#pendapatan_table').DataTable()
+            $('#pengeluaran_table').DataTable()
+        })
     </script>
 @endsection
