@@ -271,6 +271,7 @@
                     },
                     success: function () {
                         console.log('success')
+                        location.replace("/user/list_pemesanan")
                     },
                     error: function (error) {
                         console.log(error)
