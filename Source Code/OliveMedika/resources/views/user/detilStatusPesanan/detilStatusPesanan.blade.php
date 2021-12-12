@@ -25,6 +25,10 @@
             background-color: #FFBC11;
         }
 
+        .announcement-batal {
+            background-color: #FF4949;
+        }
+
         .announcement img {
             width: 90px;
             height: 90px;
@@ -56,7 +60,7 @@
         }
 
         .btn-batal {
-            background-color: #FF4949;
+            background-color: #2b2b2c;
         }
 
         .btn-kembali {
@@ -211,11 +215,18 @@
                             JL. MT. Haryono No 4, Kota Bontang, Kalimantan Timur
                         </p>
                     </div>
-                @else
+                @elseif($pemesanan->getStatus()->getValue() == "sedang_diproses")
                     <div class="announcement announcement-pending">
                         <img alt="lorem-picsum" src="{{ url("img/plain_clock.svg") }}"/>
                         <p>
                             Pesanan di proses, Mohon Tunggu...
+                        </p>
+                    </div>
+                @elseif($pemesanan->getStatus()->getValue() == "dibatalkan")
+                    <div class="announcement announcement-batal">
+                        <img alt="lorem-picsum" src="{{ url("img/plain_cross.svg") }}"/>
+                        <p>
+                            Pesanan Sudah Dibatalkan
                         </p>
                     </div>
                 @endif
@@ -271,7 +282,7 @@
                     },
                     success: function () {
                         console.log('success')
-                        location.replace("/user/list_pemesanan")
+                        location.replace('/user/list_pemesanan')
                     },
                     error: function (error) {
                         console.log(error)
