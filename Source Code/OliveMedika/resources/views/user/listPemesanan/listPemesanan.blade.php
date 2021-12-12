@@ -97,8 +97,10 @@
                     <div class="status-icon">
                         @if($pemesanan->getStatus()->getValue() == "selesai")
                             <img alt="lorem-picsum" src="{{ url("img/check.svg") }}"/>
-                        @else
+                        @elseif($pemesanan->getStatus()->getValue() == "sedang_diproses")
                             <img alt="lorem-picsum" src="{{ url("img/clock.svg") }}"/>
+                        @elseif($pemesanan->getStatus()->getValue() == "dibatalkan")
+                            <img alt="lorem-picsum" src="{{ url("img/cross.svg") }}"/>
                         @endif
                     </div>
                 </div>
